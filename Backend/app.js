@@ -1,9 +1,32 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const User = require("./models/user");
 
 const app = express();
 
+const dbUPI = "mongodb+srv://milica:test@cluster0.beton.mongodb.net/db?retryWrites=true&w=majority";
+mongoose.connect(dbUPI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => app.listen(3000))
+  .catch((err) => console.log(err));
+
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.send('Milica');
   });
 
-app.listen(3000, () => console.log("Server connected on port 3000."))
+  app.get('/add-user', (req, res) => {
+    const user = new User({
+      email: 'mimica2001@gmail.com',
+      password: '1101',
+      username: 'mimica',
+      firstName: 'Milica',
+      lastName: 'Popovic'
+    });
+
+    user.save()
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
