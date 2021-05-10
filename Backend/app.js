@@ -15,11 +15,10 @@ app.get('/', function (req, res) {
 
   app.get('/add-user', (req, res) => {
     const user = new User({
-      email: 'mimica2001@gmail.com',
+      email: 'naketeri@gmail.com',
       password: '1101',
-      username: 'mimica',
-      firstName: 'Milica',
-      lastName: 'Popovic'
+      username: 'naketeri',
+      fullName: 'Naketeri Popovic',
     });
 
     user.save()
