@@ -1,0 +1,54 @@
+.companyName{
+  font-size: 150%;
+}
+
+.mat-toolbar{
+height: 10vh;
+position: sticky;
+position: -webkit-sticky; /* For macOS/iOS Safari */
+top: 0; /* Sets the sticky toolbar to be on top */
+z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+background-color: royalblue;
+}
+
+div {
+  overflow: inherit;
+  color: aliceblue;
+}
+
+.mat-sidenav-container{
+min-height: 93vh !important;
+width: 10%;
+text-align: center;
+/*position: sticky;*/
+}
+
+a{
+  text-decoration: none;
+  font-size: 70%;
+  white-space: normal;
+  margin: 0 10px 10px 10px;
+}
+
+button{
+  font-size: 80%;
+  min-width: min-content;
+}
+
+.example-icon {
+  padding: 0 40px;
+}
+
+.example-spacer {
+  /*flex: 1 1 auto;*/
+  margin-left: 65px;
+}
+
+.mat-sidenav-content{
+    font-size: 80%;
+    text-align: center;
+}
+
+.mat-drawer-container {
+  background-color: white;
+}

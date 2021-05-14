@@ -11,7 +11,6 @@ const CartItemSchema = new mongoose.Schema(
   }, { timestamps: true });
 
 const CartItem = mongoose.model("CartItem", CartItemSchema);
-
 const OrderSchema = new mongoose.Schema(
   {
     products: [CartItemSchema],

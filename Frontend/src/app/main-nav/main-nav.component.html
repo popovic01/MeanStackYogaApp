@@ -1,0 +1,36 @@
+<div> 
+  <mat-toolbar color="primary">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <a mat-button class="companyName" routerLink="/">
+      <span>Joga</span>
+    </a>
+    
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <a mat-button routerLink="/about-us">Početna</a>
+      <a mat-button routerLink="/prices">Online prodavnica</a>
+      <img src="assets/images/Logo.png" alt="x" width="80" height="40" class="example-icon">
+      <a mat-button routerLink="/start-page">Kursevi</a>
+      <a mat-button routerLink="/offer">O meni</a>
+      <a mat-button routerLink="/contact">Kontakt</a>
+    </div>
+
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <a mat-button routerLink="/about-us">Početna</a>
+        <a mat-button routerLink="/prices">Online prodavnica</a>
+        <a mat-button routerLink="/start-page">Kursevi</a>
+        <a mat-button routerLink="/offer">O meni</a>
+        <a mat-button routerLink="/contact">Kontakt</a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
