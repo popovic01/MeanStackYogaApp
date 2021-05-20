@@ -1,0 +1,10 @@
+mat-card {
+    width: 400px;
+    height: 360px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+mat-form-field, textarea {
+    width: 100%;
+}

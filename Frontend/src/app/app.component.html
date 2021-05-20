@@ -1,2 +1,5 @@
 <app-main-nav></app-main-nav>
-<app-course></app-course>
+<main>
+    <app-add-update-course (courseCreated)="onCourseAdded($event)"></app-add-update-course>
+    <app-course-list [courses]="storedCourses"></app-course-list> 
+</main>

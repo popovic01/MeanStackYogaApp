@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-form-field class="example-full-width">
+        <mat-label>Naziv</mat-label>
+        <input matInput [(ngModel)]="enteredTitle" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput [(ngModel)]="enteredDescription" cols="30" rows="5" placeholder="Opis" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Cena</mat-label>
+        <input matInput type="number" min="0" [(ngModel)]="enteredPrice" required>
+    </mat-form-field>
+
+    <div class="form-group">
+        <input type="file" [(ngModel)]="enteredImagePath" required>
+    </div>
+
+    <button (click)="onAddCourse()" 
+    mat-raised-button 
+    color="accent" type="submit">Potvrdi</button>
+</mat-card>
