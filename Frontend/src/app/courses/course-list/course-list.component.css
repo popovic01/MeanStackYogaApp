@@ -1,0 +1,14 @@
+.example-card {
+    max-width: 400px;
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .priceP {
+    text-align: center;
+    font-size: 35px;
+  }
+
+#noAdded {
+  text-align: center;
+}

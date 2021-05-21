@@ -14,8 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { AddUpdateCourseComponent } from './add-update-course/add-update-course.component';
-import { CourseListComponent } from './course-list/course-list.component';
+import { AddUpdateCourseComponent } from './courses/add-update-course/add-update-course.component';
+import { CourseListComponent } from './courses/course-list/course-list.component';
 
 @NgModule({
   declarations: [

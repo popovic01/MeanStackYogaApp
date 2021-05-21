@@ -1,4 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { NgForm } from "@angular/forms";
+
+import { Course } from '../course.model';
 
 @Component({
   selector: 'app-add-update-course',
@@ -7,23 +10,25 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class AddUpdateCourseComponent implements OnInit {
 
-  enteredTitle = '';
+  enteredName = '';
   enteredDescription = '';
-  enteredPrice = '';
-  enteredImagePath = '';
-  @Output() courseCreated = new EventEmitter();
+  enteredPrice = 0;
+  @Output() courseCreated = new EventEmitter<Course>();
   
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onAddCourse() {
-    const course = {
-      title: this.enteredTitle,
-      description: this.enteredDescription,
-      price: this.enteredPrice,
-      imagePath: this.enteredImagePath
+  onAddCourse(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
+    const course: Course = {
+      name: form.value.name,
+      description: form.value.description,
+      price: form.value.price
     };
     this.courseCreated.emit(course);
   }

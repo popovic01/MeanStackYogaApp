@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { Course } from '../course.model';
+
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CourseListComponent implements OnInit {
 
-  @Input() courses = [];
+  @Input() courses: Course[] = [];
   
   constructor() { }
 

@@ -1,0 +1,33 @@
+<mat-card>
+    <form (submit)="onAddCourse(courseForm)" #courseForm="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Naziv</mat-label>
+            <input matInput 
+            name="name"
+            ngModel required
+            #name="ngModel">
+            <mat-error *ngIf="name.invalid">Unesite naziv kursa.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <textarea matInput 
+            name="description"
+            ngModel cols="30" rows="5" placeholder="Opis" required
+            #description="ngModel">
+            </textarea>
+            <mat-error *ngIf="description.invalid">Unesite opis kursa.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <mat-label>Cena</mat-label>
+            <input matInput type="number" min="0"
+            name="price"
+            ngModel required
+            #price="ngModel">
+            <mat-error *ngIf="price.invalid">Unesite cenu kursa.</mat-error>
+        </mat-form-field>
+        <button 
+        mat-raised-button 
+        color="accent" type="submit">Potvrdi</button>
+    </form>
+</mat-card>
