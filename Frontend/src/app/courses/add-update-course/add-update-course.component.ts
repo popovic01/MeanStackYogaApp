@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 
-import { Course } from '../course.model';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-add-update-course',
@@ -13,11 +13,10 @@ export class AddUpdateCourseComponent implements OnInit {
   enteredName = '';
   enteredDescription = '';
   enteredPrice = 0;
-  @Output() courseCreated = new EventEmitter<Course>();
   
-  constructor() { }
+  constructor(public coursesService: CoursesService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
   onAddCourse(form: NgForm) {
@@ -25,12 +24,8 @@ export class AddUpdateCourseComponent implements OnInit {
       return;
     }
 
-    const course: Course = {
-      name: form.value.name,
-      description: form.value.description,
-      price: form.value.price
-    };
-    this.courseCreated.emit(course);
+    this.coursesService.addCourse(form.value.name, form.value.description, form.value.price);
+    form.resetForm();
   }
 
 }

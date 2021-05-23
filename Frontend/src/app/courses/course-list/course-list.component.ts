@@ -1,19 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { Course } from '../course.model';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css']
 })
-export class CourseListComponent implements OnInit {
+export class CourseListComponent implements OnInit, OnDestroy {
 
-  @Input() courses: Course[] = [];
-  
-  constructor() { }
+  courses: Course[] = [];
+  private coursesSub: Subscription = new Subscription;
+
+  constructor(public coursesService: CoursesService) { }
 
   ngOnInit(): void {
+    this.courses = this.coursesService.getCourses();
+    this.coursesSub = this.coursesService.getCourseUpdateListener().subscribe((courses: Course[]) => {
+      this.courses = courses;
+    });
+  }
+
+  ngOnDestroy() {
+    this.coursesSub.unsubscribe();
   }
 
 }
