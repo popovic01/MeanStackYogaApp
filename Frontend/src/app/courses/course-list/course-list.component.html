@@ -1,25 +1,23 @@
 <mat-card class="example-card" *ngFor="let course of courses">
-    <mat-card-header>
-      <div mat-card-avatar></div>
-      <mat-card-title>{{ course.name }}</mat-card-title>
-    </mat-card-header>
+    <mat-card-content>
+      <p id="main">
+        {{ course.name }}
+      <p>
+    </mat-card-content>
     <img mat-card-image src="..\assets\images\Course.jpg" alt="Photo of a course">
     <mat-card-content>
       <p>
         {{ course.description }}
       </p>
-    </mat-card-content>
-        <mat-card-content>
+    </mat-card-content> <br>
+    <mat-card-content>
       <p class="priceP">
-        {{ course.price }} din
+        {{ course.price }} din.
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Kupi</button>
-    </mat-card-actions>
-    <mat-card-actions>
-      <button mat-button>Uredi</button>
-      <button mat-button>Obriši</button>
+      <button mat-button class="button">Uredi</button>
+      <button mat-button class="button">Obriši</button>
     </mat-card-actions>
   </mat-card>
   <p *ngIf="courses.length <= 0" id="noAdded">No course added yet!</p>

@@ -1,0 +1,33 @@
+<mat-card>
+    <form (submit)="onAddProduct(productForm)" #productForm="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>URL putanja slike</mat-label>
+            <input matInput 
+            name="url"
+            ngModel required
+            #url="ngModel">
+            <mat-error *ngIf="url.invalid">Unesite putanju slike.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Naziv</mat-label>
+            <input matInput 
+            name="name"
+            ngModel required
+            #name="ngModel">
+            <mat-error *ngIf="name.invalid">Unesite naziv proizvoda.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <mat-label>Cena</mat-label>
+            <input matInput type="number" min="0"
+            name="price"
+            ngModel required
+            #price="ngModel">
+            <mat-error *ngIf="price.invalid">Unesite cenu proizvoda.</mat-error>
+        </mat-form-field>
+        <button 
+        mat-raised-button 
+        color="accent" type="submit">Potvrdi</button>
+    </form>
+</mat-card>

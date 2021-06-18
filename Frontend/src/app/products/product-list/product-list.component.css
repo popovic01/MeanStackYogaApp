@@ -1,0 +1,33 @@
+.example-card {
+    width: 300px; 
+    display: inline-block;
+    margin: 20px;
+    background-color: white;
+  }
+
+.par {
+    text-align: center;
+    font-size: 15px;
+    color: #424242;
+}
+
+#noAdded {
+  text-align: center;
+}
+
+.button {
+  background-color: #dddddd;
+  color: #424242;
+}
+
+#name {
+  color: #424242;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+#img {
+  width: 300px;
+  height: 300px;
+}

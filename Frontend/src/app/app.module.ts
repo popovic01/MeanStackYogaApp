@@ -16,13 +16,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { AddUpdateCourseComponent } from './courses/add-update-course/add-update-course.component';
 import { CourseListComponent } from './courses/course-list/course-list.component';
+import { AddUpdateProductComponent } from './products/add-update-product/add-update-product.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     AddUpdateCourseComponent,
-    CourseListComponent
+    CourseListComponent,
+    AddUpdateProductComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
