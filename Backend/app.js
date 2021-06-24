@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
     res.send('Milica');
   });
 
-  app.get('/add-user', (req, res) => {
+app.get('/add-user', (req, res) => {
     const user = new User({
       email: 'naketeri@gmail.com',
       password: '1101',
@@ -28,4 +28,6 @@ app.get('/', function (req, res) {
       .catch((err) => {
         console.log(err);
       });
-  });
+});
+
+module.exports = app;

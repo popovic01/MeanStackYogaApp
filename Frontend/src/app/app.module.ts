@@ -18,6 +18,9 @@ import { AddUpdateCourseComponent } from './courses/add-update-course/add-update
 import { CourseListComponent } from './courses/course-list/course-list.component';
 import { AddUpdateProductComponent } from './products/add-update-product/add-update-product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { CategoryComponent } from './category/category/category.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { ProductListComponent } from './products/product-list/product-list.compo
     AddUpdateCourseComponent,
     CourseListComponent,
     AddUpdateProductComponent,
-    ProductListComponent
+    ProductListComponent,
+    CategoryComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

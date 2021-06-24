@@ -1,0 +1,16 @@
+<mat-card>
+    <form>
+        <mat-form-field class="example-full-width">
+            <mat-label>Naziv kategorije</mat-label>
+            <input matInput 
+            name="name"
+            ngModel required
+            #name="ngModel">
+            <mat-error *ngIf="name.invalid">Unesite naziv kategorije.</mat-error>
+        </mat-form-field>
+    
+        <button 
+        mat-raised-button 
+        color="accent" type="submit">Potvrdi</button>
+    </form>
+</mat-card>
