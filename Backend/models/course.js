@@ -18,9 +18,9 @@ const courseSchema = new Schema({
         min: 0
     },
     imageUrl: {
-        type: String,
-        required: true
-    },
+        type: String
+        // required: true
+    }
 }, { timestamps: true });
 
 const Course = mongoose.model('Course', courseSchema);

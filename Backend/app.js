@@ -3,13 +3,19 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const User = require("./models/user");
+const Course = require("./models/course");
 
 const app = express();
 
-/* const dbUPI = "mongodb+srv://milica:test@cluster0.beton.mongodb.net/db?retryWrites=true&w=majority";
+const dbUPI = "mongodb+srv://milica:test@cluster0.beton.mongodb.net/db?retryWrites=true&w=majority";
 mongoose.connect(dbUPI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(3000))
-  .catch((err) => console.log(err)); */
+  .then(() => {
+    console.log('Connected to database!');
+  })
+  .catch((err) => {
+    console.log(err);
+  }); 
+//povezivanje sa bazom
 
 app.use(bodyParser.json());
 
@@ -29,31 +35,23 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/courses", (req, res, next) => {
-  const course = req.body;
-  console.log(course);
+  const course = new Course({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price
+  });
+  course.save();
   res.status(201).json({
-    message: 'Post added successfully'
+    message: 'Course added successfully'
   });
 });
 
-app.use("/api/courses", (req, res, next) => {
-  const courses = [
-      {
-        id: "fadf12421l",
-        name: "Course 1",
-        description: "This is coming from the server",
-        price: 500
-      },
-      {
-        id: "fsgsdfgfd34",
-        name: "Course 2",
-        description: "This is coming from the server",
-        price: 1500
-      }
-    ];
-    res.status(200).json({
-      message: 'Courses fetched successfully!',
-      courses: courses
+app.get("/api/courses", (req, res, next) => {
+    Course.find().then(documents => {
+      res.status(200).json({
+        message: 'Courses fetched successfully!',
+        courses: documents
+      });
     });
 });
 
