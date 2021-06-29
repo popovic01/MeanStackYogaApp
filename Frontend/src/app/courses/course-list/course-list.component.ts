@@ -23,6 +23,10 @@ export class CourseListComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDelete(courseId: string) {
+    this.coursesService.deleteCourse(courseId);
+  }
+
   ngOnDestroy() {
     this.coursesSub.unsubscribe();
   }

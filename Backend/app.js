@@ -2,8 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const User = require("./models/user");
-const Course = require("./models/course");
+const coursesRouter = require("./routes/courses");
+const productsRouter = require("./routes/products");
+const workoutsRouter = require("./routes/workouts");
 
 const app = express();
 
@@ -18,6 +19,7 @@ mongoose.connect(dbUPI, { useNewUrlParser: true, useUnifiedTopology: true })
 //povezivanje sa bazom
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -28,52 +30,14 @@ app.use((req, res, next) => {
     );
     res.setHeader(
       "Access-Control-Allow-Methods",
-      "GET, POST, PATCH, DELETE, OPTIONS"
+      "GET, POST, PATCH, PUT, DELETE, OPTIONS"
     );
     //dozvovavanje dodatnih headera, metoda
     next();
 });
 
-app.post("/api/courses", (req, res, next) => {
-  const course = new Course({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price
-  });
-  course.save();
-  res.status(201).json({
-    message: 'Course added successfully'
-  });
-});
-
-app.get("/api/courses", (req, res, next) => {
-    Course.find().then(documents => {
-      res.status(200).json({
-        message: 'Courses fetched successfully!',
-        courses: documents
-      });
-    });
-});
-
-/* app.get('/', function (req, res) {
-    res.send('Milica');
-  });
-
-app.get('/add-user', (req, res) => {
-    const user = new User({
-      email: 'naketeri@gmail.com',
-      password: '1101',
-      username: 'naketeri',
-      fullName: 'Naketeri Popovic',
-    });
-
-    user.save()
-      .then((result) => {
-        res.send(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-}); */
+app.use("/courses", coursesRouter);
+app.use("/products", productsRouter);
+app.use("/workouts", workoutsRouter);
 
 module.exports = app;

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-    title: { 
+    name: { 
         type: String,
         trim: true,
         required: true,
@@ -19,14 +19,17 @@ const productSchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
+        // required: true,
         maxlength: 2000,
     },
-    imageUrl: {
-        type: String,
-        required: true
+    snippet: {
+        type: String
     },
-    category: {
+    img: { 
+        data: Buffer, 
+        contentType: String 
+     }
+/*     category: {
         type: Schema.Types.ObjectId,
         ref: "Category",
         required: true
@@ -35,8 +38,18 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Review"
       }],
-    isDeleted: Boolean
+    isDeleted: Boolean */
 }, { timestamps: true });
+
+/* productSchema.pre('validate', function (next) {
+    //check if there is a description
+    if (this.description) {
+      this.description = htmlPurify.sanitize(this.description);
+      this.snippet = stripHtml(this.description.substring(0, 200)).result;
+    }
+  
+    next();
+  }); */
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

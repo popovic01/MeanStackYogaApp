@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { Product } from './product.model';
@@ -10,19 +11,54 @@ export class ProductsService {
   private products: Product[] = [];
   private productsUpdated = new Subject<Product[]>();
 
+  constructor(private http: HttpClient) {}
+
   getProducts() {
-    return [...this.products];
+    this.http.get<{message: string, products: Product[]}>('http://localhost:3000/products')
+      .subscribe((productData) => {
+          this.products = productData.products;
+          this.productsUpdated.next([...this.products]);
+      });
   }
 
   getProductUpdateListener() {
     return this.productsUpdated.asObservable();
   }
 
-  addProduct(url: string, name: string, price: number) {
-    const course: Product = {url: url, name: name, price: price};
-    this.products.push(course);
-    this.productsUpdated.next([...this.products]);
+  getProduct(id: string) {
+    return this.http.get<{ _id: string, url: string, name: string, price: number }>('http://localhost:3000/products/' + id);
   }
 
-  constructor() { }
+  addProduct(url: string, name: string, price: number) {
+    const product: Product = {_id: "", url: url, name: name, price: price};
+    this.http.post<{ message: string, productId: string }>('http://localhost:3000/products', product)
+      .subscribe(responseData => {
+        const id = responseData.productId;
+        product._id = id;
+        this.products.push(product);
+        this.productsUpdated.next([...this.products]);
+      });
+  }
+
+  updateProduct(id: string, url: string, name: string, price: number) {
+    const product: Product = {_id: id, url: url, name: name, price: price};
+    this.http.put('http://localhost:3000/products/' + id, product)
+      .subscribe(response => {
+        const updatedProducts = [...this.products];
+        const oldProductIndex = updatedProducts.findIndex(c => c._id === product._id);
+        updatedProducts[oldProductIndex] = product;
+        this.products = updatedProducts;
+        this.productsUpdated.next([...this.products]);
+      });
+  }
+
+  deleteProduct(productId: string) {
+    this.http.delete('http://localhost:3000/products/' + productId)
+      .subscribe(() => {
+        const updatedProducts = this.products.filter(product => product._id !== productId);
+        this.products = updatedProducts;
+        this.productsUpdated.next([...this.products]);
+      })
+  }
+
 }

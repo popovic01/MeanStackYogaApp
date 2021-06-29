@@ -17,10 +17,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(public productsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts();
+    this.productsService.getProducts();
     this.productsSub = this.productsService.getProductUpdateListener().subscribe((products: Product[]) => {
       this.products = products;
     });
+  }
+
+  onDelete(productId: string) {
+    this.productsService.deleteProduct(productId);
   }
 
   ngOnDestroy() {

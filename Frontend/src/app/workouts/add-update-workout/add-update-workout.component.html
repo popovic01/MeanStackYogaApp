@@ -1,0 +1,34 @@
+<mat-card>
+    <form (submit)="onSaveWorkout(workoutForm)" #workoutForm="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Naziv</mat-label>
+            <input matInput 
+            name="name"
+            [ngModel]="workout?.name" required
+            #name="ngModel">
+            <mat-error *ngIf="name.invalid">Unesite naziv treninga.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <textarea matInput 
+            name="description"
+            [ngModel]="workout?.description" 
+            cols="30" rows="5" placeholder="Opis" required
+            #description="ngModel">
+            </textarea>
+            <mat-error *ngIf="description.invalid">Unesite opis treninga.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <mat-label>Cena</mat-label>
+            <input matInput type="number" min="0"
+            name="price"
+            [ngModel]="workout?.price" required
+            #price="ngModel">
+            <mat-error *ngIf="price.invalid">Unesite cenu treninga.</mat-error>
+        </mat-form-field>
+        <button 
+        mat-raised-button 
+        color="accent" type="submit">Potvrdi</button>
+    </form>
+</mat-card>
