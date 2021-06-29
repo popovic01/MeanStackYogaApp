@@ -19,5 +19,5 @@
       <a mat-button class="button" [routerLink]="['/izmeni-trening', workout._id]">Uredi</a>
       <button mat-button class="button" (click)="onDelete(workout._id)">Obriši</button>
     </mat-card-actions>
-  </mat-card>
-  <p *ngIf="workouts.length <= 0" id="noAdded">No workout added yet!</p>
+</mat-card>
+<p *ngIf="workouts.length <= 0" id="noAdded">No workout added yet!</p>

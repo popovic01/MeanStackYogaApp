@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { Product } from './product.model';
@@ -11,7 +12,7 @@ export class ProductsService {
   private products: Product[] = [];
   private productsUpdated = new Subject<Product[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getProducts() {
     this.http.get<{message: string, products: Product[]}>('http://localhost:3000/products')
@@ -37,6 +38,7 @@ export class ProductsService {
         product._id = id;
         this.products.push(product);
         this.productsUpdated.next([...this.products]);
+        this.router.navigate(['/online-prodavnica']);
       });
   }
 
@@ -49,6 +51,7 @@ export class ProductsService {
         updatedProducts[oldProductIndex] = product;
         this.products = updatedProducts;
         this.productsUpdated.next([...this.products]);
+        this.router.navigate(['/online-prodavnica']);
       });
   }
 

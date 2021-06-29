@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators'
 
 import { Course } from './course.model';
 
@@ -12,7 +12,7 @@ export class CoursesService {
   private courses: Course[] = [];
   private coursesUpdated = new Subject<Course[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getCourses() {
     this.http.get<{message: string, courses: Course[]}>('http://localhost:3000/courses')
@@ -38,6 +38,7 @@ export class CoursesService {
         course._id = id;
         this.courses.push(course);
         this.coursesUpdated.next([...this.courses]);
+        this.router.navigate(['/kursevi']);
       });
   }
 
@@ -50,6 +51,7 @@ export class CoursesService {
         updatedCourses[oldCourseIndex] = course;
         this.courses = updatedCourses;
         this.coursesUpdated.next([...this.courses]);
+        this.router.navigate(['/kursevi']);
       });
   }
 

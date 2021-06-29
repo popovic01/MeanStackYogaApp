@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators'
 
 import { Workout } from './workout.model';
 
@@ -12,7 +12,7 @@ export class WorkoutsService {
   private workouts: Workout[] = [];
   private workoutsUpdated = new Subject<Workout[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getWorkouts() {
     this.http.get<{message: string, workouts: Workout[]}>('http://localhost:3000/workouts')
@@ -38,6 +38,7 @@ export class WorkoutsService {
         workout._id = id;
         this.workouts.push(workout);
         this.workoutsUpdated.next([...this.workouts]);
+        this.router.navigate(['/treninzi']);
       });
   }
 
@@ -50,6 +51,7 @@ export class WorkoutsService {
         updatedWorkouts[oldWorkoutIndex] = workout;
         this.workouts = updatedWorkouts;
         this.workoutsUpdated.next([...this.workouts]);
+        this.router.navigate(['/treninzi']);
       });
   }
 

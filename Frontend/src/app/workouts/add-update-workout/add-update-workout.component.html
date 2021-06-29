@@ -1,5 +1,6 @@
 <mat-card>
-    <form (submit)="onSaveWorkout(workoutForm)" #workoutForm="ngForm">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onSaveWorkout(workoutForm)" #workoutForm="ngForm" *ngIf="!isLoading">
         <mat-form-field class="example-full-width">
             <mat-label>Naziv</mat-label>
             <input matInput 

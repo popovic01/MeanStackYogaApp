@@ -18,6 +18,7 @@ export class AddUpdateWorkoutComponent implements OnInit {
   private mode = 'create';
   private workoutId: any;
   workout: any;
+  isLoading = false;
   
   constructor(public workoutsService: WorkoutsService, public route: ActivatedRoute) { }
 
@@ -26,7 +27,9 @@ export class AddUpdateWorkoutComponent implements OnInit {
       if (paramMap.has('workoutId')) {
         this.mode = 'edit';
         this.workoutId = paramMap.get('workoutId');
+        this.isLoading = true;
         this.workoutsService.getWorkout(this.workoutId).subscribe(workoutData => {
+          this.isLoading = false;
           this.workout = {_id: workoutData._id, name: workoutData.name, description: workoutData.description, price: workoutData.price};
         });
 
@@ -41,6 +44,7 @@ export class AddUpdateWorkoutComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === "create") {
       this.workoutsService.addWorkout(form.value.name, form.value.description, form.value.price);
     } else {

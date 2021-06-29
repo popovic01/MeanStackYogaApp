@@ -18,6 +18,7 @@ export class AddUpdateCourseComponent implements OnInit {
   private mode = 'create';
   private courseId: any;
   course: any;
+  isLoading = false;
   
   constructor(public coursesService: CoursesService, public route: ActivatedRoute) { }
 
@@ -26,7 +27,9 @@ export class AddUpdateCourseComponent implements OnInit {
       if (paramMap.has('courseId')) {
         this.mode = 'edit';
         this.courseId = paramMap.get('courseId');
+        this.isLoading = true;
         this.coursesService.getCourse(this.courseId).subscribe(courseData => {
+          this.isLoading = false;
           this.course = {_id: courseData._id, name: courseData.name, description: courseData.description, price: courseData.price};
         });
 
@@ -41,6 +44,7 @@ export class AddUpdateCourseComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === "create") {
       this.coursesService.addCourse(form.value.name, form.value.description, form.value.price);
     } else {

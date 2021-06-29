@@ -26,3 +26,7 @@
   background-color: #424242;
   color: #dddddd;
 }
+
+mat-spinner {
+  margin: auto;
+}

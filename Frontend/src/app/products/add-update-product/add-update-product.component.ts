@@ -18,6 +18,7 @@ export class AddUpdateProductComponent implements OnInit {
   private mode = 'create';
   private productId: any;
   product: any;
+  isLoading = false;
 
   constructor(public productsService: ProductsService, public route: ActivatedRoute) { }
 
@@ -26,7 +27,9 @@ export class AddUpdateProductComponent implements OnInit {
       if (paramMap.has('productId')) {
         this.mode = 'edit';
         this.productId = paramMap.get('productId');
+        this.isLoading = true;
         this.productsService.getProduct(this.productId).subscribe(productData => {
+          this.isLoading = false;
           this.product = {_id: productData._id, url: productData.url, name: productData.name, price: productData.price};
         });
       } else {
@@ -40,6 +43,7 @@ export class AddUpdateProductComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === "create") {
       this.productsService.addProduct(form.value.url, form.value.name, form.value.price);
     } else {
