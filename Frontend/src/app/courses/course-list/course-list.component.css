@@ -1,5 +1,5 @@
 .example-card {
-    max-width: 400px;
+    max-width: 350px;
     display: inline-block;
     margin: 20px;
     background-color: #ced4da;
@@ -13,6 +13,7 @@
 
 #noAdded {
   text-align: center;
+  padding-top: 20px;
 }
 
 #main {
@@ -29,4 +30,16 @@
 
 mat-spinner {
   margin: auto;
+}
+
+.course-image {
+  width: 100%;
+}
+
+.course-image img {
+  width: 100%;
+}
+
+mat-paginator {
+  margin-top: 1rem;
 }

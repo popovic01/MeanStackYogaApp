@@ -10,15 +10,19 @@ import { Product } from './product.model';
 })
 export class ProductsService {
   private products: Product[] = [];
-  private productsUpdated = new Subject<Product[]>();
+  private productsUpdated = new Subject<{ products: Product[]; productCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProducts() {
-    this.http.get<{message: string, products: Product[]}>('http://localhost:3000/products')
+  getProducts(productsPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${productsPerPage}&page=${currentPage}`;
+    this.http.get<{message: string, products: Product[], maxProducts: number}>('http://localhost:3000/products' + queryParams)
       .subscribe((productData) => {
           this.products = productData.products;
-          this.productsUpdated.next([...this.products]);
+          this.productsUpdated.next({
+            products: [...this.products],
+            productCount: productData.maxProducts
+          });
       });
   }
 
@@ -27,41 +31,43 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    return this.http.get<{ _id: string, url: string, name: string, price: number }>('http://localhost:3000/products/' + id);
+    return this.http.get<{ _id: string, name: string, price: number, imagePath: string }>('http://localhost:3000/products/' + id);
   }
 
-  addProduct(url: string, name: string, price: number) {
-    const product: Product = {_id: "", url: url, name: name, price: price};
-    this.http.post<{ message: string, productId: string }>('http://localhost:3000/products', product)
+  addProduct(name: string, price: number, image: File) {
+    const productData = new FormData();
+    productData.append('name', name);
+    productData.append('price', price as unknown as string);
+    productData.append('image', image, name);
+    this.http.post<{ message: string, product: Product }>('http://localhost:3000/products', productData)
       .subscribe(responseData => {
-        const id = responseData.productId;
-        product._id = id;
-        this.products.push(product);
-        this.productsUpdated.next([...this.products]);
         this.router.navigate(['/online-prodavnica']);
       });
   }
 
-  updateProduct(id: string, url: string, name: string, price: number) {
-    const product: Product = {_id: id, url: url, name: name, price: price};
-    this.http.put('http://localhost:3000/products/' + id, product)
+  updateProduct(id: string, name: string, price: number, image: any) {
+    let productData: Product | FormData;
+    if (typeof image == 'object') {
+      productData = new FormData();
+      productData.append("_id", id);
+      productData.append("name", name);
+      productData.append("price", price as unknown as string);
+      productData.append("image", image, name);
+    } else {
+      productData = {
+        _id: id,
+        name: name,
+        price: price,
+        imagePath: image
+      };
+    }
+    this.http.put('http://localhost:3000/products/' + id, productData)
       .subscribe(response => {
-        const updatedProducts = [...this.products];
-        const oldProductIndex = updatedProducts.findIndex(c => c._id === product._id);
-        updatedProducts[oldProductIndex] = product;
-        this.products = updatedProducts;
-        this.productsUpdated.next([...this.products]);
         this.router.navigate(['/online-prodavnica']);
       });
   }
 
   deleteProduct(productId: string) {
-    this.http.delete('http://localhost:3000/products/' + productId)
-      .subscribe(() => {
-        const updatedProducts = this.products.filter(product => product._id !== productId);
-        this.products = updatedProducts;
-        this.productsUpdated.next([...this.products]);
-      })
+    return this.http.delete('http://localhost:3000/products/' + productId);
   }
-
 }

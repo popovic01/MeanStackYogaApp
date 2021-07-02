@@ -10,15 +10,19 @@ import { Course } from './course.model';
 })
 export class CoursesService {
   private courses: Course[] = [];
-  private coursesUpdated = new Subject<Course[]>();
+  private coursesUpdated = new Subject<{ courses: Course[]; courseCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getCourses() {
-    this.http.get<{message: string, courses: Course[]}>('http://localhost:3000/courses')
+  getCourses(coursesPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${coursesPerPage}&page=${currentPage}`;
+    this.http.get<{message: string, courses: Course[], maxCourses: number}>('http://localhost:3000/courses' + queryParams)
       .subscribe((courseData) => {
           this.courses = courseData.courses;
-          this.coursesUpdated.next([...this.courses]);
+          this.coursesUpdated.next({
+            courses: [...this.courses],
+            courseCount: courseData.maxCourses
+          });
       });
   }
 
@@ -27,41 +31,49 @@ export class CoursesService {
   }
 
   getCourse(id: string) {
-    return this.http.get<{ _id: string, name: string, description: string, price: number }>('http://localhost:3000/courses/' + id);
+    return this.http
+    .get<{ _id: string, name: string, description: string, price: number, imagePath: string }>
+    ('http://localhost:3000/courses/' + id);
   }
 
-  addCourse(name: string, description: string, price: number) {
-    const course: Course = {_id: "", name: name, description: description, price: price};
-    this.http.post<{ message: string, courseId: string }>('http://localhost:3000/courses', course)
+  addCourse(name: string, description: string, price: number, image: File) {
+    const courseData = new FormData();
+    courseData.append('name', name);
+    courseData.append('description', description);
+    courseData.append('price', price as unknown as string);
+    courseData.append('image', image, name);
+    this.http.post<{ message: string, course: Course }>('http://localhost:3000/courses', courseData)
       .subscribe(responseData => {
-        const id = responseData.courseId;
-        course._id = id;
-        this.courses.push(course);
-        this.coursesUpdated.next([...this.courses]);
         this.router.navigate(['/kursevi']);
       });
   }
 
-  updateCourse(id: string, name: string, description: string, price: number) {
-    const course: Course = {_id: id, name: name, description: description, price: price};
-    this.http.put('http://localhost:3000/courses/' + id, course)
+  updateCourse(id: string, name: string, description: string, price: number, image: any) {
+    let courseData: Course | FormData;
+    if (typeof image === 'object') {
+      courseData = new FormData();
+      courseData.append("_id", id);
+      courseData.append("name", name);
+      courseData.append("description", description);
+      courseData.append("price", price as unknown as string);
+      courseData.append("image", image, name);
+    } else {
+      courseData = {
+        _id: id,
+        name: name,
+        description: description, 
+        price: price,
+        imagePath: image
+      };
+    }
+    this.http.put('http://localhost:3000/courses/' + id, courseData)
       .subscribe(response => {
-        const updatedCourses = [...this.courses];
-        const oldCourseIndex = updatedCourses.findIndex(c => c._id === course._id);
-        updatedCourses[oldCourseIndex] = course;
-        this.courses = updatedCourses;
-        this.coursesUpdated.next([...this.courses]);
         this.router.navigate(['/kursevi']);
       });
   }
 
   deleteCourse(courseId: string) {
-    this.http.delete('http://localhost:3000/courses/' + courseId)
-      .subscribe(() => {
-        const updatedCourses = this.courses.filter(course => course._id !== courseId);
-        this.courses = updatedCourses;
-        this.coursesUpdated.next([...this.courses]);
-      })
+    return this.http.delete('http://localhost:3000/courses/' + courseId);
   }
 
 }

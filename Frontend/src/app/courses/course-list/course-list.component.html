@@ -4,12 +4,19 @@
         {{ course.name }}
       <p>
     </mat-card-content>
-    <img mat-card-image src="..\assets\images\Course.jpg" alt="Photo of a course">
+
+    <mat-card-content>
+      <div class="course-image">
+        <img [src]="course.imagePath" [alt]="course.name">
+      </div>
+    </mat-card-content>
+
     <mat-card-content>
       <p>
         {{ course.description }}
       </p>
-    </mat-card-content> <br>
+    </mat-card-content> 
+
     <mat-card-content>
       <p class="priceP">
         {{ course.price }} din.
@@ -20,4 +27,6 @@
       <button mat-button class="button" (click)="onDelete(course._id)">Obriši</button>
     </mat-card-actions>
   </mat-card>
+  <mat-paginator [length]="totalCourses" [pageSize]="coursesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="courses.length > 0"></mat-paginator>
   <p *ngIf="courses.length <= 0" id="noAdded">No course added yet!</p>

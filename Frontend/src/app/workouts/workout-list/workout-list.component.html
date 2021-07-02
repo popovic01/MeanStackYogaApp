@@ -4,7 +4,11 @@
         {{ workout.name }}
       <p>
     </mat-card-content>
-    <img mat-card-image src="..\assets\images\Workout.jpg" alt="Photo of a workout">
+    <mat-card-content>
+      <div class="workout-image">
+        <img [src]="workout.imagePath" [alt]="workout.name">
+      </div>
+    </mat-card-content>
     <mat-card-content>
       <p>
         {{ workout.description }}
@@ -20,4 +24,6 @@
       <button mat-button class="button" (click)="onDelete(workout._id)">Obriši</button>
     </mat-card-actions>
 </mat-card>
+<mat-paginator [length]="totalWorkouts" [pageSize]="workoutsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+*ngIf="workouts.length > 0"></mat-paginator>
 <p *ngIf="workouts.length <= 0" id="noAdded">No workout added yet!</p>

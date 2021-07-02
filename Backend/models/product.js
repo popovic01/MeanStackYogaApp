@@ -25,10 +25,10 @@ const productSchema = new Schema({
     snippet: {
         type: String
     },
-    img: { 
-        data: Buffer, 
-        contentType: String 
-     }
+    imagePath: {
+        type: String,
+        required: true
+    }
 /*     category: {
         type: Schema.Types.ObjectId,
         ref: "Category",

@@ -1,8 +1,8 @@
 .example-card {
-    width: 300px; 
+    width: 350px; 
     display: inline-block;
     margin: 20px;
-    background-color: white;
+    background-color: rgb(229, 229, 229);
   }
 
 .par {
@@ -13,10 +13,11 @@
 
 #noAdded {
   text-align: center;
+  padding-top: 20px;
 }
 
 .button {
-  background-color: #dddddd;
+  background-color: #c5c4c4;
   color: #424242;
 }
 
@@ -27,11 +28,18 @@
   font-weight: 500;
 }
 
-#img {
-  width: 300px;
-  height: 300px;
-}
-
 mat-spinner {
   margin: auto;
+}
+
+.product-image {
+  width: 100%;
+}
+
+.product-image img {
+  width: 100%;
+}
+
+mat-paginator {
+  margin-top: 1rem;
 }

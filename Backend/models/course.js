@@ -16,9 +16,9 @@ const courseSchema = new Schema({
         required: true,
         min: 0
     },
-    imageUrl: {
-        type: String
-        // required: true
+    imagePath: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 

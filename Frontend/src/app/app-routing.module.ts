@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'izmeni-proizvod/:productId', component: AddUpdateProductComponent},
   { path: 'dodaj-trening', component: AddUpdateWorkoutComponent},
   { path: 'izmeni-trening/:workoutId', component: AddUpdateWorkoutComponent},
+  { path: 'o-meni', component: CategoryComponent},
+  { path: 'kontakt', component: CategoryComponent}
 ];
 
 @NgModule({

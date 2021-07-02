@@ -1,32 +1,32 @@
 <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form (submit)="onSaveCourse(courseForm)" #courseForm="ngForm" *ngIf="!isLoading">
+    <form [formGroup]="form" (submit)="onSaveCourse()" *ngIf="!isLoading">
         <mat-form-field class="example-full-width">
             <mat-label>Naziv</mat-label>
             <input matInput 
-            name="name"
-            [ngModel]="course?.name" required
-            #name="ngModel">
-            <mat-error *ngIf="name.invalid">Unesite naziv kursa.</mat-error>
+            formControlName="name">
+            <mat-error *ngIf="form.get('name')!.hasError('required')">Unesite naziv kursa.</mat-error>
         </mat-form-field>
     
+        <div>
+            <button mat-stroked-button type="button" (click)="filePicker.click()">Izaberite sliku kursa</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
+        </div>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image')!.valid">
+            <img [src]="imagePreview" [alt]="form.value.name">
+        </div>
+
         <mat-form-field>
             <textarea matInput 
-            name="description"
-            [ngModel]="course?.description" 
-            cols="30" rows="5" placeholder="Opis" required
-            #description="ngModel">
+            cols="30" rows="5" placeholder="Opis" formControlName="description">
             </textarea>
-            <mat-error *ngIf="description.invalid">Unesite opis kursa.</mat-error>
+            <mat-error *ngIf="form.get('description')!.hasError('required')">Unesite opis kursa.</mat-error>
         </mat-form-field>
     
         <mat-form-field class="example-full-width">
             <mat-label>Cena</mat-label>
-            <input matInput type="number" min="0"
-            name="price"
-            [ngModel]="course?.price" required
-            #price="ngModel">
-            <mat-error *ngIf="price.invalid">Unesite cenu kursa.</mat-error>
+            <input matInput type="number" min="0" formControlName="price">
+            <mat-error *ngIf="form.get('price')!.hasError('required')">Unesite cenu kursa.</mat-error>
         </mat-form-field>
         <button 
         mat-raised-button 

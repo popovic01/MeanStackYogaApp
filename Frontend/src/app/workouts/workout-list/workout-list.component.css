@@ -1,8 +1,8 @@
 .example-card {
-    max-width: 400px;
+    max-width: 350px;
     display: inline-block;
     margin: 20px;
-    background-color: #ced4da;
+    background-color: rgb(240, 239, 235);
     color: #424242;
   }
 
@@ -13,6 +13,7 @@
 
 #noAdded {
   text-align: center;
+  padding-top: 20px;
 }
 
 #main {
@@ -29,4 +30,16 @@
 
 mat-spinner {
   margin: auto;
+}
+
+.workout-image {
+  width: 100%;
+}
+
+.workout-image img {
+  width: 100%;
+}
+
+mat-paginator {
+  margin-top: 1rem;
 }

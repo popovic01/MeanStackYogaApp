@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { FileCheck } from 'angular-file-validator';
 
 import { Workout } from '../workout.model';
 import { WorkoutsService } from '../workouts.service';
@@ -17,12 +18,29 @@ export class AddUpdateWorkoutComponent implements OnInit {
   enteredPrice = 0;
   private mode = 'create';
   private workoutId: any;
-  workout: any;
+  form!: FormGroup;
+  workout!: Workout;
   isLoading = false;
+  imagePreview: string = "";
   
   constructor(public workoutsService: WorkoutsService, public route: ActivatedRoute) { }
 
   ngOnInit(): void { 
+    this.form = new FormGroup({
+      name: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      description: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      price: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [FileCheck.ngFileValidator(['png', 'jpeg', 'jpg'])]
+      })
+    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('workoutId')) {
         this.mode = 'edit';
@@ -30,9 +48,20 @@ export class AddUpdateWorkoutComponent implements OnInit {
         this.isLoading = true;
         this.workoutsService.getWorkout(this.workoutId).subscribe(workoutData => {
           this.isLoading = false;
-          this.workout = {_id: workoutData._id, name: workoutData.name, description: workoutData.description, price: workoutData.price};
+          this.workout = {
+            _id: workoutData._id, 
+            name: workoutData.name, 
+            description: workoutData.description, 
+            price: workoutData.price,
+            imagePath: workoutData.imagePath
+          };
+          this.form.patchValue({
+            name: this.workout.name,
+            description: this.workout.description,
+            price: this.workout.price,
+            image: this.workout.imagePath
+          });
         });
-
       } else {
         this.mode = 'create';
         this.workoutId = "";
@@ -40,22 +69,35 @@ export class AddUpdateWorkoutComponent implements OnInit {
     });
   }
 
-  onSaveWorkout(form: NgForm) {
-    if (form.invalid) {
+  onImagePicked(event: Event) {
+    // @ts-ignore: Object is possibly 'null'.
+    const file = (event.target as HTMLInputElement).files[0]; 
+    this.form.patchValue({image: file});
+    this.form.get('image')!.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onSaveWorkout() {
+    if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === "create") {
-      this.workoutsService.addWorkout(form.value.name, form.value.description, form.value.price);
+      this.workoutsService.addWorkout(this.form.value.name, this.form.value.description, this.form.value.price, this.form.value.image);
     } else {
       this.workoutsService.updateWorkout(
         this.workoutId,
-        form.value.name, 
-        form.value.description, 
-        form.value.price
+        this.form.value.name, 
+        this.form.value.description, 
+        this.form.value.price,
+        this.form.value.image
       );
     }
-    form.resetForm();
+    this.form.reset();
   }
 
 }

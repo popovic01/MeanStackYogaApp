@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { FileCheck } from 'angular-file-validator';
 
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
@@ -13,16 +14,29 @@ import { ProductsService } from '../products.service';
 export class AddUpdateProductComponent implements OnInit {
 
   enteredName = '';
-  enteredURL = '';
   enteredPrice = 0;
+  form!: FormGroup;
   private mode = 'create';
   private productId: any;
   product: any;
   isLoading = false;
+  imagePreview: string = "";
 
   constructor(public productsService: ProductsService, public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      name: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      price: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [FileCheck.ngFileValidator(['png', 'jpeg', 'jpg'])]
+      })
+    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('productId')) {
         this.mode = 'edit';
@@ -30,7 +44,17 @@ export class AddUpdateProductComponent implements OnInit {
         this.isLoading = true;
         this.productsService.getProduct(this.productId).subscribe(productData => {
           this.isLoading = false;
-          this.product = {_id: productData._id, url: productData.url, name: productData.name, price: productData.price};
+          this.product = {
+            _id: productData._id, 
+            name: productData.name, 
+            price: productData.price,
+            imagePath: productData.imagePath
+          };
+          this.form.patchValue({
+            name: this.product.name,
+            price: this.product.price,
+            image: this.product.imagePath
+          });
         });
       } else {
         this.mode = 'create';
@@ -39,22 +63,34 @@ export class AddUpdateProductComponent implements OnInit {
     })
   }
 
-  onSaveProduct(form: NgForm) {
-    if (form.invalid) {
+  onImagePicked(event: Event) {
+    // @ts-ignore: Object is possibly 'null'.
+    const file = (event.target as HTMLInputElement).files[0]; 
+    this.form.patchValue({image: file});
+    this.form.get('image')!.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onSaveProduct() {
+    if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === "create") {
-      this.productsService.addProduct(form.value.url, form.value.name, form.value.price);
+      this.productsService.addProduct(this.form.value.name, this.form.value.price, this.form.value.image);
     } else {
       this.productsService.updateProduct(
         this.productId,
-        form.value.url, 
-        form.value.name, 
-        form.value.price
+        this.form.value.name, 
+        this.form.value.price,
+        this.form.value.image
       );
     }
-    form.resetForm();
+    this.form.reset();
   }
 
 }
