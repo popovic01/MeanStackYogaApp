@@ -6,6 +6,7 @@ const path = require("path");
 const coursesRouter = require("./routes/courses");
 const productsRouter = require("./routes/products");
 const workoutsRouter = require("./routes/workouts");
+const userRouter = require("./routes/user");
 
 const app = express();
 
@@ -42,5 +43,6 @@ app.use((req, res, next) => {
 app.use("/courses", coursesRouter);
 app.use("/products", productsRouter);
 app.use("/workouts", workoutsRouter);
+app.use("/user", userRouter);
 
 module.exports = app;

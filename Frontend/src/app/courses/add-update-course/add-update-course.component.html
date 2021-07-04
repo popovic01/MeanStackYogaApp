@@ -4,13 +4,13 @@
         <mat-form-field class="example-full-width">
             <mat-label>Naziv</mat-label>
             <input matInput 
-            formControlName="name">
+            formControlName="name" required>
             <mat-error *ngIf="form.get('name')!.hasError('required')">Unesite naziv kursa.</mat-error>
         </mat-form-field>
     
         <div>
             <button mat-stroked-button type="button" (click)="filePicker.click()">Izaberite sliku kursa</button>
-            <input type="file" #filePicker (change)="onImagePicked($event)">
+            <input type="file" #filePicker (change)="onImagePicked($event)" required>
         </div>
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image')!.valid">
             <img [src]="imagePreview" [alt]="form.value.name">
@@ -18,14 +18,14 @@
 
         <mat-form-field>
             <textarea matInput 
-            cols="30" rows="5" placeholder="Opis" formControlName="description">
+            cols="30" rows="5" placeholder="Opis" formControlName="description" required>
             </textarea>
             <mat-error *ngIf="form.get('description')!.hasError('required')">Unesite opis kursa.</mat-error>
         </mat-form-field>
     
         <mat-form-field class="example-full-width">
             <mat-label>Cena</mat-label>
-            <input matInput type="number" min="0" formControlName="price">
+            <input matInput type="number" min="0" formControlName="price" required>
             <mat-error *ngIf="form.get('price')!.hasError('required')">Unesite cenu kursa.</mat-error>
         </mat-form-field>
         <button 

@@ -23,10 +23,10 @@ import { CourseListComponent } from './courses/course-list/course-list.component
 import { AddUpdateProductComponent } from './products/add-update-product/add-update-product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { CategoryComponent } from './category/category/category.component';
-import { RegistrationComponent } from './user/registration/registration.component';
-import { LoginComponent } from './user/login/login.component';
 import { AddUpdateWorkoutComponent } from './workouts/add-update-workout/add-update-workout.component';
 import { WorkoutListComponent } from './workouts/workout-list/workout-list.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +37,10 @@ import { WorkoutListComponent } from './workouts/workout-list/workout-list.compo
     AddUpdateProductComponent,
     ProductListComponent,
     CategoryComponent,
-    RegistrationComponent,
-    LoginComponent,
     AddUpdateWorkoutComponent,
-    WorkoutListComponent
+    WorkoutListComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 import { CategoryComponent } from './category/category/category.component';
 import { AddUpdateCourseComponent } from './courses/add-update-course/add-update-course.component';
 import { CourseListComponent } from './courses/course-list/course-list.component';
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'dodaj-trening', component: AddUpdateWorkoutComponent},
   { path: 'izmeni-trening/:workoutId', component: AddUpdateWorkoutComponent},
   { path: 'o-meni', component: CategoryComponent},
-  { path: 'kontakt', component: CategoryComponent}
+  { path: 'kontakt', component: CategoryComponent},
+  { path: 'prijava', component: LoginComponent},
+  { path: 'registracija', component: SignupComponent}
 ];
 
 @NgModule({
