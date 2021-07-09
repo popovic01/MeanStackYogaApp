@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 
 const Workout = require("../models/workout");
+const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
@@ -30,7 +31,8 @@ const storage = multer.diskStorage({
   }
 });
 
-router.post("", multer({ storage: storage }).single("image"), (req, res, next) => {
+router.post("", checkAuth,  
+  multer({ storage: storage }).single("image"), (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");    
   const workout = new Workout({
       name: req.body.name,
@@ -51,7 +53,8 @@ router.post("", multer({ storage: storage }).single("image"), (req, res, next) =
   
   //patch - update-ovanje postojeceg objekta novim informacijama
   //put - update-ovanje celog objekta
-  router.put("/:_id", multer({ storage: storage }).single("image"), (req, res, next) => {
+  router.put("/:_id", checkAuth,
+    multer({ storage: storage }).single("image"), (req, res, next) => {
     let imagePath = req.body.imagePath;
     if (req.file) {
       const url = req.protocol + "://" + req.get("host");  
@@ -103,7 +106,8 @@ router.post("", multer({ storage: storage }).single("image"), (req, res, next) =
     })
   });
   
-  router.delete("/:_id", (req, res, next) => {
+  router.delete("/:_id", checkAuth,
+    (req, res, next) => {
     Workout.deleteOne({ _id: req.params._id })
       .then(result => {
         console.log(req.params._id);

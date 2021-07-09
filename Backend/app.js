@@ -30,7 +30,7 @@ app.use((req, res, next) => {
     //dozvola za pristup resursima na serveru od strane drugih domena
     res.setHeader(
       "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
     res.setHeader(
       "Access-Control-Allow-Methods",

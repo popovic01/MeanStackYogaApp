@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-/*const jwt = require("jsonwebtoken");*/
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
@@ -22,13 +22,14 @@ router.post("/signup", (req, res, next) => {
       })
       .catch(err => {
         res.status(500).json({
+          message: "Errorrrrrrrr!",
           error: err
         });
       });
   });
 });
 
-/*router.post("/login", (req, res, next) => {
+router.post("/login", (req, res, next) => {
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -60,6 +61,6 @@ router.post("/signup", (req, res, next) => {
         message: "Auth failed"
       });
     });
-});*/
+});
 
 module.exports = router;
