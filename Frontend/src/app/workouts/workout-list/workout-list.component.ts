@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
+import { AuthService } from 'src/app/auth/auth.service';
 import { Workout } from '../workout.model';
 import { WorkoutsService } from '../workouts.service';
 
@@ -18,8 +19,10 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   private workoutsSub: Subscription = new Subscription;
+  userIsAuthenticated = false;
+  private authStatusSub: Subscription | undefined;
 
-  constructor(public workoutsService: WorkoutsService) { }
+  constructor(public workoutsService: WorkoutsService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.workoutsService.getWorkouts(this.workoutsPerPage, this.currentPage);
@@ -27,6 +30,12 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     .subscribe((workoutData: { workouts: Workout[], workoutCount: number }) => {
       this.totalWorkouts = workoutData.workoutCount;
       this.workouts = workoutData.workouts;
+    });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
     });
   }
 

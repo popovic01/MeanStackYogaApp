@@ -22,7 +22,7 @@
         {{ course.price }} din.
       </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="userIsAuthenticated">
       <a mat-button class="button" [routerLink]="['/izmeni-kurs', course._id]">Uredi</a>
       <button mat-button class="button" (click)="onDelete(course._id)">Obriši</button>
     </mat-card-actions>

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
+import { AuthService } from 'src/app/auth/auth.service';
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 
@@ -18,8 +19,10 @@ export class CourseListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   private coursesSub: Subscription = new Subscription;
+  userIsAuthenticated = false;
+  private authStatusSub: Subscription | undefined;
 
-  constructor(public coursesService: CoursesService) { }
+  constructor(public coursesService: CoursesService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.coursesService.getCourses(this.coursesPerPage, this.currentPage);
@@ -28,6 +31,12 @@ export class CourseListComponent implements OnInit, OnDestroy {
       this.totalCourses = courseData.courseCount;
       this.courses = courseData.courses;
     });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
+      });
   }
 
   onChangedPage(pageData: PageEvent) {

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
+import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 
@@ -18,8 +19,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   private productsSub: Subscription = new Subscription;
+  userIsAuthenticated = false;
+  private authStatusSub: Subscription | undefined;
 
-  constructor(public productsService: ProductsService) { }
+  constructor(public productsService: ProductsService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.productsService.getProducts(this.productsPerPage, this.currentPage);
@@ -27,6 +30,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     .subscribe((productData: { products: Product[], productCount: number }) => {
       this.totalProducts = productData.productCount;
       this.products = productData.products;
+    });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
     });
   }
 

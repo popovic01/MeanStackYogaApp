@@ -19,7 +19,7 @@
         {{ workout.price }} din.
       </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="userIsAuthenticated">
       <a mat-button class="button" [routerLink]="['/izmeni-trening', workout._id]">Uredi</a>
       <button mat-button class="button" (click)="onDelete(workout._id)">Obriši</button>
     </mat-card-actions>
