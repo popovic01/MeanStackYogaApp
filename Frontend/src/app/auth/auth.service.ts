@@ -27,10 +27,13 @@ export class AuthService {
   }
 
   createUser(email: string, password: string) {
-    const authData: AuthData = {email: email, password: password};
-    this.http.post("http://localhost:3000/user/signup", authData)
-      .subscribe(response => {
-        console.log(response);
+    const authData: AuthData = { email: email, password: password };
+    this.http
+      .post("http://localhost:3000/user/signup", authData)
+      .subscribe(() => {
+        this.router.navigate(["/prijava"]);
+      }, error => {
+        this.authStatusListener.next(false);
       });
   }
 
@@ -51,7 +54,9 @@ export class AuthService {
           this.saveAuthData(token, expirationDate);
           this.router.navigate(['/']);
         }
-      })
+      }, error => {
+        this.authStatusListener.next(false);
+      });
   }
 
   autoAuthUser() {

@@ -48,6 +48,11 @@ router.post("", checkAuth,
           _id: createdCourse._id
         }
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno kreiranje kursa"
+      });
     }); //cuvanje u bazu
   });
   
@@ -68,7 +73,12 @@ router.post("", checkAuth,
       imagePath: imagePath
     });
     Course.updateOne({ _id: req.params._id }, course).then(result => {
-      res.status(200).json({ message: 'Update successful!' });
+      res.status(200).json({ message: 'Uspešno izmenjen kurs!' });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešna izmena kursa"
+      });
     });
   });
   
@@ -93,6 +103,11 @@ router.post("", checkAuth,
         courses: fetchedCourses,
         maxCourses: count
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno dobavljanje kurseva iz baze podataka"
+      });
     });
   });
   
@@ -104,6 +119,11 @@ router.post("", checkAuth,
         res.status(404).json({ message: 'Course nout found!' });
       }
     })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno dobavljanje kursa iz baze podataka"
+      });
+    });
   });
   
   router.delete("/:_id", checkAuth, (req, res, next) => {
@@ -111,6 +131,11 @@ router.post("", checkAuth,
       .then(result => {
         console.log(req.params._id);
         res.status(200).json({ message: "Course deleted!" });
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: "Neuspešno brisanje kursa"
+        });
       });
   });
 

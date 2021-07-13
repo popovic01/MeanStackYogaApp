@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FileCheck } from 'angular-file-validator';
+import { Subscription } from 'rxjs';
 
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-add-update-product',
   templateUrl: './add-update-product.component.html',
   styleUrls: ['./add-update-product.component.css']
 })
-export class AddUpdateProductComponent implements OnInit {
+export class AddUpdateProductComponent implements OnInit, OnDestroy {
 
   enteredName = '';
   enteredPrice = 0;
@@ -21,10 +23,17 @@ export class AddUpdateProductComponent implements OnInit {
   product: any;
   isLoading = false;
   imagePreview: string = "";
+  private authStatusSub!: Subscription;
 
-  constructor(public productsService: ProductsService, public route: ActivatedRoute) { }
+  constructor(public productsService: ProductsService, public route: ActivatedRoute,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(authStatus => {
+      this.isLoading = false;
+    });
     this.form = new FormGroup({
       name: new FormControl(null, {
         validators: [Validators.required]
@@ -91,6 +100,10 @@ export class AddUpdateProductComponent implements OnInit {
       );
     }
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 
 }

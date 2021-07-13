@@ -47,6 +47,11 @@ router.post("", checkAuth,
           _id: createdProduct._id
         }
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno kreiranje proizvoda"
+      });
     });
   });
   
@@ -65,6 +70,11 @@ router.post("", checkAuth,
     });
     Product.updateOne( {_id: req.params._id }, product).then(result => {
       res.status(200).json({ message: 'Update successful! '});
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešna izmena proizvoda"
+      });
     });
   });
   
@@ -89,6 +99,11 @@ router.post("", checkAuth,
         products: fetchedProducts,
         maxProducts: count
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno dobavljanje proizvoda iz baze podataka"
+      });
     });
   });
   
@@ -100,6 +115,11 @@ router.post("", checkAuth,
         res.status(404).json({ message: 'Product nout found!' });
       }
     })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno dobavljanje proizvoda"
+      });
+    });
   });
   
   router.delete("/:_id", checkAuth, (req, res, next) => {
@@ -107,6 +127,11 @@ router.post("", checkAuth,
       .then(result => {
         console.log(req.params._id);
         res.status(200).json({ message: "Product deleted!" });
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: "Neuspešno brisanje proizvoda"
+        });
       });
   });
 

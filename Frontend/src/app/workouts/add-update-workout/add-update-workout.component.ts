@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FileCheck } from 'angular-file-validator';
+import { Subscription } from 'rxjs';
 
 import { Workout } from '../workout.model';
 import { WorkoutsService } from '../workouts.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-add-update-workout',
   templateUrl: './add-update-workout.component.html',
   styleUrls: ['./add-update-workout.component.css']
 })
-export class AddUpdateWorkoutComponent implements OnInit {
+export class AddUpdateWorkoutComponent implements OnInit, OnDestroy {
 
   enteredName = '';
   enteredDescription = '';
@@ -22,10 +24,17 @@ export class AddUpdateWorkoutComponent implements OnInit {
   workout!: Workout;
   isLoading = false;
   imagePreview: string = "";
+  private authStatusSub!: Subscription;
   
-  constructor(public workoutsService: WorkoutsService, public route: ActivatedRoute) { }
+  constructor(public workoutsService: WorkoutsService, public route: ActivatedRoute,
+    public authService: AuthService) { }
 
   ngOnInit(): void { 
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(authStatus => {
+      this.isLoading = false;
+    });
     this.form = new FormGroup({
       name: new FormControl(null, {
         validators: [Validators.required]
@@ -98,6 +107,10 @@ export class AddUpdateWorkoutComponent implements OnInit {
       );
     }
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 
 }

@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FileCheck } from 'angular-file-validator';
+import { Subscription } from 'rxjs';
 
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-add-update-course',
   templateUrl: './add-update-course.component.html',
   styleUrls: ['./add-update-course.component.css']
 })
-export class AddUpdateCourseComponent implements OnInit {
+export class AddUpdateCourseComponent implements OnInit, OnDestroy {
 
   enteredName = '';
   enteredDescription = '';
@@ -22,10 +24,19 @@ export class AddUpdateCourseComponent implements OnInit {
   isLoading = false;
   imagePreview: string = "";
   form!: FormGroup;
+  private authStatusSub!: Subscription;
   
-  constructor(public coursesService: CoursesService, public route: ActivatedRoute) { }
+  constructor(
+    public coursesService: CoursesService, 
+    public route: ActivatedRoute,
+    public authService: AuthService) { }
 
   ngOnInit(): void { 
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(authStatus => {
+      this.isLoading = false;
+    });
     this.form = new FormGroup({
       name: new FormControl(null, {
         validators: [Validators.required]
@@ -102,6 +113,10 @@ export class AddUpdateCourseComponent implements OnInit {
       );
     }
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 
 }

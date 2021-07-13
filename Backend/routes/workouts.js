@@ -48,6 +48,11 @@ router.post("", checkAuth,
           _id: createdWorkout._id
         }
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno kreiranje treninga"
+      });
     }); //cuvanje u bazu
   });
   
@@ -69,6 +74,11 @@ router.post("", checkAuth,
     });
     Workout.updateOne({ _id: req.params._id }, workout).then(result => {
       res.status(200).json({ message: 'Update successful!' });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešna izmena treninga"
+      });
     });
   });
   
@@ -93,6 +103,11 @@ router.post("", checkAuth,
         workouts: fetchedWorkouts,
         maxWorkouts: count
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno dobavljanje treninga iz baze podataka"
+      });
     });
   });
   
@@ -104,6 +119,11 @@ router.post("", checkAuth,
         res.status(404).json({ message: 'Workout nout found!' });
       }
     })
+    .catch(error => {
+      res.status(500).json({
+        message: "Neuspešno dobavljanje treninga"
+      });
+    });
   });
   
   router.delete("/:_id", checkAuth,
@@ -112,6 +132,11 @@ router.post("", checkAuth,
       .then(result => {
         console.log(req.params._id);
         res.status(200).json({ message: "Workout deleted!" });
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: "Neuspešno brisanje treninga"
+        });
       });
   });
 
