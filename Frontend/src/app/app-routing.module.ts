@@ -5,6 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { CategoryComponent } from './category/category/category.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddUpdateCourseComponent } from './courses/add-update-course/add-update-course.component';
 import { CourseListComponent } from './courses/course-list/course-list.component';
 import { HomeComponent } from './home/home.component';
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'dodaj-trening', component: AddUpdateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'izmeni-trening/:workoutId', component: AddUpdateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'o-meni', component: CategoryComponent},
-  { path: 'kontakt', component: CategoryComponent},
+  { path: 'kontakt', component: ContactFormComponent},
   { path: 'prijava', component: LoginComponent},
   { path: 'registracija', component: SignupComponent}
 ];

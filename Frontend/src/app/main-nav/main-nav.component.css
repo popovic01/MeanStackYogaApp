@@ -1,3 +1,13 @@
 .bs-example {
     margin-bottom: 50px;
 }
+
+img {
+    height: 40px;
+    width: 40px;
+}
+
+div a {
+    font-size: 16px;
+    margin-left: 15px;
+}

@@ -32,6 +32,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ErrorInterceptor } from './error-interceptor';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
