@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { CategoryComponent } from './category/category/category.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddUpdateCourseComponent } from './courses/add-update-course/add-update-course.component';
 import { CourseListComponent } from './courses/course-list/course-list.component';
@@ -25,7 +25,8 @@ const routes: Routes = [
   { path: 'izmeni-proizvod/:productId', component: AddUpdateProductComponent, canActivate: [AuthGuard]},
   { path: 'dodaj-trening', component: AddUpdateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'izmeni-trening/:workoutId', component: AddUpdateWorkoutComponent, canActivate: [AuthGuard]},
-  { path: 'o-meni', component: CategoryComponent},
+  { path: 'dodaj-kategoriju', component: AddCategoryComponent, canActivate: [AuthGuard]},
+  { path: 'o-meni', component: LoginComponent},
   { path: 'kontakt', component: ContactFormComponent},
   { path: 'prijava', component: LoginComponent},
   { path: 'registracija', component: SignupComponent}

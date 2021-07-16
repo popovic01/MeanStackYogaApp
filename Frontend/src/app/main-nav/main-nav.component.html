@@ -11,11 +11,12 @@
           <div class="navbar-nav">
               <a routerLink="/" class="nav-item nav-link">Početna</a>
               <a routerLink="/kursevi" class="nav-item nav-link">Radionice</a>
-              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-kurs" class="nav-item nav-link">Dodaj kurs</a>
+              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-kurs" class="nav-item nav-link">Dodaj radionicu</a>
               <a routerLink="/treninzi" class="nav-item nav-link">Treninzi</a>
               <a *ngIf="userIsAuthenticated" routerLink="/dodaj-trening" class="nav-item nav-link">Dodaj trening</a>
               <a routerLink="/online-prodavnica" class="nav-item nav-link">Online prodavnica</a>
               <a *ngIf="userIsAuthenticated" routerLink="/dodaj-proizvod" class="nav-item nav-link">Dodaj proizvod</a>
+              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-kategoriju" class="nav-item nav-link">Dodaj kategoriju</a>
               <a routerLink="/o-meni" class="nav-item nav-link" tabindex="-1">O meni</a>
               <a routerLink="/kontakt" class="nav-item nav-link" tabindex="-1">Kontakt</a>
           </div>

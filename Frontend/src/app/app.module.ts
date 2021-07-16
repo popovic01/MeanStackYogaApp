@@ -23,7 +23,6 @@ import { AddUpdateCourseComponent } from './courses/add-update-course/add-update
 import { CourseListComponent } from './courses/course-list/course-list.component';
 import { AddUpdateProductComponent } from './products/add-update-product/add-update-product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
-import { CategoryComponent } from './category/category/category.component';
 import { AddUpdateWorkoutComponent } from './workouts/add-update-workout/add-update-workout.component';
 import { WorkoutListComponent } from './workouts/workout-list/workout-list.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -33,6 +32,7 @@ import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -42,14 +42,14 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     CourseListComponent,
     AddUpdateProductComponent,
     ProductListComponent,
-    CategoryComponent,
     AddUpdateWorkoutComponent,
     WorkoutListComponent,
     LoginComponent,
     SignupComponent,
     HomeComponent,
     ErrorComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -5,11 +5,11 @@
             <mat-label>Naziv</mat-label>
             <input matInput 
             formControlName="name" required>
-            <mat-error *ngIf="form.get('name')!.hasError('required')">Unesite naziv kursa.</mat-error>
+            <mat-error *ngIf="form.get('name')!.hasError('required')">Unesite naziv radionice.</mat-error>
         </mat-form-field>
     
         <div>
-            <button mat-stroked-button type="button" (click)="filePicker.click()">Izaberite sliku kursa</button>
+            <button mat-stroked-button type="button" (click)="filePicker.click()">Izaberite sliku radionice</button>
             <input type="file" #filePicker (change)="onImagePicked($event)" required>
         </div>
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image')!.valid">
@@ -20,14 +20,15 @@
             <textarea matInput 
             cols="30" rows="5" placeholder="Opis" formControlName="description" required>
             </textarea>
-            <mat-error *ngIf="form.get('description')!.hasError('required')">Unesite opis kursa.</mat-error>
+            <mat-error *ngIf="form.get('description')!.hasError('required')">Unesite opis radionice.</mat-error>
         </mat-form-field>
     
         <mat-form-field class="example-full-width">
             <mat-label>Cena</mat-label>
             <input matInput type="number" min="0" formControlName="price" required>
-            <mat-error *ngIf="form.get('price')!.hasError('required')">Unesite cenu kursa.</mat-error>
+            <mat-error *ngIf="form.get('price')!.hasError('required')">Unesite cenu radionice.</mat-error>
         </mat-form-field>
+        
         <button 
         mat-raised-button 
         color="accent" type="submit">Potvrdi</button>

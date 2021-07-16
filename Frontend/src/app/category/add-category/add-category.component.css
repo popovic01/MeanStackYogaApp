@@ -1,15 +1,19 @@
 mat-card {
     width: 400px;
-    height: 150px;
+    min-height: 160px;
     margin: auto;
     margin-bottom: 40px;
     margin-top: 80px;
 }
 
-mat-form-field {
+mat-form-field, textarea {
     width: 100%;
 }
 
 button {
     margin-top: 15px;
+}
+
+mat-spinner {
+    margin: auto;
 }

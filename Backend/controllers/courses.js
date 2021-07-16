@@ -1,6 +1,6 @@
 const Course = require("../models/course");
 
-exports.createCourse = (req, res, next) => {
+exports.createCourse = (req, res, next) => {;
     const url = req.protocol + "://" + req.get("host");  
     const course = new Course({
         name: req.body.name,
