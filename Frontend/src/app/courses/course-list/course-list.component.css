@@ -43,3 +43,8 @@ mat-spinner {
 mat-paginator {
   margin-top: 1rem;
 }
+
+input {
+  margin-top: 80px;
+  margin-left: 20px;
+}

@@ -1,11 +1,13 @@
 const Product = require("../models/product");
 
 exports.createProduct = (req, res, next) => {
+  console.log(req.body);
     const url = req.protocol + "://" + req.get("host");  
     const product = new Product({
       name: req.body.name,
       price: req.body.price,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/" + req.file.filename,
+      category: req.body.category
     });
     product.save().then(createdProduct => {
       res.status(201).json({
@@ -33,7 +35,8 @@ exports.updateProduct = (req, res, next) => {
       _id: req.body._id,
       name: req.body.name,
       price: req.body.price,
-      imagePath: imagePath
+      imagePath: imagePath,
+      category: req.body.category
     });
     Product.updateOne( {_id: req.params._id }, product).then(result => {
       res.status(200).json({ message: 'Update successful! '});

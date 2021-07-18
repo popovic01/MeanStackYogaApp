@@ -31,21 +31,23 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    return this.http.get<{ _id: string, name: string, price: number, imagePath: string }>('http://localhost:3000/products/' + id);
+    return this.http.get<{ _id: string, name: string, price: number, imagePath: string, category: string }>('http://localhost:3000/products/' + id);
   }
 
-  addProduct(name: string, price: number, image: File) {
+  addProduct(name: string, price: number, image: File, category: string) {
     const productData = new FormData();
+    console.log(category);
     productData.append('name', name);
     productData.append('price', price as unknown as string);
     productData.append('image', image, name);
+    productData.append('category', category);
     this.http.post<{ message: string, product: Product }>('http://localhost:3000/products', productData)
       .subscribe(responseData => {
         this.router.navigate(['/online-prodavnica']);
       });
   }
 
-  updateProduct(id: string, name: string, price: number, image: any) {
+  updateProduct(id: string, name: string, price: number, image: any, category: string) {
     let productData: Product | FormData;
     if (typeof image == 'object') {
       productData = new FormData();
@@ -53,12 +55,14 @@ export class ProductsService {
       productData.append("name", name);
       productData.append("price", price as unknown as string);
       productData.append("image", image, name);
+      productData.append('category', category);
     } else {
       productData = {
         _id: id,
         name: name,
         price: price,
-        imagePath: image
+        imagePath: image,
+        category: category
       };
     }
     this.http.put('http://localhost:3000/products/' + id, productData)

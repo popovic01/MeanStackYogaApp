@@ -14,6 +14,7 @@ import { WorkoutsService } from '../workouts.service';
 export class WorkoutListComponent implements OnInit, OnDestroy {
 
   workouts: Workout[] = [];
+  filteredWorkouts: Workout[] = [];
   totalWorkouts = 0;
   workoutsPerPage = 2;
   currentPage = 1;
@@ -21,6 +22,20 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   private workoutsSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
+
+  private _searchTerm!: string;
+
+  // We are binding to this property in the view template, so this
+  // getter is called when the binding needs to read the value
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  // This setter is called everytime the value in the search text box changes
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.filteredWorkouts = this.filterWorkouts(value);
+  }
 
   constructor(public workoutsService: WorkoutsService, public authService: AuthService) { }
 
@@ -30,6 +45,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     .subscribe((workoutData: { workouts: Workout[], workoutCount: number }) => {
       this.totalWorkouts = workoutData.workoutCount;
       this.workouts = workoutData.workouts;
+      this.filteredWorkouts = this.workouts;
     });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
@@ -37,6 +53,11 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     .subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;
     });
+  }
+
+  filterWorkouts(searchString: string) {
+    return this.workouts.filter(workout =>
+      workout.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
   onChangedPage(pageData: PageEvent) {

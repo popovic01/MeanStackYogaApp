@@ -1,4 +1,8 @@
-<mat-card class="example-card" *ngFor="let product of products">
+<div class="form-group">
+  <input type="text" class="form-control" placeholder="Pretraga"
+          style="width:300px" [(ngModel)]="searchTerm" />
+</div>
+<mat-card class="example-card" *ngFor="let product of filteredProducts">
     <mat-card-content>
         <p id="name">
             {{ product.name }}

@@ -23,6 +23,16 @@
             <mat-error *ngIf="form.get('price')!.invalid">Unesite cenu proizvoda.</mat-error>
         </mat-form-field>
 
+        <mat-form-field>
+            <mat-label>Kategorija</mat-label>
+            <mat-select [(value)]="selectedCategory" formControlName="category" required>
+              <mat-option value="svila">Svila</mat-option>
+              <mat-option value="hopovi">Hopovi</mat-option>
+              <mat-option value="konopci">Konopci</mat-option>
+            </mat-select>
+        <mat-error *ngIf="form.get('category')!.invalid">Izaberite kategoriju.</mat-error>
+        </mat-form-field>
+
         <button 
         mat-raised-button 
         color="accent" type="submit">Potvrdi</button>

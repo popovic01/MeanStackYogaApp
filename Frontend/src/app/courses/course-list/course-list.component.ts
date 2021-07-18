@@ -14,6 +14,7 @@ import { CoursesService } from '../courses.service';
 export class CourseListComponent implements OnInit, OnDestroy {
 
   courses: Course[] = [];
+  filteredCourses: Course[] = [];
   totalCourses = 0;
   coursesPerPage = 2;
   currentPage = 1;
@@ -21,6 +22,20 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private coursesSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
+
+  private _searchTerm!: string;
+
+  // We are binding to this property in the view template, so this
+  // getter is called when the binding needs to read the value
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  // This setter is called everytime the value in the search text box changes
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.filteredCourses = this.filterCourses(value);
+  }
 
   constructor(public coursesService: CoursesService, public authService: AuthService) { }
 
@@ -30,6 +45,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
     .subscribe((courseData: { courses: Course[], courseCount: number }) => {
       this.totalCourses = courseData.courseCount;
       this.courses = courseData.courses;
+      this.filteredCourses = this.courses;
     });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
@@ -37,6 +53,11 @@ export class CourseListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
       });
+  }
+
+  filterCourses(searchString: string) {
+    return this.courses.filter(course =>
+      course.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
   onChangedPage(pageData: PageEvent) {

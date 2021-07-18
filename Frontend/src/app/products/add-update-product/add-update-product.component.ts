@@ -3,10 +3,12 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FileCheck } from 'angular-file-validator';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Category } from 'src/app/category/add-category/category.model';
 
 @Component({
   selector: 'app-add-update-product',
@@ -24,9 +26,11 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
   isLoading = false;
   imagePreview: string = "";
   private authStatusSub!: Subscription;
+  /*categoryControl = new FormControl('', Validators.required);*/
+  selectedCategory = "";
 
   constructor(public productsService: ProductsService, public route: ActivatedRoute,
-    public authService: AuthService) { }
+    public authService: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.authStatusSub = this.authService
@@ -44,6 +48,9 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [FileCheck.ngFileValidator(['png', 'jpeg', 'jpg'])]
+      }),
+      category: new FormControl(null, {
+        validators: [Validators.required]
       })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -57,12 +64,14 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
             _id: productData._id, 
             name: productData.name, 
             price: productData.price,
-            imagePath: productData.imagePath
+            imagePath: productData.imagePath,
+            category: productData.category
           };
           this.form.patchValue({
             name: this.product.name,
             price: this.product.price,
-            image: this.product.imagePath
+            image: this.product.imagePath,
+            category: this.product.category
           });
         });
       } else {
@@ -90,13 +99,14 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
     }
     this.isLoading = true;
     if (this.mode === "create") {
-      this.productsService.addProduct(this.form.value.name, this.form.value.price, this.form.value.image);
+      this.productsService.addProduct(this.form.value.name, this.form.value.price, this.form.value.image, this.form.value.category);
     } else {
       this.productsService.updateProduct(
         this.productId,
         this.form.value.name, 
         this.form.value.price,
-        this.form.value.image
+        this.form.value.image, 
+        this.form.value.category
       );
     }
     this.form.reset();

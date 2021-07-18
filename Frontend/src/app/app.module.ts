@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgFileValidatorLibModule } from 'angular-file-validator';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,7 +70,8 @@ import { AddCategoryComponent } from './category/add-category/add-category.compo
     FormsModule,
     NgFileValidatorLibModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

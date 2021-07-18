@@ -14,6 +14,7 @@ import { ProductsService } from '../products.service';
 export class ProductListComponent implements OnInit, OnDestroy {
 
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   totalProducts = 0;
   productsPerPage = 2;
   currentPage = 1;
@@ -21,6 +22,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private productsSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
+
+  private _searchTerm!: string;
+
+  // We are binding to this property in the view template, so this
+  // getter is called when the binding needs to read the value
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  // This setter is called everytime the value in the search text box changes
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.filteredProducts = this.filterProducts(value);
+  }
 
   constructor(public productsService: ProductsService, public authService: AuthService) { }
 
@@ -30,6 +45,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     .subscribe((productData: { products: Product[], productCount: number }) => {
       this.totalProducts = productData.productCount;
       this.products = productData.products;
+      this.filteredProducts = this.products;
     });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
@@ -37,6 +53,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     .subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;
     });
+  }
+
+  filterProducts(searchString: string) {
+    return this.products.filter(product =>
+      product.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
   onChangedPage(pageData: PageEvent) {

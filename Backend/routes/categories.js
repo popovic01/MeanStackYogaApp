@@ -8,4 +8,6 @@ const CategoryController = require('../controllers/categories');
 
 router.post("", checkAuth, CategoryController.createCategory);
 
+router.get("", checkAuth, CategoryController.getCategories);
+
 module.exports = router;
