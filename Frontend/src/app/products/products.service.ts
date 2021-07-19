@@ -31,14 +31,15 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    return this.http.get<{ _id: string, name: string, price: number, imagePath: string, category: string }>('http://localhost:3000/products/' + id);
+    return this.http.get<{ _id: string, name: string, price: number, stock: number, quantity: number, imagePath: string, category: string }>('http://localhost:3000/products/' + id);
   }
 
-  addProduct(name: string, price: number, image: File, category: string) {
+  addProduct(name: string, price: number, stock: number, quantity: number, image: File, category: string) {
     const productData = new FormData();
-    console.log(category);
     productData.append('name', name);
     productData.append('price', price as unknown as string);
+    productData.append('stock', stock as unknown as string);
+    productData.append('quantity', quantity as unknown as string);
     productData.append('image', image, name);
     productData.append('category', category);
     this.http.post<{ message: string, product: Product }>('http://localhost:3000/products', productData)
@@ -47,13 +48,15 @@ export class ProductsService {
       });
   }
 
-  updateProduct(id: string, name: string, price: number, image: any, category: string) {
+  updateProduct(id: string, name: string, price: number, stock: number, quantity: number, image: any, category: string) {
     let productData: Product | FormData;
     if (typeof image == 'object') {
       productData = new FormData();
       productData.append("_id", id);
       productData.append("name", name);
       productData.append("price", price as unknown as string);
+      productData.append('stock', stock as unknown as string);
+      productData.append('quantity', quantity as unknown as string);
       productData.append("image", image, name);
       productData.append('category', category);
     } else {
@@ -61,6 +64,8 @@ export class ProductsService {
         _id: id,
         name: name,
         price: price,
+        stock: stock,
+        quantity: quantity,
         imagePath: image,
         category: category
       };

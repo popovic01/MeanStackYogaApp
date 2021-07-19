@@ -16,6 +16,10 @@ const workoutSchema = new Schema({
         required: true,
         min: 0
     },
+    quantity: {
+        type: Number,
+        default: 1
+    },
     imagePath: {
         type: String,
         required: true

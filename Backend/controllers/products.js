@@ -1,12 +1,13 @@
 const Product = require("../models/product");
 
 exports.createProduct = (req, res, next) => {
-  console.log(req.body);
     const url = req.protocol + "://" + req.get("host");  
     const product = new Product({
       name: req.body.name,
       price: req.body.price,
       imagePath: url + "/images/" + req.file.filename,
+      stock: req.body.stock,
+      quantity: 1,
       category: req.body.category
     });
     product.save().then(createdProduct => {
@@ -35,6 +36,8 @@ exports.updateProduct = (req, res, next) => {
       _id: req.body._id,
       name: req.body.name,
       price: req.body.price,
+      stock: req.body.stock,
+      quantity: 1,
       imagePath: imagePath,
       category: req.body.category
     });

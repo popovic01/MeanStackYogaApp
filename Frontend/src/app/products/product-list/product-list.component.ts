@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';
+import { DialogComponent } from '../dialog/dialog.component';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 
@@ -37,7 +39,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.filteredProducts = this.filterProducts(value);
   }
 
-  constructor(public productsService: ProductsService, public authService: AuthService) { }
+  constructor(public productsService: ProductsService, 
+    public authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.productsService.getProducts(this.productsPerPage, this.currentPage);
@@ -70,6 +73,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.productsService.deleteProduct(productId).subscribe(() => {
       this.productsService.getProducts(this.productsPerPage, this.currentPage);
     });
+  }
+
+  inc(product: { quantity: number; stock: any; }) {
+    if (product.quantity != product.stock)
+      product.quantity += 1;
+    else 
+      this.dialog.open(DialogComponent);
+  }
+
+  dec(product: { quantity: number; }) {
+    if (product.quantity != 1)
+      product.quantity -= 1;
+  }
+
+  addToCart(product: any) {
+    console.log(product);
   }
 
   ngOnDestroy() {

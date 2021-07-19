@@ -16,6 +16,7 @@ import { NgFileValidatorLibModule } from 'angular-file-validator';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +35,8 @@ import { ErrorComponent } from './error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { CartComponent } from './cart/cart.component';
+import { DialogComponent } from './products/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { AddCategoryComponent } from './category/add-category/add-category.compo
     HomeComponent,
     ErrorComponent,
     ContactFormComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    CartComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +76,8 @@ import { AddCategoryComponent } from './category/add-category/add-category.compo
     NgFileValidatorLibModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

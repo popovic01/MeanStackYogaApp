@@ -19,7 +19,11 @@ const productSchema = new Schema({
     },
     stock: { 
         type: Number, 
-        default: 1 
+        required: true
+    },
+    quantity: {
+        type: Number,
+        default: 1
     },
     description: {
         type: String,

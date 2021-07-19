@@ -26,8 +26,15 @@
           <div class="navbar-nav">
             <a *ngIf="!userIsAuthenticated" routerLink="/registracija" class="nav-item nav-link">Registruj se</a>
         </div>
-        <div *ngIf="userIsAuthenticated" class="navbar-nav">
-            <button mat-button class="nav-item nav-link" (click)="onLogout()">Odjavi se</button>
+
+        <div class='cart-icon' routerLink="/korpa" *ngIf="userIsAuthenticated">
+            <i class="fa fa-shopping-cart"></i>
+            <div class="cart-value">3</div>
+        </div>
+
+        <div class="navbar-nav">
+            <button *ngIf="userIsAuthenticated" mat-button 
+            class="nav-item nav-link" (click)="onLogout()">Odjavi se</button>
         </div>
       </div>
   </nav>

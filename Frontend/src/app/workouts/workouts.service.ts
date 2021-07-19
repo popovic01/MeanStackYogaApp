@@ -32,7 +32,7 @@ export class WorkoutsService {
 
   getWorkout(id: string) {
     return this.http.
-    get<{ _id: string, name: string, description: string, price: number, imagePath: string }>('http://localhost:3000/workouts/' + id);
+    get<{ _id: string, name: string, description: string, price: number, quantity: number, imagePath: string }>('http://localhost:3000/workouts/' + id);
   }
 
   addWorkout(name: string, description: string, price: number, image: File) {

@@ -45,6 +45,12 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
       price: new FormControl(null, {
         validators: [Validators.required]
       }),
+      stock: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      quantity: new FormControl(1, {
+        validators: [Validators.required]
+      }),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [FileCheck.ngFileValidator(['png', 'jpeg', 'jpg'])]
@@ -64,12 +70,15 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
             _id: productData._id, 
             name: productData.name, 
             price: productData.price,
+            stock: productData.stock,
+            quantity: productData.quantity,
             imagePath: productData.imagePath,
             category: productData.category
           };
           this.form.patchValue({
             name: this.product.name,
             price: this.product.price,
+            stock: this.product.stock,
             image: this.product.imagePath,
             category: this.product.category
           });
@@ -99,12 +108,14 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
     }
     this.isLoading = true;
     if (this.mode === "create") {
-      this.productsService.addProduct(this.form.value.name, this.form.value.price, this.form.value.image, this.form.value.category);
+      this.productsService.addProduct(this.form.value.name, this.form.value.price, this.form.value.stock, this.form.value.quantity, this.form.value.image, this.form.value.category);
     } else {
       this.productsService.updateProduct(
         this.productId,
         this.form.value.name, 
         this.form.value.price,
+        this.form.value.stock,
+        this.form.value.quantity,
         this.form.value.image, 
         this.form.value.category
       );

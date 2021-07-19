@@ -6,6 +6,7 @@ exports.createWorkout = (req, res, next) => {
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
+        quantity: req.body.quantity,  
         imagePath: url + "/images/" + req.file.filename
       });
       workout.save().then(createdWorkout => {
@@ -35,6 +36,7 @@ exports.updateWorkout = (req, res, next) => {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
+      quantity: req.body.quantity,
       imagePath: imagePath
     });
     Workout.updateOne({ _id: req.params._id }, workout).then(result => {

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { CartComponent } from './cart/cart.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddUpdateCourseComponent } from './courses/add-update-course/add-update-course.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'o-meni', component: LoginComponent},
   { path: 'kontakt', component: ContactFormComponent},
   { path: 'prijava', component: LoginComponent},
-  { path: 'registracija', component: SignupComponent}
+  { path: 'registracija', component: SignupComponent},
+  { path: 'korpa', component: CartComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

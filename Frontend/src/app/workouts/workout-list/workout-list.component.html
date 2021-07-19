@@ -20,9 +20,12 @@
     </mat-card-content> <br>
     <mat-card-content>
       <p class="priceP">
-        {{ workout.price }} din.
+        {{ workout.price }} RSD
       </p>
     </mat-card-content>
+    
+    <button type="button" class="cart-btn">Dodaj u korpu</button>
+
     <mat-card-actions *ngIf="userIsAuthenticated">
       <a mat-button class="button" [routerLink]="['/izmeni-trening', workout._id]">Uredi</a>
       <button mat-button class="button" (click)="onDelete(workout._id)">Obriši</button>
