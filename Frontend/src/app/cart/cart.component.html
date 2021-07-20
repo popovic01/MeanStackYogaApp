@@ -1,21 +1,37 @@
 <section class="cart-section">
     <div class="container">
         <h2>Vaša korpa</h2>
+        <div *ngIf="getCartDetails">
         <table>
-        <tr>
-            <th>Proizvod</th>
+        <tr>    
+            <th>Naziv</th>
+            <th>Slika</th>
             <th>Cena</th>
             <th>Količina</th>
-            <th>Suma</th>
+            <th>Dostupna količina</th>
+            <th>Ukupno</th>
             <th>Ukloni proizvod</th>
         </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
+        <tr *ngFor="let getCartDetail of getCartDetails">
+            <td>{{ getCartDetail.name }}</td>
+            <td><img src="{{ getCartDetail.imagePath }}" alt="{{ getCartDetail.name }}"></td>
+            <td>{{ getCartDetail.price }} RSD</td>
+            <td>
+                <div class="container">
+                    <button type="button" class="btn"><i class="fa fa-minus" (click)="dec(getCartDetail._id, getCartDetail.quantity)"></i></button>
+                    <span>{{ getCartDetail.quantity }}</span>
+                    <button type="button" class="btn"><i class="fa fa-plus" (click)="inc(getCartDetail._id, getCartDetail.quantity)"></i></button>      
+                  </div>
+            </td>
+            <td>{{ getCartDetail.stock }}</td>
+            <td>{{ getCartDetail.price * getCartDetail.quantity | number }} RSD</td>
+            <td><button type="button" class="remove" (click)="singleRemove(getCartDetail._id)"><i class="fa fa-trash-o"></i></button></td>
         </tr>
         </table><br>
-        <p>Ukupno: </p>
-        <button class="remove"><i class="fa fa-trash-o"></i> Isprazni korpu</button>
+        <div>
+            <p class="p">Ukupno - {{ total }} RSD</p>
+            <button class="removeAll" (click)="removeAll()"><i class="fa fa-trash-o"></i> Isprazni korpu</button>
+        </div>
+        </div>
     </div>
 </section>

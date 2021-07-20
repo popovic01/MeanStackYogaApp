@@ -18,9 +18,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   totalProducts = 0;
-  productsPerPage = 2;
+  productsPerPage = 6;
   currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
+  pageSizeOptions = [1, 3, 6, 12, 24];
   private productsSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
@@ -87,8 +87,47 @@ export class ProductListComponent implements OnInit, OnDestroy {
       product.quantity -= 1;
   }
 
+  itemsCart: any = [];
+
   addToCart(product: any) {
-    console.log(product);
+    let cartDataNull = localStorage.getItem('localCart');
+
+    //ako je localStorage prazan
+    if (cartDataNull == null) {
+      let storeDataGet: any = [];
+      storeDataGet.push(product);
+      localStorage.setItem('localCart', JSON.stringify(storeDataGet));
+    } else {
+      var id =  product._id;
+      let index: number = -1;
+      this.itemsCart = JSON.parse(localStorage.getItem('localCart') as string);
+      for (let i = 0; i < this.itemsCart.length; i++) {
+        //provera da li se u localStorage nalazi proizvod sa selektovanom id-om
+        if (id === this.itemsCart[i]._id) {
+          this.itemsCart[i].quantity = product.quantity;
+          index = i;
+          break;
+        }
+      } 
+
+      //ako localStorage nije prazan, i nema proizvoda sa selektovanim id-om
+      if (index == -1) {
+        this.itemsCart.push(product);
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      } else {
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      }
+
+    }
+    this.cartNumberFunc();
+  }
+
+  cartNumber: number = 0;
+
+  cartNumberFunc() {
+    var cartValue = JSON.parse(localStorage.getItem('localCart') as string);
+    this.cartNumber = cartValue.length;
+    this.authService.cartSubject.next(this.cartNumber);
   }
 
   ngOnDestroy() {

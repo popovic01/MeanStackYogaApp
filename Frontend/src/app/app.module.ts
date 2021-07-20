@@ -37,6 +37,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { CartComponent } from './cart/cart.component';
 import { DialogComponent } from './products/dialog/dialog.component';
+import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { DialogComponent } from './products/dialog/dialog.component';
     ContactFormComponent,
     AddCategoryComponent,
     CartComponent,
-    DialogComponent
+    DialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

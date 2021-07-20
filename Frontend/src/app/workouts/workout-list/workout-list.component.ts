@@ -16,9 +16,9 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   workouts: Workout[] = [];
   filteredWorkouts: Workout[] = [];
   totalWorkouts = 0;
-  workoutsPerPage = 2;
+  workoutsPerPage = 6;
   currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
+  pageSizeOptions = [1, 3, 6, 12, 24];
   private workoutsSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;

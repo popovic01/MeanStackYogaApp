@@ -11,6 +11,7 @@ export class AuthService {
   private token: string | undefined;
   private authStatusListener = new Subject<boolean>();
   private tokenTimer: any;
+  cartSubject = new Subject<any>();
 
   constructor(private http: HttpClient, private router: Router) {}
 

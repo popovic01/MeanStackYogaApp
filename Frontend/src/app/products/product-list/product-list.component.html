@@ -22,9 +22,9 @@
     </mat-card-content>
 
     <div class="container">
-      <button type="button" class="btn" (click)="inc(product)"><i class="fa fa-plus"></i></button>
-      <span>{{ product.quantity }}</span>
       <button type="button" class="btn" (click)="dec(product)"><i class="fa fa-minus"></i></button>
+      <span>{{ product.quantity }}</span>
+      <button type="button" class="btn" (click)="inc(product)"><i class="fa fa-plus"></i></button>      
     </div>
     <p id="stock">Dostupna količina: {{ product.stock }}</p>
     <button type="button" class="cart-btn" (click)="addToCart(product)">Dodaj u korpu</button>

@@ -16,9 +16,9 @@ export class CourseListComponent implements OnInit, OnDestroy {
   courses: Course[] = [];
   filteredCourses: Course[] = [];
   totalCourses = 0;
-  coursesPerPage = 2;
+  coursesPerPage = 6;
   currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
+  pageSizeOptions = [1, 3, 6, 12, 24];
   private coursesSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
