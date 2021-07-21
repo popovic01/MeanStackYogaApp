@@ -65,16 +65,20 @@ export class CartComponent implements OnInit {
   }
 
   removeAll() {
-    let dialogRef = this.dialog.open(ConfirmationDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
-
-    localStorage.removeItem('localCart');
-    this.getCartDetails = [];
-    this.total = 0;
-    this.cartNumber = 0;
-    this.authService.cartSubject.next(this.cartNumber);
+    if (localStorage.getItem('localCart')) {
+      let dialogRef = this.dialog.open(ConfirmationDialogComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(typeof(result));
+  
+        if(result === 'true') {
+          localStorage.removeItem('localCart');
+          this.getCartDetails = [];
+          this.total = 0;
+          this.cartNumber = 0;
+          this.authService.cartSubject.next(this.cartNumber);
+        }
+      });
+    }
   }
 
   singleRemove(id: any) {

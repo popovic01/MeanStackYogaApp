@@ -1,0 +1,16 @@
+form {
+    margin: 50px 10px 10px 100px;
+    width: 400px;
+}
+
+p {
+    padding-top: 80px;
+    padding-left: 190px;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+hr {
+    width: 500px;
+    margin-left: 40px;
+}

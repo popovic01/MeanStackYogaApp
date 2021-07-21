@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { AddCategoryComponent } from './category/add-category/add-category.compo
 import { CartComponent } from './cart/cart.component';
 import { DialogComponent } from './products/dialog/dialog.component';
 import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirmation-dialog.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirma
     AddCategoryComponent,
     CartComponent,
     DialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirma
     MatPaginatorModule,
     MatDialogModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule
   ],
   providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

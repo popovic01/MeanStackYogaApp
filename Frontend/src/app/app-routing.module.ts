@@ -12,6 +12,7 @@ import { CourseListComponent } from './courses/course-list/course-list.component
 import { HomeComponent } from './home/home.component';
 import { AddUpdateProductComponent } from './products/add-update-product/add-update-product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AddUpdateWorkoutComponent } from './workouts/add-update-workout/add-update-workout.component';
 import { WorkoutListComponent } from './workouts/workout-list/workout-list.component';
 
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'kontakt', component: ContactFormComponent},
   { path: 'prijava', component: LoginComponent},
   { path: 'registracija', component: SignupComponent},
-  { path: 'korpa', component: CartComponent, canActivate: [AuthGuard]}
+  { path: 'korpa', component: CartComponent, canActivate: [AuthGuard]},
+  { path: 'profil', component: UserProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

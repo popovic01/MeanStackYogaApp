@@ -32,10 +32,16 @@
             <div class="cart-value">{{ cartItem }}</div>
         </div>
 
-        <div class="navbar-nav">
-            <button *ngIf="userIsAuthenticated" mat-button 
-            class="nav-item nav-link" (click)="onLogout()">Odjavi se</button>
+        <div class="profile">
+            <button mat-button [matMenuTriggerFor]="menu"
+            *ngIf="userIsAuthenticated" class="nav-item nav-link"><i class="fa fa-user"></i></button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/profil">Profil</button>
+            <button mat-menu-item>Moje porudžbine</button>
+            <button mat-menu-item (click)="onLogout()">Odjavi se</button>
+            </mat-menu>
         </div>
+
       </div>
   </nav>
 </div>

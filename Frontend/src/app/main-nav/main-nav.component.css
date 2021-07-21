@@ -47,3 +47,19 @@ div button {
     font-weight: 400;
 }
 
+.profile {
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.profile:focus {
+    outline: none;
+    border: none;
+}
+
+.profile i {
+    font-size: 24px;
+    color: #848485;
+}
