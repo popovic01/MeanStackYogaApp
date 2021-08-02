@@ -2,22 +2,24 @@
   <input type="text" class="form-control" placeholder="Pretraga"
           style="width:300px" [(ngModel)]="searchTerm" />
 </div>
+
 <mat-card class="example-card" *ngFor="let workout of filteredWorkouts">
     <mat-card-content>
       <p id="main">
         {{ workout.name }}
       <p>
     </mat-card-content>
+
     <mat-card-content>
       <div class="workout-image">
         <img [src]="workout.imagePath" [alt]="workout.name">
       </div>
     </mat-card-content>
+
     <mat-card-content>
-      <p>
         {{ workout.description }}
-      </p>
-    </mat-card-content> <br>
+    </mat-card-content>  <br>
+
     <mat-card-content>
       <p class="priceP">
         {{ workout.price }} RSD
@@ -26,10 +28,11 @@
     
     <button type="button" class="cart-btn">Dodaj u korpu</button>
 
-    <mat-card-actions *ngIf="userIsAuthenticated">
+    <mat-card-actions *ngIf="userIsAdmin">
       <a mat-button class="button" [routerLink]="['/izmeni-trening', workout._id]">Uredi</a>
       <button mat-button class="button" (click)="onDelete(workout._id)">Obriši</button>
     </mat-card-actions>
+
 </mat-card>
 <mat-paginator [length]="totalWorkouts" [pageSize]="workoutsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
 *ngIf="workouts.length > 0"></mat-paginator>

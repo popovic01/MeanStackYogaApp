@@ -9,6 +9,7 @@
             {{ product.name }}
         </p>
     </mat-card-content>
+
     <mat-card-content>
       <div class="product-image">
         <img [src]="product.imagePath" [alt]="product.name">
@@ -21,6 +22,12 @@
       </p>
     </mat-card-content>
 
+    <mat-card-content>
+      <p id="cat">
+        Kategorija: {{ product.category }}
+      </p>
+    </mat-card-content>
+
     <div class="container">
       <button type="button" class="btn" (click)="dec(product)"><i class="fa fa-minus"></i></button>
       <span>{{ product.quantity }}</span>
@@ -29,7 +36,7 @@
     <p id="stock">Dostupna količina: {{ product.stock }}</p>
     <button type="button" class="cart-btn" (click)="addToCart(product)">Dodaj u korpu</button>
 
-    <mat-card-actions *ngIf="userIsAuthenticated">
+    <mat-card-actions *ngIf="userIsAdmin">
       <a mat-button color="accent" class="button" [routerLink]="['/izmeni-proizvod', product._id]">Uredi</a>
       <button mat-button color="accent" class="button" (click)="onDelete(product._id)">Obriši</button>
     </mat-card-actions>

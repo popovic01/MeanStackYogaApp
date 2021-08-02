@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
+import { CartService } from 'src/app/cart/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -24,6 +25,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private productsSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
+  userIsAdmin = false;
 
   private _searchTerm!: string;
 
@@ -40,9 +42,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   constructor(public productsService: ProductsService, 
-    public authService: AuthService, public dialog: MatDialog) { }
+    public authService: AuthService, public dialog: MatDialog, private cartService: CartService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('isAdmin') == 'true')
+    {
+      this.userIsAdmin = true;
+    }
     this.productsService.getProducts(this.productsPerPage, this.currentPage);
     this.productsSub = this.productsService.getProductUpdateListener()
     .subscribe((productData: { products: Product[], productCount: number }) => {
@@ -96,6 +102,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (cartDataNull == null) {
       let storeDataGet: any = [];
       storeDataGet.push(product);
+      
       localStorage.setItem('localCart', JSON.stringify(storeDataGet));
     } else {
       var id =  product._id;

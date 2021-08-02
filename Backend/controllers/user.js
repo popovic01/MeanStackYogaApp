@@ -27,6 +27,7 @@ exports.createUser = (req, res, next) => {
 
 exports.userLogin = (req, res, next) => {
     let fetchedUser;
+    let isAdmin = false;
     User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
@@ -43,6 +44,10 @@ exports.userLogin = (req, res, next) => {
             message: "Uneta lozinka nije tačna"
           });
         }
+        if (fetchedUser.admin)
+        {
+          isAdmin = true;
+        }
         const token = jwt.sign(
           { email: fetchedUser.email, userId: fetchedUser._id },
           "secret_this_should_be_longer",
@@ -50,7 +55,9 @@ exports.userLogin = (req, res, next) => {
         );
         res.status(200).json({
           token: token,
-          expiresIn: 3600
+          expiresIn: 3600,
+          isAdmin: isAdmin,
+          id: fetchedUser._id
         });
       })
       .catch(err => {
@@ -58,4 +65,23 @@ exports.userLogin = (req, res, next) => {
           message: "Greška"
         });
       });
+};
+
+exports.orderDetails = (req, res, next) => {
+  if (req.body.currUser !== req.body.username)
+    return res.status(401).json({
+      message: "Uneta mejl adresa mora biti ista kao ona sa kojom ste ulogovani!"
+    });
+  User.findOneAndUpdate({ email: req.body.username },
+    { phone: req.body.phone,
+      address: req.body.address,
+      city: req.body.city,
+      postalCode: req.body.postalCode,
+      name: req.body.name },
+      { new: true }, //new znaci da ce rezutat funkcije biti updatovani user, a ne stari
+      (err, res) => {
+      if (err) {
+        console.log('Greška pri dodavanju!');
+      }
+    });
 };

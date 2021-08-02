@@ -1,32 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//pojedinacni proizvodi u korpi
-let ItemSchema = new Schema({
-    productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-    },
-    quantity: {
-        type: Number,
-        required: true,
-        min: [1, 'Quantity can not be less then 1.']
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    total: {
-        type: Number,
-        required: true,
-    }
-}, {
-    timestamps: true
-});
-
 //cela korpa, tj. svi proizvodi u korpi
 const CartSchema = new Schema({
-    items: [ItemSchema],
+    items: [],
+    user: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User' },
     subTotal: {
         default: 0,
         type: Number

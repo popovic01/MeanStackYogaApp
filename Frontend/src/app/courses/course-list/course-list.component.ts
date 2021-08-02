@@ -22,6 +22,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private coursesSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
+  userIsAdmin = false;
 
   private _searchTerm!: string;
 
@@ -40,6 +41,10 @@ export class CourseListComponent implements OnInit, OnDestroy {
   constructor(public coursesService: CoursesService, public authService: AuthService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('isAdmin') == 'true')
+    {
+      this.userIsAdmin = true;
+    }
     this.coursesService.getCourses(this.coursesPerPage, this.currentPage);
     this.coursesSub = this.coursesService.getCourseUpdateListener()
     .subscribe((courseData: { courses: Course[], courseCount: number }) => {

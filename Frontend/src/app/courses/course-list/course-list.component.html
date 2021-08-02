@@ -16,9 +16,7 @@
     </mat-card-content>
 
     <mat-card-content>
-      <p>
         {{ course.description }}
-      </p>
     </mat-card-content> 
 
     <mat-card-content>
@@ -29,7 +27,7 @@
 
     <button type="button" class="cart-btn">Dodaj u korpu</button>
 
-    <mat-card-actions *ngIf="userIsAuthenticated">
+    <mat-card-actions *ngIf="userIsAdmin">
       <a mat-button class="button" [routerLink]="['/izmeni-kurs', course._id]">Uredi</a>
       <button mat-button class="button" (click)="onDelete(course._id)">Obriši</button>
     </mat-card-actions>

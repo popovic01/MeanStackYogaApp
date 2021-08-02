@@ -1,0 +1,41 @@
+<div class="form">
+    <p>Podaci za dostavu</p>
+    <hr>
+    <mat-card>
+        <form (submit)="nextStep(orderForm)" #orderForm="ngForm">
+          <mat-form-field>
+            <input matInput name="username" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
+            <mat-error *ngIf="emailInput.invalid">Unesite ispravan email.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput name="name" ngModel type="text" placeholder="Ime i prezime" #nameInput="ngModel" required>
+            <mat-error *ngIf="nameInput.invalid">Unesite ime i prezime.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput name="phone" ngModel type="text" placeholder="Broj telefona" #phoneInput="ngModel" required>
+            <mat-error *ngIf="phoneInput.invalid">Unesite broj telefona.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput name="address" ngModel type="text" placeholder="Adresa" #addressInput="ngModel" required>
+            <mat-error *ngIf="addressInput.invalid">Unesite adresu.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput name="city" ngModel type="text" placeholder="Grad" #cityInput="ngModel" required>
+            <mat-error *ngIf="cityInput.invalid">Unesite grad.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" name="postalCode" ngModel matInput placeholder="Poštanski broj" #postalInput="ngModel" required>
+            <mat-error *ngIf="postalInput.invalid">Unesite poštanski broj.</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" type="submit">Dalje</button>
+        </form>
+    </mat-card>
+</div>
+
+

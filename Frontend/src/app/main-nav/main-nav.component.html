@@ -1,7 +1,7 @@
 <div class="bs-example">
   <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
       <a href="#" class="navbar-brand">
-          <img src="assets/images/Logo.png" height="28" alt="CoolBrand">
+          <img src="assets/images/Logo.png" height="68" alt="CoolBrand">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
@@ -11,12 +11,8 @@
           <div class="navbar-nav">
               <a routerLink="/" class="nav-item nav-link">Početna</a>
               <a routerLink="/kursevi" class="nav-item nav-link">Radionice</a>
-              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-kurs" class="nav-item nav-link">Dodaj radionicu</a>
               <a routerLink="/treninzi" class="nav-item nav-link">Treninzi</a>
-              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-trening" class="nav-item nav-link">Dodaj trening</a>
               <a routerLink="/online-prodavnica" class="nav-item nav-link">Online prodavnica</a>
-              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-proizvod" class="nav-item nav-link">Dodaj proizvod</a>
-              <a *ngIf="userIsAuthenticated" routerLink="/dodaj-kategoriju" class="nav-item nav-link">Dodaj kategoriju</a>
               <a routerLink="/o-meni" class="nav-item nav-link" tabindex="-1">O meni</a>
               <a routerLink="/kontakt" class="nav-item nav-link" tabindex="-1">Kontakt</a>
           </div>
@@ -27,17 +23,28 @@
             <a *ngIf="!userIsAuthenticated" routerLink="/registracija" class="nav-item nav-link">Registruj se</a>
         </div>
 
-        <div class='cart-icon' routerLink="/korpa" *ngIf="userIsAuthenticated">
+        <div class='cart-icon' routerLink="/korpa" *ngIf="userIsAuthenticated && !userIsAdmin">
             <i class="fa fa-shopping-cart"></i>
             <div class="cart-value">{{ cartItem }}</div>
         </div>
 
         <div class="profile">
             <button mat-button [matMenuTriggerFor]="menu"
-            *ngIf="userIsAuthenticated" class="nav-item nav-link"><i class="fa fa-user"></i></button>
+            *ngIf="userIsAuthenticated && !userIsAdmin" class="nav-item nav-link"><i class="fa fa-user"></i></button>
             <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/profil">Profil</button>
             <button mat-menu-item>Moje porudžbine</button>
+            <button mat-menu-item (click)="onLogout()">Odjavi se</button>
+            </mat-menu>
+        </div>
+
+        <div class="profile">
+            <button mat-button [matMenuTriggerFor]="menuAdmin"
+            *ngIf="userIsAuthenticated && userIsAdmin" class="nav-item nav-link"><i class="fa fa-user"></i></button>
+            <mat-menu #menuAdmin="matMenu">
+            <button mat-menu-item routerLink="/dodaj-kurs">Dodaj radionicu</button>
+            <button mat-menu-item routerLink="/dodaj-trening">Dodaj trening</button>
+            <button mat-menu-item routerLink="/dodaj-proizvod">Dodaj proizvod</button>
+            <button mat-menu-item>Porudžbine</button>
             <button mat-menu-item (click)="onLogout()">Odjavi se</button>
             </mat-menu>
         </div>

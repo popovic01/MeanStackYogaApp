@@ -1,6 +1,6 @@
 const Course = require("../models/course");
 
-exports.createCourse = (req, res, next) => {;
+exports.createCourse = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");  
     const course = new Course({
         name: req.body.name,
@@ -94,7 +94,6 @@ exports.getCourse = (req, res, next) => {
 exports.deleteCourse = (req, res, next) => {
     Course.deleteOne({ _id: req.params._id })
       .then(result => {
-        console.log(req.params._id);
         res.status(200).json({ message: "Course deleted!" });
       })
       .catch(error => {

@@ -2,12 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
+const stripe = require('stripe')('sk_test_51JI9R1AUVPYGsQW32tXdzdSrehmQy7qBKLVPMOIys0rVQpJ6qjUkMkFC6j3Eq5GI1pTgDZ4N5ZxAW1E2kj4R0z2t00REzEoOf1');
 
 const coursesRouter = require("./routes/courses");
 const productsRouter = require("./routes/products");
 const workoutsRouter = require("./routes/workouts");
 const userRouter = require("./routes/user");
 const categoryRouter = require("./routes/categories");
+const cartRouter = require("./routes/cart");
 
 const app = express();
 
@@ -46,5 +48,6 @@ app.use("/courses", coursesRouter);
 app.use("/products", productsRouter);
 app.use("/workouts", workoutsRouter);
 app.use("/user", userRouter);
+app.use("/cart", cartRouter);
 
 module.exports = app;

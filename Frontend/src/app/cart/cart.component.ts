@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
 import { DialogComponent } from '../products/dialog/dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { CartService } from './cart.service';
 
 
 @Component({
@@ -13,7 +15,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 })
 export class CartComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public authService: AuthService) { }
+  constructor(public dialog: MatDialog, public authService: AuthService, 
+    private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.CartDetails();
@@ -67,9 +70,7 @@ export class CartComponent implements OnInit {
   removeAll() {
     if (localStorage.getItem('localCart')) {
       let dialogRef = this.dialog.open(ConfirmationDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(typeof(result));
-  
+      dialogRef.afterClosed().subscribe(result => {  
         if(result === 'true') {
           localStorage.removeItem('localCart');
           this.getCartDetails = [];
@@ -83,17 +84,23 @@ export class CartComponent implements OnInit {
 
   singleRemove(id: any) {
     if (localStorage.getItem('localCart')) {
-      this.getCartDetails = JSON.parse(localStorage.getItem('localCart') as string);
-      for (let i = 0; i < this.getCartDetails.length; i++) {
-        if (this.getCartDetails[i]._id === id) {
-          //uklanjanje iz niza
-          this.getCartDetails.splice(i, 1);
-          //dodavanje u local storage nakon brisanja
-          localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));
-          this.loadCart();
-          this.cartNumberFunc();
+      let dialogRef = this.dialog.open(ConfirmationDialogComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        if(result === 'true') {
+          this.getCartDetails = JSON.parse(localStorage.getItem('localCart') as string);
+          for (let i = 0; i < this.getCartDetails.length; i++) {
+            if (this.getCartDetails[i]._id === id) {
+              //uklanjanje iz niza
+              this.getCartDetails.splice(i, 1);
+              //dodavanje u local storage nakon brisanja
+              localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));
+              this.loadCart();
+              this.cartNumberFunc();
+            }
+          }
         }
-      }
+      });
+
     }
   }
 
@@ -103,6 +110,10 @@ export class CartComponent implements OnInit {
     var cartValue = JSON.parse(localStorage.getItem('localCart') as string);
     this.cartNumber = cartValue.length;
     this.authService.cartSubject.next(this.cartNumber);
+  }
+
+  done() {
+    this.cartService.finishOrder(this.getCartDetails, this.total);
   }
 
 }

@@ -1,5 +1,5 @@
 .example-card {
-    max-width: 350px;
+    max-width: 400px;
     display: inline-block;
     margin: 20px;
     background-color: #ced4da;
@@ -21,6 +21,7 @@
   font-size: 30px;
   margin-top: 10px;
   margin-bottom: 25px;
+  line-height: 2rem;
 }
 
 .button {
@@ -69,8 +70,8 @@ input {
 }
 
 .cart-btn {
-  margin-left: 90px;
-  margin-top: 16px;
+  margin-left: 110px;
+  margin-top: 12px;
   background: #727171;
   color: white;
   border-radius: 4px;
@@ -85,3 +86,4 @@ input {
   background: transparent;
   color: #424242;
 }
+

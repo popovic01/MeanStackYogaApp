@@ -39,7 +39,7 @@ import { AddCategoryComponent } from './category/add-category/add-category.compo
 import { CartComponent } from './cart/cart.component';
 import { DialogComponent } from './products/dialog/dialog.component';
 import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirmation-dialog.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     CartComponent,
     DialogComponent,
     ConfirmationDialogComponent,
-    UserProfileComponent
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

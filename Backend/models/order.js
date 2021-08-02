@@ -7,10 +7,12 @@ const CartItemSchema = new mongoose.Schema(
     product: { type: ObjectId, ref: "Product" },
     name: String,
     price: Number,
-    count: Number,
+    quantity: Number,
+    total: Number
   }, { timestamps: true });
 
 const CartItem = mongoose.model("CartItem", CartItemSchema);
+
 const OrderSchema = new mongoose.Schema(
   {
     products: [CartItemSchema],

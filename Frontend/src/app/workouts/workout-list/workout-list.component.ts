@@ -22,6 +22,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   private workoutsSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
+  userIsAdmin = false;
 
   private _searchTerm!: string;
 
@@ -40,6 +41,10 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   constructor(public workoutsService: WorkoutsService, public authService: AuthService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('isAdmin') == 'true')
+    {
+      this.userIsAdmin = true;
+    }
     this.workoutsService.getWorkouts(this.workoutsPerPage, this.currentPage);
     this.workoutsSub = this.workoutsService.getWorkoutUpdateListener()
     .subscribe((workoutData: { workouts: Workout[], workoutCount: number }) => {

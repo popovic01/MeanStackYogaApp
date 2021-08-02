@@ -7,8 +7,21 @@
 
 .par {
     text-align: center;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: bold;
     color: #424242;
+}
+
+#cat {
+  text-align: center;
+  font-size: 16px;
+  color: #424242;
+  background-color: beige;
+  border: 1px solid beige;
+  border-radius: 5%;
+  padding: 5px;
+  margin: 0 55px;
+  
 }
 
 #noAdded {
