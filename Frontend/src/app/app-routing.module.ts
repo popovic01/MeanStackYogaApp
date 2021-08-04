@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'prijava', component: LoginComponent},
   { path: 'registracija', component: SignupComponent},
   { path: 'korpa', component: CartComponent, canActivate: [AuthGuard]},
-  { path: 'porudzbina', component: OrderDetailsComponent, canActivate: [AuthGuard]}
+  { path: 'porudzbina', component: OrderDetailsComponent, canActivate: [AuthGuard]},
+  { path: 'porudzbine', component: AllOrdersComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

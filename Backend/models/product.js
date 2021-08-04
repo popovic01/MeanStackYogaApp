@@ -33,6 +33,10 @@ const productSchema = new Schema({
     snippet: {
         type: String
     },
+    color: {
+        type: String,
+        default: 'black'
+    },
     imagePath: {
         type: String,
         required: true

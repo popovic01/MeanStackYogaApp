@@ -8,6 +8,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { CartService } from 'src/app/cart/cart.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -26,6 +27,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
+  color = '';
 
   private _searchTerm!: string;
 

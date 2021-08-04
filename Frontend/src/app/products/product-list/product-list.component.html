@@ -33,6 +33,16 @@
       <span>{{ product.quantity }}</span>
       <button type="button" class="btn" (click)="inc(product)"><i class="fa fa-plus"></i></button>      
     </div>
+
+    <label id="example-radio-group-label">Izaberite boju svile</label>
+    <mat-radio-group [(ngModel)]="color">
+      <mat-radio-button value="blue">Plava</mat-radio-button>
+      <mat-radio-button value="pink">Roza</mat-radio-button>
+      <mat-radio-button value="green">Zelena</mat-radio-button>
+      <mat-radio-button value="purple">Ljubičasta</mat-radio-button>
+      <mat-radio-button value="yellow">Žuta</mat-radio-button>
+    </mat-radio-group>
+
     <p id="stock">Dostupna količina: {{ product.stock }}</p>
     <button type="button" class="cart-btn" (click)="addToCart(product)">Dodaj u korpu</button>
 

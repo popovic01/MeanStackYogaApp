@@ -5,5 +5,6 @@ export interface OrderDetails {
     city: string;
     postalCode: string;
     username: string;
+    userId: string;
     currUser: string;
 }

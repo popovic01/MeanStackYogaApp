@@ -67,7 +67,8 @@ export class ProductsService {
         stock: stock,
         quantity: quantity,
         imagePath: image,
-        category: category
+        category: category,
+        color: 'black'
       };
     }
     this.http.put('http://localhost:3000/products/' + id, productData)

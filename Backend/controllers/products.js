@@ -8,6 +8,7 @@ exports.createProduct = (req, res, next) => {
       imagePath: url + "/images/" + req.file.filename,
       stock: req.body.stock,
       quantity: 1,
+      color: req.body.color,
       category: req.body.category
     });
     product.save().then(createdProduct => {
@@ -39,6 +40,7 @@ exports.updateProduct = (req, res, next) => {
       stock: req.body.stock,
       quantity: 1,
       imagePath: imagePath,
+      color: req.body.color,
       category: req.body.category
     });
     Product.updateOne( {_id: req.params._id }, product).then(result => {

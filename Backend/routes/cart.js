@@ -8,4 +8,8 @@ const router = express.Router();
 
 router.post("", checkAuth, CartController.addUpdateCart);
 
+router.post("/order-details", checkAuth, CartController.orderDetails);
+
+router.get("", checkAuth, CartController.getAllCarts);
+
 module.exports = router;

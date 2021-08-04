@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +41,8 @@ import { CartComponent } from './cart/cart.component';
 import { DialogComponent } from './products/dialog/dialog.component';
 import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirmation-dialog.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { FooterComponent } from './footer/footer.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,9 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     CartComponent,
     DialogComponent,
     ConfirmationDialogComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    FooterComponent,
+    AllOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    MatRadioModule
   ],
   providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
