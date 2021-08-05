@@ -7,7 +7,6 @@ import { DialogComponent } from '../products/dialog/dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CartService } from './cart.service';
 
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',

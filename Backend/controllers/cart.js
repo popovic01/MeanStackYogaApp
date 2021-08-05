@@ -45,17 +45,25 @@ exports.orderDetails = (req, res, next) => {
     return res.status(401).json({
       message: "Uneta mejl adresa mora biti ista kao ona sa kojom ste ulogovani!"
     });
-  Cart.findOneAndUpdate({ userId: req.body.userId },
-    { phone: req.body.phone,
-      address: req.body.address,
-      city: req.body.city,
-      postalCode: req.body.postalCode,
-      name: req.body.name },
-      { new: true }, //new znaci da ce rezutat funkcije biti updatovani user, a ne stari
-      (err, res) => {
-      if (err) {
-        console.log('Greška pri dodavanju!');
-      }
-      console.log(res);
+  const cart = new Cart({
+    items: req.body.items, 
+    subTotal: req.body.subTotal,
+    name: req.body.name, 
+    address: req.body.address,
+    city: req.body.city,
+    postalCode: req.body.postalCode,
+    phone: req.body.phone
+  });
+  cart.save()
+  .then(result => {
+    res.status(201).json({
+      message: "Cart created!",
+      result: result
     });
+  })
+  .catch(err => {
+    res.status(500).json({
+      message: "Unet email je već registrovan"
+    });
+  });
 };

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
-import { CartData } from '../cart/cart-data.model';
 import { CartService } from '../cart/cart.service';
 import { Subscription } from 'rxjs';
-import { OrderDetails } from '../order-details/order-details.model';
+import { Order } from './order.model';
 
 @Component({
   selector: 'app-all-orders',
@@ -13,7 +12,7 @@ import { OrderDetails } from '../order-details/order-details.model';
 })
 export class AllOrdersComponent implements OnInit, OnDestroy {
 
-  orders: CartData[] = [];
+  carts: Order[] = [];
   private cartsSub: Subscription = new Subscription;
 
   constructor(private http: HttpClient, 
@@ -22,9 +21,9 @@ export class AllOrdersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cartService.getAllOrders();
 
-    this.cartsSub = this.cartService.getCartUpdateListener()
-    .subscribe((cartData: { carts: CartData[] }) => {
-      this.orders = cartData.carts;
+    this.cartsSub = this.cartService.getOrderUpdateListener()
+    .subscribe((cartData: { carts: Order[] }) => {
+      this.carts = cartData.carts;
     });
     
   }

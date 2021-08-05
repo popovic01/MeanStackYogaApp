@@ -3,45 +3,50 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Subject } from 'rxjs';
 
-import { CartData } from './cart-data.model'; 
-import { OrderDetails } from '../order-details/order-details.model';
+import { Order } from '../all-orders/order.model';
+import { OrderDetailsService } from '../order-details/order-details.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private carts: CartData[] = [];
-  private cartsUpdated = new Subject<{ carts: CartData[] }>();
+  private carts: Order[] = [];
+  private ordersUpdated = new Subject<{ carts: Order[] }>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private orderDetailsService: OrderDetailsService) { }
 
   finishOrder(cart: any, subTotal: number) {
-    let user = localStorage.getItem('userId') || '{}';
-    const cartData: CartData = {items: cart, user: user, subTotal: subTotal};
-    this.http.post("http://localhost:3000/cart", cartData)
-    .subscribe(() => {
-      this.router.navigate(["/porudzbina"]);
-    }, error => {
-      console.log(error);
-    });
+    this.router.navigate(["/porudzbina"]);
+    this.orderDetailsService.saveData(cart, subTotal);
   }
 
   getAllOrders() {
-    this.http.get<{message: string, carts: CartData[]}>('http://localhost:3000/cart')
+    this.http.get<{message: string, carts: Order[]}>('http://localhost:3000/cart')
       .subscribe((ordersData) => {
         this.carts = ordersData.carts;
-        this.cartsUpdated.next({
+        this.ordersUpdated.next({
           carts: [...this.carts]
         });
       }, error => {
         console.log(error);
       });
-
   }
 
-  getCartUpdateListener() {
-    return this.cartsUpdated.asObservable();
+  getAllOrdersByOneUser(id: string) {
+    this.http.get<{message: string, carts: Order[]}>('http://localhost:3000/cart/' + id)
+      .subscribe((ordersData) => {
+        this.carts = ordersData.carts;
+        this.ordersUpdated.next({
+          carts: [...this.carts]
+        });
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  getOrderUpdateListener() {
+    return this.ordersUpdated.asObservable();
   }
 
 }

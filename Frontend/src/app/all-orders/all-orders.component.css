@@ -1,5 +1,6 @@
 .example-card {
     margin: 30px;
+    display: inline-block;
     max-width: 400px;
     background-color: #ced4da;
     color: #424242;
