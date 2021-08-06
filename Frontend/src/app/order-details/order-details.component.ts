@@ -25,7 +25,7 @@ export class OrderDetailsComponent implements OnInit {
       return;
     this.orderService.
     orderDetails(form.value.name, form.value.phone, form.value.address, form.value.city, 
-      form.value.postalCode, form.value.username, localStorage.getItem('username') || '{}');
+      form.value.postalCode);
     this.alert = true;
     localStorage.removeItem('localCart');
     this.authService.cartSubject.next(0);

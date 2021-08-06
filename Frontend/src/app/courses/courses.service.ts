@@ -64,7 +64,8 @@ export class CoursesService {
         name: name,
         description: description, 
         price: price,
-        imagePath: image
+        imagePath: image,
+        quantity: 1
       };
     }
     this.http.put('http://localhost:3000/courses/' + id, courseData)

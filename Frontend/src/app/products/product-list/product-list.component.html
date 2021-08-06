@@ -52,6 +52,10 @@
     </mat-card-actions>
 </mat-card>
 
+<div class="alert alert-danger" role="alert" *ngIf='alert'>
+  Morate biti prijavljeni da biste dodali u korpu. <a href="/prijava" class="alert-link">Prijavi se</a>
+</div>
+
 <mat-paginator [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
 *ngIf="products.length > 0"></mat-paginator>
 

@@ -40,6 +40,10 @@ const productSchema = new Schema({
     imagePath: {
         type: String,
         required: true
+    },
+    type: {
+        type: String,
+        default: 'product'
     }
 /*     category: {
         type: Schema.Types.ObjectId,

@@ -19,6 +19,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   coursesPerPage = 6;
   currentPage = 1;
   pageSizeOptions = [1, 3, 6, 12, 24];
+  alert = false;
   private coursesSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
@@ -75,6 +76,53 @@ export class CourseListComponent implements OnInit, OnDestroy {
     this.coursesService.deleteCourse(courseId).subscribe(() => {
       this.coursesService.getCourses(this.coursesPerPage, this.currentPage);
     });
+  }
+
+  itemsCart: any = [];
+
+  addToCart(course: any) {
+    if (this.userIsAuthenticated == false)
+      this.alert = true;
+      
+    let cartDataNull = localStorage.getItem('localCart');
+
+    //ako je localStorage prazan
+    if (cartDataNull == null) {
+      let storeDataGet: any = [];
+      storeDataGet.push(course);
+      
+      localStorage.setItem('localCart', JSON.stringify(storeDataGet));
+    } else {
+      var id =  course._id;
+      let index: number = -1;
+      this.itemsCart = JSON.parse(localStorage.getItem('localCart') as string);
+      for (let i = 0; i < this.itemsCart.length; i++) {
+        //provera da li se u localStorage nalazi proizvod sa selektovanom id-om
+        if (id === this.itemsCart[i]._id) {
+          this.itemsCart[i].quantity = course.quantity;
+          index = i;
+          break;
+        }
+      } 
+
+      //ako localStorage nije prazan, i nema proizvoda sa selektovanim id-om
+      if (index == -1) {
+        this.itemsCart.push(course);
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      } else {
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      }
+
+    }
+    this.cartNumberFunc();
+  }
+
+  cartNumber: number = 0;
+
+  cartNumberFunc() {
+    var cartValue = JSON.parse(localStorage.getItem('localCart') as string);
+    this.cartNumber = cartValue.length;
+    this.authService.cartSubject.next(this.cartNumber);
   }
 
   ngOnDestroy() {

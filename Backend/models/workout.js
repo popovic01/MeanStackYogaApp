@@ -23,6 +23,14 @@ const workoutSchema = new Schema({
     imagePath: {
         type: String,
         required: true
+    },
+    type: {
+        type: String,
+        default: 'workout'
+    },
+    quantity: {
+        type: Number,
+        default: 1
     }
 }, { timestamps: true });
 

@@ -28,6 +28,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
   color = '';
+  alert = false;
 
   private _searchTerm!: string;
 
@@ -98,6 +99,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   itemsCart: any = [];
 
   addToCart(product: any) {
+    if (this.userIsAuthenticated == false)
+      this.alert = true;
+
     let cartDataNull = localStorage.getItem('localCart');
 
     //ako je localStorage prazan

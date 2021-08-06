@@ -4,4 +4,5 @@ export interface Course {
     description: string;
     price: number;
     imagePath: string;
+    quantity: 1;
 }

@@ -26,7 +26,7 @@
       </p>
     </mat-card-content>
     
-    <button type="button" class="cart-btn">Dodaj u korpu</button>
+    <button type="button" class="cart-btn" (click)="addToCart(workout)">Dodaj u korpu</button>
 
     <mat-card-actions *ngIf="userIsAdmin">
       <a mat-button class="button" [routerLink]="['/izmeni-trening', workout._id]">Uredi</a>
@@ -34,6 +34,11 @@
     </mat-card-actions>
 
 </mat-card>
+
+<div class="alert alert-danger" role="alert" *ngIf='alert'>
+  Morate biti prijavljeni da biste dodali u korpu. <a href="/prijava" class="alert-link">Prijavi se</a>
+</div>
+
 <mat-paginator [length]="totalWorkouts" [pageSize]="workoutsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
 *ngIf="workouts.length > 0"></mat-paginator>
 <p *ngIf="workouts.length <= 0" id="noAdded">No workout added yet!</p>

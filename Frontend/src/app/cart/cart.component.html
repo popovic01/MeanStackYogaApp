@@ -17,11 +17,11 @@
             <td><img src="{{ getCartDetail.imagePath }}" alt="{{ getCartDetail.name }}"></td>
             <td>{{ getCartDetail.price }} RSD</td>
             <td>
-                <div class="container">
+                <div class="container" *ngIf="getCartDetail.type === 'product'">
                     <button type="button" class="btn"><i class="fa fa-minus" (click)="dec(getCartDetail._id, getCartDetail.quantity)"></i></button>
                     <span>{{ getCartDetail.quantity }}</span>
                     <button type="button" class="btn"><i class="fa fa-plus" (click)="inc(getCartDetail._id, getCartDetail.quantity)"></i></button>      
-                  </div>
+                </div>
             </td>
             <td>{{ getCartDetail.stock }}</td>
             <td>{{ getCartDetail.price * getCartDetail.quantity | number }} RSD</td>

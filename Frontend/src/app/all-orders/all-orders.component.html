@@ -16,6 +16,9 @@
         <p>
           Poštanski broj: {{ cart.postalCode }}
         <p>
+        <p>
+          Datum kreiranja porudžbine: {{ stringAsDate(cart.createdAt) | date:'dd-MM-yy HH:mm:ss' }}
+        <p>
       </mat-card-content>
   
       <mat-card-content *ngFor='let item of cart.items'>

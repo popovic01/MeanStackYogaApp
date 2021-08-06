@@ -23,6 +23,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
+  alert = false;
 
   private _searchTerm!: string;
 
@@ -75,6 +76,53 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     this.workoutsService.deleteWorkout(workoutId).subscribe(() => {
       this.workoutsService.getWorkouts(this.workoutsPerPage, this.currentPage);
     });
+  }
+
+  itemsCart: any = [];
+
+  addToCart(workout: any) {
+    if (this.userIsAuthenticated == false)
+      this.alert = true;
+
+    let cartDataNull = localStorage.getItem('localCart');
+
+    //ako je localStorage prazan
+    if (cartDataNull == null) {
+      let storeDataGet: any = [];
+      storeDataGet.push(workout);
+      
+      localStorage.setItem('localCart', JSON.stringify(storeDataGet));
+    } else {
+      var id =  workout._id;
+      let index: number = -1;
+      this.itemsCart = JSON.parse(localStorage.getItem('localCart') as string);
+      for (let i = 0; i < this.itemsCart.length; i++) {
+        //provera da li se u localStorage nalazi proizvod sa selektovanom id-om
+        if (id === this.itemsCart[i]._id) {
+          this.itemsCart[i].quantity = workout.quantity;
+          index = i;
+          break;
+        }
+      } 
+
+      //ako localStorage nije prazan, i nema proizvoda sa selektovanim id-om
+      if (index == -1) {
+        this.itemsCart.push(workout);
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      } else {
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      }
+
+    }
+    this.cartNumberFunc();
+  }
+
+  cartNumber: number = 0;
+
+  cartNumberFunc() {
+    var cartValue = JSON.parse(localStorage.getItem('localCart') as string);
+    this.cartNumber = cartValue.length;
+    this.authService.cartSubject.next(this.cartNumber);
   }
 
   ngOnDestroy() {

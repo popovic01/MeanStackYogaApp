@@ -8,6 +8,5 @@ export interface Order {
     address: string;
     city: string;
     postalCode: string;
-    currUser: string;
-    username: string;
+    createdAt: string;
 }

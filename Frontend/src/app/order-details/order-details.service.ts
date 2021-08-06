@@ -12,7 +12,6 @@ export class OrderDetailsService {
 
   items: any = [];
   subTotal = 0;
-  user = '';
 
   saveData(items: any, subTotal: number)
   {
@@ -20,11 +19,9 @@ export class OrderDetailsService {
     this.subTotal = subTotal;
   }
 
-  orderDetails(name: string, phone: string, address: string, city: string, postalCode: string, 
-    username: string, currUser: string) {
+  orderDetails(name: string, phone: string, address: string, city: string, postalCode: string) {
     const orderData: Order = {name: name, phone: phone, address: address, city: city, 
-      postalCode: postalCode, username: username, currUser: currUser, items: this.items,
-    subTotal: this.subTotal};
+      postalCode: postalCode, items: this.items, subTotal: this.subTotal, createdAt: ''};
     this.http.post("http://localhost:3000/cart/order-details", orderData)
     .subscribe(() => {
     }, error => {

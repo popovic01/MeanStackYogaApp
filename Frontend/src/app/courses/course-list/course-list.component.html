@@ -2,37 +2,43 @@
   <input type="text" class="form-control" placeholder="Pretraga"
           style="width:300px" [(ngModel)]="searchTerm" />
 </div>
+
 <mat-card class="example-card" *ngFor="let course of filteredCourses">
-    <mat-card-content>
-      <p id="main">
-        {{ course.name }}
-      <p>
-    </mat-card-content>
+  <mat-card-content>
+    <p id="main">
+      {{ course.name }}
+    <p>
+  </mat-card-content>
 
-    <mat-card-content>
-      <div class="course-image">
-        <img [src]="course.imagePath" [alt]="course.name">
-      </div>
-    </mat-card-content>
+  <mat-card-content>
+    <div class="course-image">
+      <img [src]="course.imagePath" [alt]="course.name">
+    </div>
+  </mat-card-content>
 
-    <mat-card-content>
-        {{ course.description }}
-    </mat-card-content> 
+  <mat-card-content>
+      {{ course.description }}
+  </mat-card-content> 
 
-    <mat-card-content>
-      <p class="priceP">
-        {{ course.price }} RSD
-      </p>
-    </mat-card-content>
+  <mat-card-content>
+    <p class="priceP">
+      {{ course.price }} RSD
+    </p>
+  </mat-card-content>
 
-    <button type="button" class="cart-btn">Dodaj u korpu</button>
+  <button type="button" class="cart-btn" (click)="addToCart(course)">Dodaj u korpu</button>
 
-    <mat-card-actions *ngIf="userIsAdmin">
-      <a mat-button class="button" [routerLink]="['/izmeni-kurs', course._id]">Uredi</a>
-      <button mat-button class="button" (click)="onDelete(course._id)">Obriši</button>
-    </mat-card-actions>
-    
-  </mat-card>
-  <mat-paginator [length]="totalCourses" [pageSize]="coursesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
-  *ngIf="courses.length > 0"></mat-paginator>
-  <p *ngIf="courses.length <= 0" id="noAdded">No course added yet!</p>
+  <mat-card-actions *ngIf="userIsAdmin">
+    <a mat-button class="button" [routerLink]="['/izmeni-kurs', course._id]">Uredi</a>
+    <button mat-button class="button" (click)="onDelete(course._id)">Obriši</button>
+  </mat-card-actions>
+  
+</mat-card>
+
+<div class="alert alert-danger" role="alert" *ngIf='alert'>
+  Morate biti prijavljeni da biste dodali u korpu. <a href="/prijava" class="alert-link">Prijavi se</a>
+</div>
+
+<mat-paginator [length]="totalCourses" [pageSize]="coursesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+*ngIf="courses.length > 0"></mat-paginator>
+<p *ngIf="courses.length <= 0" id="noAdded">No course added yet!</p>

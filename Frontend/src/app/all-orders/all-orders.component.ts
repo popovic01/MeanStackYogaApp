@@ -24,8 +24,11 @@ export class AllOrdersComponent implements OnInit, OnDestroy {
     this.cartsSub = this.cartService.getOrderUpdateListener()
     .subscribe((cartData: { carts: Order[] }) => {
       this.carts = cartData.carts;
-    });
-    
+    });   
+  }
+  
+  stringAsDate(dateStr: string) {
+    return new Date(dateStr);
   }
 
   ngOnDestroy() {
