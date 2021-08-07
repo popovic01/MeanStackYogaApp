@@ -13,3 +13,46 @@ a {
 #div {
     margin-top: 20px;
 }
+
+#buttons {
+    display: flex;
+    margin-top: 60px;
+    justify-content: center;
+}
+
+#buttons a {
+    margin-bottom: 16px;
+    color: ivory;
+    background: rgb(218, 192, 193);
+    border-radius: 20px;
+    border: ivory 2px solid;
+    padding: 10px 16px;
+}
+
+#buttons a:hover {
+    color: rgb(218, 192, 193);
+    background: ivory;
+}
+
+#b1 {
+    margin-left: 10px;
+}
+
+i img {
+    margin-top: 30px;
+}
+
+.social {
+    color: ivory;
+    background: rgb(218, 192, 193);
+    border-radius: 34px;
+    border: ivory 2px solid;
+    padding: 14px 18px;
+    font-size: 22px;
+    margin-left: 16px;
+}
+
+.social:hover {
+    color: rgb(218, 192, 193);
+    background: ivory;
+}

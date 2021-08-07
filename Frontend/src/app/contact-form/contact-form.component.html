@@ -30,26 +30,26 @@
 			</div>
 		  </div>
 		  <div class="contactForm">
-			  <form action="">
+			  <form  (submit)="send(contactForm)" #contactForm="ngForm">
 				  <h2>Pošalji mi poruku</h2>
-				  <div class="inputBox">
-					  <input type="text" name="" id="" required="required">
-					  <span>Ime i prezime</span>
-				  </div>
-				  <div class="inputBox">
-					<input type="text" name="" id="" required="required">
-					<span>Email</span>
-				</div>
-				<div class="inputBox">
-					<input type="text" name="" id="" required="required">
-					<span>Naslov</span>
-				</div>
-				<div class="inputBox">
-					<textarea name="" id="" cols="30" rows="10" required="required"></textarea>
-					<span>Poruka</span>
-				</div>
-				<div class="inputBox">
-					<input type="submit" name="" id="" value="Pošalji">
+				  <mat-form-field>
+					  <input type="text" ngModel matInput name="fullName" required #fullNameInput="ngModel" placeholder="Ime i prezime">
+					  <mat-error *ngIf="fullNameInput.invalid">Unesite ime i prezime.</mat-error>
+				  </mat-form-field>
+				  <mat-form-field>
+					<input type="email" ngModel matInput name="email" required email #emailInput="ngModel" placeholder="Email">
+					<mat-error *ngIf="emailInput.invalid">Unesite ispravan email.</mat-error>
+				</mat-form-field>
+				<mat-form-field>
+					<input type="text" ngModel matInput name="subject" required #subjectInput="ngModel" placeholder="Naslov">
+					<mat-error *ngIf="subjectInput.invalid">Unesite naslov.</mat-error>
+				</mat-form-field>
+				<mat-form-field>
+					<textarea matInput name="message" ngModel cols="20" rows="10" required #messageInput="ngModel" placeholder="Poruka"></textarea>
+					<mat-error *ngIf="messageInput.invalid">Unesite poruku.</mat-error>
+				</mat-form-field>
+				<div>
+					<button type="submit">Prijavi se</button>
 				</div>
 			  </form>
 		  </div>
