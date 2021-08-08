@@ -43,6 +43,22 @@ app.use((req, res, next) => {
     next();
 });
 
+app.post('/payment', (req,res) => {
+  var charge = stripe.charges.create({
+    amount: req.body.price * 100,
+    currency: 'RSD',
+    source: req.body.token
+  }, (err, charge)=> {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      success: true,
+      message: "Payment done!"
+    })
+  });
+})
+
 app.use("/categories", categoryRouter);
 app.use("/courses", coursesRouter);
 app.use("/products", productsRouter);

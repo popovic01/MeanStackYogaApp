@@ -19,6 +19,10 @@ export class OrderDetailsService {
     this.subTotal = subTotal;
   }
 
+  getPrice() {
+    return this.subTotal;
+  }
+
   orderDetails(name: string, phone: string, address: string, city: string, postalCode: string) {
     const orderData: Order = {name: name, phone: phone, address: address, city: city, 
       postalCode: postalCode, items: this.items, subTotal: this.subTotal, createdAt: ''};
