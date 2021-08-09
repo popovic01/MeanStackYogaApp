@@ -10,6 +10,7 @@ const workoutsRouter = require("./routes/workouts");
 const userRouter = require("./routes/user");
 const categoryRouter = require("./routes/categories");
 const cartRouter = require("./routes/cart");
+const contactRouter = require("./routes/contact");
 
 const app = express();
 
@@ -65,5 +66,6 @@ app.use("/products", productsRouter);
 app.use("/workouts", workoutsRouter);
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
+app.use("/contact", contactRouter);
 
 module.exports = app;

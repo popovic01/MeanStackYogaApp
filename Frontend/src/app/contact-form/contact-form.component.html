@@ -1,7 +1,4 @@
   <section class="contact">
-	  <div class="content">
-		  <h2>Kontakt</h2>
-	  </div>
 	  <div class="container">
 		  <div class="contactInfo">
 			  <div class="box">
@@ -33,19 +30,23 @@
 			  <form  (submit)="send(contactForm)" #contactForm="ngForm">
 				  <h2>Pošalji mi poruku</h2>
 				  <mat-form-field>
-					  <input type="text" ngModel matInput name="fullName" required #fullNameInput="ngModel" placeholder="Ime i prezime">
+					  <input type="text" ngModel matInput name="fullName" required #fullNameInput="ngModel">
+					  <mat-placeholder class="placeholder">Ime i prezime</mat-placeholder>
 					  <mat-error *ngIf="fullNameInput.invalid">Unesite ime i prezime.</mat-error>
 				  </mat-form-field>
 				  <mat-form-field>
-					<input type="email" ngModel matInput name="email" required email #emailInput="ngModel" placeholder="Email">
+					<input type="email" ngModel matInput name="email" required email #emailInput="ngModel">
+					<mat-placeholder class="placeholder">Email</mat-placeholder>
 					<mat-error *ngIf="emailInput.invalid">Unesite ispravan email.</mat-error>
 				</mat-form-field>
 				<mat-form-field>
-					<input type="text" ngModel matInput name="subject" required #subjectInput="ngModel" placeholder="Naslov">
+					<input type="text" ngModel matInput name="subject" required #subjectInput="ngModel">
+					<mat-placeholder class="placeholder">Naslov</mat-placeholder>
 					<mat-error *ngIf="subjectInput.invalid">Unesite naslov.</mat-error>
 				</mat-form-field>
 				<mat-form-field>
-					<textarea matInput name="message" ngModel cols="20" rows="10" required #messageInput="ngModel" placeholder="Poruka"></textarea>
+					<textarea matInput name="message" ngModel cols="20" rows="10" required #messageInput="ngModel"></textarea>
+					<mat-placeholder class="placeholder">Poruka</mat-placeholder>
 					<mat-error *ngIf="messageInput.invalid">Unesite poruku.</mat-error>
 				</mat-form-field>
 				<div>

@@ -19,18 +19,6 @@
   background-size: cover;
 }
 
-.contact .content {
-  max-width: 800px;
-  text-align: center;
-}
-
-.contact .content h2 {
-  font-size: 40px;
-  margin-top: 12px;
-  font-weight: 600;
-  color: #FDB19F;
-}
-
 .container {
   width: 100%;
   display: flex;
@@ -83,7 +71,7 @@
   width: 40%;
   margin-top: 14px;
   padding: 30px;
-  background: #ddcccd;
+  background: #fff;
   border-radius: 10px;
 }
 
@@ -129,6 +117,10 @@
 ::ng-deep.mat-form-field-ripple {
  /*change color of underline when focused*/
  background-color: #724448 !important;;
+}
+
+.placeholder{
+  color: #724448;
 }
 
 @media (max-width: 991px) {
