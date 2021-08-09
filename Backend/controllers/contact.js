@@ -13,6 +13,7 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 const accessToken = oAuth2Client.getAccessToken();
 const from = req.body.email;
+const fullName = req.body.fullName;
 const subject = req.body.subject;
 const message = req.body.message;
 
@@ -29,7 +30,7 @@ const transport = nodemailer.createTransport({
     });
 
 var mailOptions = {
-    from: from,
+    from: fullName + from,
     to: 'danivilovski@gmail.com',
     subject: subject,
     text: message
