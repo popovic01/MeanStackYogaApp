@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllOrdersComponent } from './all-orders/all-orders.component';
 
 import { AuthGuard } from './auth/auth.guard';
+import { AboutComponent } from './about/about.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { CartComponent } from './cart/cart.component';
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'dodaj-trening', component: AddUpdateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'izmeni-trening/:workoutId', component: AddUpdateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'dodaj-kategoriju', component: AddCategoryComponent, canActivate: [AuthGuard]},
-  { path: 'o-meni', component: LoginComponent},
+  { path: 'o-meni', component: AboutComponent},
   { path: 'kontakt', component: ContactFormComponent},
   { path: 'prijava', component: LoginComponent},
   { path: 'registracija', component: SignupComponent},

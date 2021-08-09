@@ -20,7 +20,7 @@ section .imgBx {
   height: 100%;
 }
 
-section .imgBx  img{
+section .imgBx img{
   position: relative;
   top: 0;
   left: 0;
@@ -35,6 +35,7 @@ section .contentBx {
   align-items: center;
   width: 50%;
   height: 100%;
+  background-color: #C7D1DF;
 }
 
 section .contentBx .formBx {
@@ -42,12 +43,12 @@ section .contentBx .formBx {
 }
 
 section .contentBx .formBx h2 {
-  color: #101E25;
+  color: #212B3A;
   font-weight: 600;
   font-size: 1.5em;
   text-transform: uppercase;
   margin-bottom: 20px;
-  border-bottom: 4px solid #A2C3D6;
+  border-bottom: 4px solid #4D6586;
   display: inline-block;
   letter-spacing: 1px;
 }
@@ -60,30 +61,10 @@ section .contentBx .formBx .inputBx span {
   font-size: 16px;
   margin-bottom: 5px;
   display: inline-block;
-  color: #101E25;
+  color: #212B3A;
   font-weight: 300;
   font-size: 16px;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  line-height: 1.5rem;
+  text-align: justify;
 }
-
-section .contentBx .formBx .inputBx input {
-  width: 100%;
-  padding: 10px 20px;
-  outline: none;
-  font-weight: 400;
-  border: 1px solid #101E25;
-  font-size: 16px;
-  letter-spacing: 1px;
-  color: #101E25;
-  background: transparent;
-  border-radius: 20px;
-}
-
-section .contentBx .formBx .inputBx input[type="submit"] {
-  background-color: #A2C3D6;
-  color: white;
-  border: none;
-  font-weight: 600;
-  cursor:pointer;
-}
-

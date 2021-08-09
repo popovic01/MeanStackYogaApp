@@ -44,6 +44,7 @@ import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirma
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { FooterComponent } from './footer/footer.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
     ConfirmationDialogComponent,
     OrderDetailsComponent,
     FooterComponent,
-    AllOrdersComponent
+    AllOrdersComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

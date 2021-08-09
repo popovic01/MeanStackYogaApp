@@ -10,7 +10,7 @@
 .contact {
   position: relative;
   min-height: 100vh;
-  padding: 50px 100px;
+  padding: 20px 100px 50px 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,18 +24,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .container .contactInfo {
-  width: 50%;
+  width: 30%;
   display: flex;
   flex-direction: column;
 }
 
-.container .contactInfo .box {
+.container .socialMedia {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.socialMedia .box2 {
   position: relative;
   padding: 20px 0;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+.socialMedia .icon {
+  min-width: 45px;
+  height: 45px;
+  color: white;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 18px;
+  margin: 10px;
+}
+
+.socialMedia .icon:hover {
+  background: white;
+  color: #724448;
+}
+
+.container .contactInfo .box {
+  position: relative;
+  padding: 30px 0;
   display: flex;
 }
 
@@ -69,7 +103,7 @@
 
 .contactForm {
   width: 40%;
-  margin-top: 14px;
+  margin-top: 30px;
   padding: 30px;
   background: #fff;
   border-radius: 10px;
@@ -79,6 +113,26 @@
   font-size: 30px;
   color: #724448;
   font-weight: 600;
+}
+
+.map {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 34px;
+}
+
+#how {
+  text-align: center;
+  padding-top: 20px;
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0;
+  color: #1B212A;
+}
+
+.location {
+  background: #A8ACB6;
 }
 
 .contactForm mat-form-field {
@@ -109,7 +163,7 @@
   color: #724448 !important;
  }
 
- ::ng-deep.mat-form-field-underline {
+::ng-deep.mat-form-field-underline {
   /*change color of underline*/
   background-color: #724448 !important;
 } 
@@ -135,5 +189,8 @@
   }
   .container .contactInfo, .contactForm {
     width: 100%;
+  }
+  .container .socialMedia {
+    margin-right: 0;
   }
 }

@@ -42,6 +42,11 @@ i img {
     margin-top: 30px;
 }
 
+#social {
+    color: #6C757D;
+    padding-bottom: 30px;
+}
+
 .social {
     color: ivory;
     background: rgb(218, 192, 193);

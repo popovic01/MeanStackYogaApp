@@ -1,4 +1,4 @@
-<section class="cart-section">
+<section class="cart-section" *ngIf="getCartDetails.length > 0">
     <div class="container">
         <h2>Vaša korpa</h2>
         <div *ngIf="getCartDetails">
@@ -8,7 +8,7 @@
             <th>Slika</th>
             <th>Cena</th>
             <th>Količina</th>
-            <th>Dostupna količina</th>
+            <th id="q">Dostupna količina</th>
             <th>Ukupno</th>
             <th>Ukloni proizvod</th>
         </tr>
@@ -30,9 +30,10 @@
         </table><br>
         <div>
             <p class="p">Ukupno - {{ total }} RSD</p>
-            <button class="done" (click)="done()"><i class="fa fa-trash-o"></i> Završi kupovinu</button>
+            <button class="done" (click)="done()"><i class="fa fa-trash-o"></i> Dalje</button>
             <button class="removeAll" (click)="removeAll()"><i class="fa fa-trash-o"></i> Isprazni korpu</button>
         </div>
         </div>
     </div>
 </section>
+<h1 *ngIf="getCartDetails.length == 0">Vaša korpa je prazna :(</h1>

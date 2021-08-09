@@ -1,15 +1,24 @@
-<mat-card>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
-      <mat-form-field>
-        <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
-        <mat-error *ngIf="emailInput.invalid">Unesite ispravan email.</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="password" name="password" ngModel matInput placeholder="Lozinka" #passwordInput="ngModel" required>
-        <mat-error *ngIf="passwordInput.invalid">Unesite ispravnu lozinku.</mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Registruj se</button>
-    </form>
-</mat-card>
+<section>
+  <div class="imgBx">
+    <img src="assets/images/Registration.jpg">
+  </div>
+  <div class="contentBx">
+    <div class="formBx">
+      <h2>Registruj se</h2>
+      <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+        <div class="inputBx">
+          <span>E-mail</span>
+          <input name="email" ngModel type="email" #emailInput="ngModel" required email>
+        </div >
+        <div class="inputBx">
+          <span>Lozinka</span>
+          <input type="password" name="password" ngModel matInput  #passwordInput="ngModel" required>
+        </div>
+        <div class="inputBx">
+          <input type="submit" *ngIf="!isLoading" value="Registruj se" name="">
+        </div >
+      </form>
+    </div>
+  </div>
+</section>
   

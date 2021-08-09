@@ -1,5 +1,7 @@
 .cart-section {
     padding: 40px 0;
+    margin-bottom: 38px;
+    color: #17191B;
 }
 
 table {
@@ -8,18 +10,47 @@ table {
   }
   
 td, th {
-    border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
 }
-  
-tr:nth-child(even) {
-    background-color: #dddddd;
+
+tr:first-child {
+  background: #8B939A;
+  color: white;
+  font-size: 18px;
+}
+
+tr {
+    background-color: #CACED1;
+}
+
+#q {
+  width: 10%;
+}
+
+h2 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 5px 0 20px 0;
+  color: #17191B;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #17191B;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0 20px 0;
 }
 
 img {
-    width: 150px;
+    width: 100px;
     height: 80px;
+    border-radius: 6px;
 }
 
 container {

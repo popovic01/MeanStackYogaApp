@@ -28,7 +28,6 @@ export class CartComponent implements OnInit {
     if (localStorage.getItem('localCart')) {
       //sve u local storage-u se cuva kao json
       this.getCartDetails = JSON.parse(localStorage.getItem('localCart') as string);
-
     }
   }
 
@@ -100,7 +99,6 @@ export class CartComponent implements OnInit {
           }
         }
       });
-
     }
   }
 

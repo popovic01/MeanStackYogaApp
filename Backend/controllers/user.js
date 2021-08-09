@@ -17,6 +17,8 @@ exports.createUser = (req, res, next) => {
           });
         })
         .catch(err => {
+          console.log(err);
+          console.log(err.message);
           res.status(500).json({
             message: "Unet email je već registrovan"
           });

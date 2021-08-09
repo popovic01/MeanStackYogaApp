@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 const stripe = require('stripe')('sk_test_51JI9R1AUVPYGsQW32tXdzdSrehmQy7qBKLVPMOIys0rVQpJ6qjUkMkFC6j3Eq5GI1pTgDZ4N5ZxAW1E2kj4R0z2t00REzEoOf1');
+require("dotenv").config();
 
 const coursesRouter = require("./routes/courses");
 const productsRouter = require("./routes/products");
