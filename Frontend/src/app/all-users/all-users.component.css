@@ -3,22 +3,20 @@
     margin-bottom: 38px;
     color: #17191B;
     margin: auto;
-    width: 100%;
+    width: 50%;
 }
 
 table {
     border-collapse: collapse;
     width: 100%;
-    border: 1px solid #8B939A;
   }
   
 td, th {
     text-align: center;
     padding: 8px;
-    border: 1px solid #8B939A;
 }
 
-#first {
+tr:first-child {
   background: #8B939A;
   color: white;
   font-size: 18px;
@@ -26,7 +24,6 @@ td, th {
 
 tr {
     background-color: #CACED1;
-    text-align: center;
 }
 
 h2 {

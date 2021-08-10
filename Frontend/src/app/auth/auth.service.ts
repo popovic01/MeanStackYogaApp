@@ -37,8 +37,8 @@ export class AuthService {
     return this.isAdminListener.asObservable();
   }
 
-  createUser(email: string, password: string) {
-    const authData: AuthData = { email: email, password: password };
+  createUser(email: string, password: string, fullName: string) {
+    const authData: AuthData = { email: email, password: password, fullName: fullName };
     this.http
       .post("http://localhost:3000/user/signup", authData)
       .subscribe(() => {
@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    const authData: AuthData = {email: email, password: password};
+    const authData: AuthData = {email: email, password: password, fullName: ''};
     this.http.post<{token: string, expiresIn: number, isAdmin: boolean, id: string}>("http://localhost:3000/user/login", authData)
       .subscribe(response => {
         const token = response.token;

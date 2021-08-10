@@ -7,6 +7,7 @@ exports.createUser = (req, res, next) => {
     bcrypt.hash(req.body.password, 10).then(hash => {
       const user = new User({
         email: req.body.email,
+        fullName: req.body.fullName,
         password: hash
       });
       user.save()
@@ -87,3 +88,22 @@ exports.getOrderDetails = (req, res, next) => {
   });
     
   };
+
+exports.getAllUsers = (req, res, next) => {
+  const usersQuery = User.find();
+  let fetchedUsers;
+  
+  usersQuery
+  .then(documents => {
+    fetchedUsers = documents;
+    res.status(200).json({
+      message: "Uspešno dobavljanje korisnika iz baze!",
+      users: fetchedUsers
+    });
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Neuspešno dobavljanje korisnika iz baze podataka"
+    });
+  });
+};

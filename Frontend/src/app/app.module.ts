@@ -45,6 +45,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { FooterComponent } from './footer/footer.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { AboutComponent } from './about/about.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { AboutComponent } from './about/about.component';
     OrderDetailsComponent,
     FooterComponent,
     AllOrdersComponent,
-    AboutComponent
+    AboutComponent,
+    AllUsersComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

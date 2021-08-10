@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { Subscription } from 'rxjs';
 
 import { CartService } from '../cart/cart.service';
-import { Subscription } from 'rxjs';
 import { Order } from './order.model';
 
 @Component({
@@ -15,8 +14,7 @@ export class AllOrdersComponent implements OnInit, OnDestroy {
   carts: Order[] = [];
   private cartsSub: Subscription = new Subscription;
 
-  constructor(private http: HttpClient, 
-    private cartService: CartService) { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.cartService.getAllOrders();

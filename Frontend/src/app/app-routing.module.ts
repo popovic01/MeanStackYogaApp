@@ -17,6 +17,8 @@ import { AddUpdateProductComponent } from './products/add-update-product/add-upd
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { AddUpdateWorkoutComponent } from './workouts/add-update-workout/add-update-workout.component';
 import { WorkoutListComponent } from './workouts/workout-list/workout-list.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -36,7 +38,9 @@ const routes: Routes = [
   { path: 'registracija', component: SignupComponent},
   { path: 'korpa', component: CartComponent, canActivate: [AuthGuard]},
   { path: 'porudzbina', component: OrderDetailsComponent, canActivate: [AuthGuard]},
-  { path: 'porudzbine', component: AllOrdersComponent, canActivate: [AuthGuard]}
+  { path: 'porudzbine', component: AllOrdersComponent, canActivate: [AuthGuard]},
+  { path: 'korisnici', component: AllUsersComponent, canActivate: [AuthGuard]},
+  { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

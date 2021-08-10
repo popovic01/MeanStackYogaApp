@@ -1,41 +1,34 @@
-<mat-card class="example-card" *ngFor="let cart of carts">
+<p *ngIf="carts.length <= 0" id="noAdded">Nema porudžbina!</p>
 
-      <mat-card-content>
-        <p>
-          Ime i prezime: {{ cart.name }}
-        <p>
-        <p>
-          Broj telefona: {{ cart.phone }}
-        <p>
-        <p>
-          Adresa: {{ cart.address }}
-        <p>
-        <p>
-          Grad: {{ cart.city }}
-        <p>
-        <p>
-          Poštanski broj: {{ cart.postalCode }}
-        <p>
-        <p>
-          Datum kreiranja porudžbine: {{ stringAsDate(cart.createdAt) | date:'dd-MM-yy HH:mm:ss' }}
-        <p>
-      </mat-card-content>
-  
-      <mat-card-content *ngFor='let item of cart.items'>
-        <p>
-          Proizvod: {{ item.name }} <br>
-          Količina: {{ item.quantity }} <br>
-          Cena: {{ item.price }}
-        <p>
-      </mat-card-content>
-  
-      <mat-card-content>
-        <p>
-          Ukupna cena: {{ cart.subTotal }}
-        <p>
-      </mat-card-content>
-
-</mat-card>
-
-<p *ngIf="carts.length <= 0" id="noAdded">No orders added yet!</p>
+<section class="cart-section" *ngIf="carts.length > 0">
+  <div class="container">
+      <h2>Porudžbine</h2>
+      <div *ngIf="carts">
+      <table>
+      <tr id="first">    
+          <th>Ime i prezime</th>
+          <th>Broj telefona</th>
+          <th>Adresa</th>
+          <th>Datum kreiranja porudžbine</th>
+          <th>Ukupna cena</th>
+          <th>Proizvodi</th>
+      </tr>
+      <tr *ngFor="let cart of carts">
+          <td>{{ cart.name }}</td>
+          <td>{{ cart.phone }}</td>
+          <td>{{ cart.address }}, {{ cart.city }}, {{ cart.postalCode }}</td>
+          <td>{{ stringAsDate(cart.createdAt) | date:'dd-MM-yy HH:mm:ss' }}</td>
+          <td>{{ cart.subTotal }}</td>
+          <td>
+            <tr *ngFor='let item of cart.items'>
+              Proizvod: {{ item.name }} <br>
+              Količina: {{ item.quantity }} <br>
+              Cena: {{ item.price }} <br>
+            <tr>
+          </td>
+      </tr>
+      </table><br>
+      </div>
+  </div>
+</section>
 
