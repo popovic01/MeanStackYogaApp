@@ -13,6 +13,7 @@ export class CartService {
 
   private carts: Order[] = [];
   private ordersUpdated = new Subject<{ carts: Order[] }>();
+  private ordersOneUpdated = new Subject<{ carts: Order[] }>();
 
   constructor(private http: HttpClient, private router: Router, private orderDetailsService: OrderDetailsService) { }
 
@@ -33,11 +34,12 @@ export class CartService {
       });
   }
 
-  getAllOrdersByOneUser(id: string) {
-    this.http.get<{message: string, carts: Order[]}>('http://localhost:3000/cart/' + id)
+  getAllOrdersByOneUser() {
+    const userName = localStorage.getItem('username');
+    this.http.post<{message: string, orders: Order[]}>('http://localhost:3000/cart/one-user', { body: userName })
       .subscribe((ordersData) => {
-        this.carts = ordersData.carts;
-        this.ordersUpdated.next({
+        this.carts = ordersData.orders;
+        this.ordersOneUpdated.next({
           carts: [...this.carts]
         });
       }, error => {
@@ -47,6 +49,10 @@ export class CartService {
 
   getOrderUpdateListener() {
     return this.ordersUpdated.asObservable();
+  }
+
+  getOrdersUpdateListener() {
+    return this.ordersOneUpdated.asObservable();
   }
 
 }

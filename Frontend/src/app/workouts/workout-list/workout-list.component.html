@@ -5,15 +5,16 @@
       <p>
     </mat-card-content>
 
-    <mat-card-content>
-      <div class="workout-image">
-        <img [src]="workout.imagePath" [alt]="workout.name">
-      </div>
-    </mat-card-content>
-
-    <mat-card-content>
-        {{ workout.description }}
-    </mat-card-content>  <br>
+    <div class="flip-box">
+      <mat-card-content class="flip-box-inner">
+        <div class="flip-box-front">
+          <img [src]="workout.imagePath" [alt]="workout.name">
+        </div>
+        <div class="flip-box-back">
+          <p>{{ workout.description }}</p>
+        </div>
+      </mat-card-content>
+    </div>
 
     <mat-card-content>
       <p class="priceP">

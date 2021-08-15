@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';
@@ -8,7 +9,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { CartService } from 'src/app/cart/cart.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -27,8 +27,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
-  color = '';
   alert = false;
+  colorControl = new FormControl('', Validators.required);
+  selected = '';
 
   private _searchTerm!: string;
 

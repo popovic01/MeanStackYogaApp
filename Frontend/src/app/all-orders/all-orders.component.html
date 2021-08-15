@@ -16,14 +16,14 @@
       <tr *ngFor="let cart of carts">
           <td>{{ cart.name }}</td>
           <td>{{ cart.phone }}</td>
-          <td>{{ cart.address }}, {{ cart.city }}, {{ cart.postalCode }}</td>
+          <td>{{ cart.address }} <br> {{ cart.city }} <br> {{ cart.postalCode }}</td>
           <td>{{ stringAsDate(cart.createdAt) | date:'dd-MM-yy HH:mm:ss' }}</td>
           <td>{{ cart.subTotal }}</td>
           <td>
             <tr *ngFor='let item of cart.items'>
               Proizvod: {{ item.name }} <br>
               Količina: {{ item.quantity }} <br>
-              Cena: {{ item.price }} <br>
+              Cena: {{ item.price }} <br><br>
             <tr>
           </td>
       </tr>

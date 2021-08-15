@@ -8,6 +8,13 @@ const productSchema = new Schema({
         required: true,
         maxlength: 40
     },
+    description: { 
+        type: String,
+        required: true
+    },
+    colors: { 
+        type: []
+    },
     price: { 
         type: Number, 
         required: true, 
@@ -24,18 +31,6 @@ const productSchema = new Schema({
     quantity: {
         type: Number,
         default: 1
-    },
-    description: {
-        type: String,
-        // required: true,
-        maxlength: 2000,
-    },
-    snippet: {
-        type: String
-    },
-    color: {
-        type: String,
-        default: 'black'
     },
     imagePath: {
         type: String,

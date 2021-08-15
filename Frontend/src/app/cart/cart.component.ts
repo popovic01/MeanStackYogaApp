@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
 import { DialogComponent } from '../products/dialog/dialog.component';
@@ -14,8 +13,7 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public authService: AuthService, 
-    private router: Router, private cartService: CartService) { }
+  constructor(public dialog: MatDialog, public authService: AuthService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.CartDetails();

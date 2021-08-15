@@ -3,9 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FileCheck } from 'angular-file-validator';
 import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
-import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Category } from 'src/app/category/add-category/category.model';
@@ -19,6 +17,8 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
 
   enteredName = '';
   enteredPrice = 0;
+  enteredDescription = '';
+  enteredColors = '';
   form!: FormGroup;
   private mode = 'create';
   private productId: any;
@@ -30,7 +30,7 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
   selectedCategory = "";
 
   constructor(public productsService: ProductsService, public route: ActivatedRoute,
-    public authService: AuthService, private http: HttpClient) { }
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.authStatusSub = this.authService
@@ -42,6 +42,10 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
       name: new FormControl(null, {
         validators: [Validators.required]
       }),
+      description: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      colors: new FormControl(null),
       price: new FormControl(null, {
         validators: [Validators.required]
       }),
@@ -69,6 +73,8 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
           this.product = {
             _id: productData._id, 
             name: productData.name, 
+            description: productData.description, 
+            colors: productData.colors, 
             price: productData.price,
             stock: productData.stock,
             quantity: productData.quantity,
@@ -77,6 +83,8 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
           };
           this.form.patchValue({
             name: this.product.name,
+            description: this.product.description,
+            colors: productData.colors, 
             price: this.product.price,
             stock: this.product.stock,
             image: this.product.imagePath,
@@ -108,16 +116,21 @@ export class AddUpdateProductComponent implements OnInit, OnDestroy {
     }
     this.isLoading = true;
     if (this.mode === "create") {
-      this.productsService.addProduct(this.form.value.name, this.form.value.price, this.form.value.stock, this.form.value.quantity, this.form.value.image, this.form.value.category);
+      this.productsService.addProduct(this.form.value.name,
+        this.form.value.description, this.form.value.colors,
+        this.form.value.price, this.form.value.stock, this.form.value.quantity, this.form.value.image, this.form.value.category);
     } else {
       this.productsService.updateProduct(
         this.productId,
         this.form.value.name, 
+        this.form.value.description, 
+        this.form.value.colors,
         this.form.value.price,
         this.form.value.stock,
         this.form.value.quantity,
         this.form.value.image, 
-        this.form.value.category
+        this.form.value.category,
+        ''
       );
     }
     this.form.reset();

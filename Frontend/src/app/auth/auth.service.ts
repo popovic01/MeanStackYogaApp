@@ -50,7 +50,8 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = {email: email, password: password, fullName: ''};
-    this.http.post<{token: string, expiresIn: number, isAdmin: boolean, id: string}>("http://localhost:3000/user/login", authData)
+    this.http.post<{token: string, expiresIn: number, isAdmin: boolean, id: string,
+    fullName: string}>("http://localhost:3000/user/login", authData)
       .subscribe(response => {
         const token = response.token;
         const isAdmin = response.isAdmin;

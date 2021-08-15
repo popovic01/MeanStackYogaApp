@@ -3,21 +3,28 @@
           style="width:300px" [(ngModel)]="searchTerm" />
 </div>
 
-<mat-card class="example-card" *ngFor="let product of filteredProducts">
+<mat-card class="example-card" *ngFor="let product of filteredProducts" (submit)="addToCart(product)">
     <mat-card-content>
-        <p id="name">
-            {{ product.name }}
-        </p>
-    </mat-card-content>
-
-    <mat-card-content>
-      <div class="product-image">
-        <img [src]="product.imagePath" [alt]="product.name">
+      <div id="name">
+        <p id="main">
+          {{ product.name }}
+      </p>
       </div>
     </mat-card-content>
 
+    <div class="flip-box">
+      <mat-card-content class="flip-box-inner">
+        <div class="flip-box-front">
+          <img [src]="product.imagePath" [alt]="product.name">
+        </div>
+        <div class="flip-box-back">
+          <p>{{ product.description }}</p>
+        </div>
+      </mat-card-content>
+    </div>
+
     <mat-card-content>
-      <p class="par">
+      <p class="priceP">
         {{ product.price }} RSD
       </p>
     </mat-card-content>
@@ -34,17 +41,17 @@
       <button type="button" class="btn" (click)="inc(product)"><i class="fa fa-plus"></i></button>      
     </div>
 
-    <label id="example-radio-group-label">Izaberite boju svile</label>
-    <mat-radio-group [(ngModel)]="color">
-      <mat-radio-button value="blue">Plava</mat-radio-button>
-      <mat-radio-button value="pink">Roza</mat-radio-button>
-      <mat-radio-button value="green">Zelena</mat-radio-button>
-      <mat-radio-button value="purple">Ljubičasta</mat-radio-button>
-      <mat-radio-button value="yellow">Žuta</mat-radio-button>
-    </mat-radio-group>
+    <mat-form-field id="select" *ngIf="product.category === 'Svila 5m' || product.category === 'Svila 4m'">
+      <mat-label>Dostupne boje</mat-label>
+      <mat-select [formControl]="colorControl" [(value)]="product.selectedColor" required>
+        <mat-option *ngFor="let color of product.colors" [value]="color">
+          {{color}}
+        </mat-option>  
+      </mat-select>
+      <mat-error *ngIf="colorControl.hasError('required')">Izaberite boju</mat-error>
+    </mat-form-field>
 
-    <p id="stock">Dostupna količina: {{ product.stock }}</p>
-    <button type="button" class="cart-btn" (click)="addToCart(product)">Dodaj u korpu</button>
+    <button type="submit" class="cart-btn" (click)="addToCart(product)">Dodaj u korpu</button>
 
     <mat-card-actions *ngIf="userIsAdmin">
       <a mat-button color="accent" class="button" [routerLink]="['/izmeni-proizvod', product._id]">Uredi</a>

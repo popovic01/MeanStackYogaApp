@@ -4,11 +4,12 @@ exports.createProduct = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");  
     const product = new Product({
       name: req.body.name,
+      description: req.body.description,
+      colors: req.body.colors,
       price: req.body.price,
       imagePath: url + "/images/" + req.file.filename,
       stock: req.body.stock,
       quantity: 1,
-      color: req.body.color,
       category: req.body.category
     });
     product.save().then(createdProduct => {
@@ -36,11 +37,12 @@ exports.updateProduct = (req, res, next) => {
     const product = new Product({
       _id: req.body._id,
       name: req.body.name,
+      description: req.body.description,
+      colors: req.body.colors,
       price: req.body.price,
       stock: req.body.stock,
       quantity: 1,
       imagePath: imagePath,
-      color: req.body.color,
       category: req.body.category
     });
     Product.updateOne( {_id: req.params._id }, product).then(result => {

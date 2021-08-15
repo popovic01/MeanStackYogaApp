@@ -9,6 +9,7 @@
             <th>Cena</th>
             <th>Količina</th>
             <th id="q">Dostupna količina</th>
+            <th>Boja</th>
             <th>Ukupno</th>
             <th>Ukloni proizvod</th>
         </tr>
@@ -24,6 +25,7 @@
                 </div>
             </td>
             <td>{{ getCartDetail.stock }}</td>
+            <td>{{ getCartDetail.selectedColor }}</td>
             <td>{{ getCartDetail.price * getCartDetail.quantity | number }} RSD</td>
             <td><button type="button" class="remove" (click)="singleRemove(getCartDetail._id)"><i class="fa fa-trash-o"></i></button></td>
         </tr>

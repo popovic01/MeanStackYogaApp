@@ -24,8 +24,9 @@ export class OrderDetailsService {
   }
 
   orderDetails(name: string, phone: string, address: string, city: string, postalCode: string) {
+    const username = localStorage.getItem('username') || '';
     const orderData: Order = {name: name, phone: phone, address: address, city: city, 
-      postalCode: postalCode, items: this.items, subTotal: this.subTotal, createdAt: ''};
+      postalCode: postalCode, items: this.items, subTotal: this.subTotal, createdAt: '', username: username};
     this.http.post("http://localhost:3000/cart/order-details", orderData)
     .subscribe(() => {
     }, error => {

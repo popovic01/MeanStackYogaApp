@@ -5,15 +5,16 @@
     <p>
   </mat-card-content>
 
-  <mat-card-content>
-    <div class="course-image">
-      <img [src]="course.imagePath" [alt]="course.name">
-    </div>
-  </mat-card-content>
-
-  <mat-card-content>
-      {{ course.description }}
-  </mat-card-content> 
+  <div class="flip-box">
+    <mat-card-content class="flip-box-inner">
+      <div class="flip-box-front">
+        <img [src]="course.imagePath" [alt]="course.name">
+      </div>
+      <div class="flip-box-back">
+        <p>{{ course.description }}</p>
+      </div>
+    </mat-card-content>
+  </div>
 
   <mat-card-content>
     <p class="priceP">

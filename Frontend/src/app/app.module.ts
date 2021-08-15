@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxStripeModule } from 'ngx-stripe';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -97,6 +98,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatCheckboxModule,
     MatMenuModule,
     MatRadioModule,
+    MatFormFieldModule,
     NgxStripeModule.forRoot('pk_test_51JI9R1AUVPYGsQW3P1BPCiFzW9QA0vbyVOxQOY1nQuLP8A7wDOMOw0of9dHhVt6Ot5w6IkPq8pJwwdJIRMqupuYt00kvKlNjLC')
   ],
   providers: [ 

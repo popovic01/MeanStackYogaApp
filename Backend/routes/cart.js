@@ -10,4 +10,6 @@ router.post("/order-details", checkAuth, CartController.orderDetails);
 
 router.get("", checkAuth, CartController.getAllCarts);
 
+router.post("/one-user", checkAuth, CartController.getAllCartsFromOneUser);
+
 module.exports = router;

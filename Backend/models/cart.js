@@ -15,7 +15,8 @@ const CartSchema = new Schema({
     address: { type: String, required: true },
     city: { type: String, required: true },
     phone: { type: String, required: true },
-    postalCode: { type: String, required: true }
+    postalCode: { type: String, required: true },
+    username: { type: String, required: true }
 }, {
     timestamps: true
 });

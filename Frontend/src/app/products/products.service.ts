@@ -31,29 +31,37 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    return this.http.get<{ _id: string, name: string, price: number, stock: number, quantity: number, imagePath: string, category: string }>('http://localhost:3000/products/' + id);
+    return this.http
+      .get<{ _id: string, name: string, description: string, colors: string, price: number, stock: number, quantity: number, imagePath: string, category: string }>('http://localhost:3000/products/' + id);
   }
 
-  addProduct(name: string, price: number, stock: number, quantity: number, image: File, category: string) {
+  addProduct(name: string, description: string, colors: string, price: number, stock: number, quantity: number, image: File, category: string) {
     const productData = new FormData();
+    const colorsArr = colors.split(",");
     productData.append('name', name);
+    productData.append('description', description);
+    productData.append('colors', colorsArr as unknown as string);
     productData.append('price', price as unknown as string);
     productData.append('stock', stock as unknown as string);
     productData.append('quantity', quantity as unknown as string);
     productData.append('image', image, name);
     productData.append('category', category);
     this.http.post<{ message: string, product: Product }>('http://localhost:3000/products', productData)
-      .subscribe(responseData => {
+      .subscribe(() => {
         this.router.navigate(['/online-prodavnica']);
       });
   }
 
-  updateProduct(id: string, name: string, price: number, stock: number, quantity: number, image: any, category: string) {
+  updateProduct(id: string, name: string, description: string, colors: string, price: number, 
+    stock: number, quantity: number, image: any, category: string, selectedColor: string) {
     let productData: Product | FormData;
+    const colorsArr = colors.split(",");
     if (typeof image == 'object') {
       productData = new FormData();
       productData.append("_id", id);
       productData.append("name", name);
+      productData.append("description", description);
+      productData.append('colors', colorsArr as unknown as string);
       productData.append("price", price as unknown as string);
       productData.append('stock', stock as unknown as string);
       productData.append('quantity', quantity as unknown as string);
@@ -63,12 +71,14 @@ export class ProductsService {
       productData = {
         _id: id,
         name: name,
+        description: description, 
+        colors: colorsArr,
         price: price,
         stock: stock,
         quantity: quantity,
         imagePath: image,
         category: category,
-        color: 'black'
+        selectedColor: selectedColor
       };
     }
     this.http.put('http://localhost:3000/products/' + id, productData)

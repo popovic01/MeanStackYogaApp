@@ -15,6 +15,20 @@
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image')!.valid">
             <img [src]="imagePreview" [alt]="form.value.name">
         </div>
+
+        <mat-form-field>
+            <textarea matInput 
+            cols="30" rows="5" placeholder="Opis" formControlName="description" required>
+            </textarea>
+            <mat-error *ngIf="form.get('description')!.hasError('required')">Unesite opis proizvoda.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput 
+            cols="20" rows="5" placeholder="Boje" formControlName="colors">
+            </textarea>
+            <mat-error *ngIf="form.get('colors')!.hasError('required')">Unesite dostupne boje proizvoda.</mat-error>
+        </mat-form-field>
     
         <mat-form-field class="example-full-width">
             <mat-label>Cena</mat-label>

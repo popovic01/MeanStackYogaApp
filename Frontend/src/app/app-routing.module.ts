@@ -39,12 +39,13 @@ const routes: Routes = [
   { path: 'korpa', component: CartComponent, canActivate: [AuthGuard]},
   { path: 'porudzbina', component: OrderDetailsComponent, canActivate: [AuthGuard]},
   { path: 'porudzbine', component: AllOrdersComponent, canActivate: [AuthGuard]},
+  { path: 'moje-porudzbine', component: AllOrdersComponent, canActivate: [AuthGuard]},
   { path: 'korisnici', component: AllUsersComponent, canActivate: [AuthGuard]},
   { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)], 
   exports: [RouterModule],
   providers: [AuthGuard]
 })

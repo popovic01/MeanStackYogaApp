@@ -9,4 +9,5 @@ export interface Order {
     city: string;
     postalCode: string;
     createdAt: string;
+    username: string;
 }
