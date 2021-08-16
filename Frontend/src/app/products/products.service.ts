@@ -35,12 +35,12 @@ export class ProductsService {
       .get<{ _id: string, name: string, description: string, colors: string, price: number, stock: number, quantity: number, imagePath: string, category: string }>('http://localhost:3000/products/' + id);
   }
 
-  addProduct(name: string, description: string, colors: string, price: number, stock: number, quantity: number, image: File, category: string) {
+  addProduct(name: string, description: string, colors: string, price: number, stock: number, 
+      quantity: number, image: File, category: string) {
     const productData = new FormData();
-    const colorsArr = colors.split(",");
     productData.append('name', name);
     productData.append('description', description);
-    productData.append('colors', colorsArr as unknown as string);
+    productData.append('colors', colors);
     productData.append('price', price as unknown as string);
     productData.append('stock', stock as unknown as string);
     productData.append('quantity', quantity as unknown as string);
@@ -55,13 +55,13 @@ export class ProductsService {
   updateProduct(id: string, name: string, description: string, colors: string, price: number, 
     stock: number, quantity: number, image: any, category: string, selectedColor: string) {
     let productData: Product | FormData;
-    const colorsArr = colors.split(",");
+    const colorsArr = colors.toString().split(",");
     if (typeof image == 'object') {
       productData = new FormData();
       productData.append("_id", id);
       productData.append("name", name);
       productData.append("description", description);
-      productData.append('colors', colorsArr as unknown as string);
+      productData.append('colors', colors);
       productData.append("price", price as unknown as string);
       productData.append('stock', stock as unknown as string);
       productData.append('quantity', quantity as unknown as string);

@@ -2,10 +2,11 @@ const Product = require("../models/product");
 
 exports.createProduct = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");  
+    const colorsArr = req.body.colors.toString().split(",");
     const product = new Product({
       name: req.body.name,
       description: req.body.description,
-      colors: req.body.colors,
+      colors: colorsArr,
       price: req.body.price,
       imagePath: url + "/images/" + req.file.filename,
       stock: req.body.stock,
@@ -30,6 +31,7 @@ exports.createProduct = (req, res, next) => {
 
 exports.updateProduct = (req, res, next) => {
     let imagePath = req.body.imagePath;
+    const colorsArr = req.body.colors.toString().split(",");
     if (req.file) {
       const url = req.protocol + "://" + req.get("host");  
       imagePath = url + "/images/" + req.file.filename
@@ -38,7 +40,7 @@ exports.updateProduct = (req, res, next) => {
       _id: req.body._id,
       name: req.body.name,
       description: req.body.description,
-      colors: req.body.colors,
+      colors: colorsArr,
       price: req.body.price,
       stock: req.body.stock,
       quantity: 1,
@@ -102,7 +104,6 @@ exports.getProduct = (req, res, next) => {
 exports.deleteProduct = (req, res, next) => {
     Product.deleteOne({ _id: req.params._id })
       .then(result => {
-        console.log(req.params._id);
         res.status(200).json({ message: "Product deleted!" });
       })
       .catch(error => {

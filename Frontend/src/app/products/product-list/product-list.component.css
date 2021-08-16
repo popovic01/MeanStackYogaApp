@@ -166,3 +166,9 @@ mat-card-actions {
   margin-right: auto;
   width: 50%;
 }
+
+#center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
