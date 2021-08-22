@@ -1,70 +1,81 @@
-<div class="form-group">
-  <input type="text" class="form-control" placeholder="Pretraga"
-          style="width:300px" [(ngModel)]="searchTerm" />
-</div>
-
-<div id="center"><mat-card class="example-card" *ngFor="let product of filteredProducts" (submit)="addToCart(product)">
-  <mat-card-content>
-    <div id="name">
-      <p id="main">
-        {{ product.name }}
-    </p>
+<div class="body">
+  <div id="search">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Pretraga"
+              style="width:300px" [(ngModel)]="searchTerm" />
     </div>
-  </mat-card-content>
-
-  <div class="flip-box">
-    <mat-card-content class="flip-box-inner">
-      <div class="flip-box-front">
-        <img [src]="product.imagePath" [alt]="product.name">
-      </div>
-      <div class="flip-box-back">
-        <p>{{ product.description }}</p>
+    
+    <div id="myBtnContainer">
+      <button class="btn2" (click)="filter('All')">Svi proizvodi</button>
+      <button class="btn2" (click)="filter('Svila 5m')">Svila 5m</button>
+      <button class="btn2" (click)="filter('Svila 4m')">Svila 4m</button>
+      <button class="btn2" (click)="filter('Obruč')">Obruč</button>
+    </div>
+  </div>
+  
+  <div id="center"><mat-card class="example-card" *ngFor="let product of filteredProducts " (submit)="addToCart(product)">
+    <mat-card-content>
+      <div id="name">
+        <p id="main">
+          {{ product.name }}
+      </p>
       </div>
     </mat-card-content>
+  
+    <div class="flip-box">
+      <mat-card-content class="flip-box-inner">
+        <div class="flip-box-front">
+          <img [src]="product.imagePath" [alt]="product.name">
+        </div>
+        <div class="flip-box-back">
+          <p>{{ product.description }}</p>
+        </div>
+      </mat-card-content>
+    </div>
+  
+    <mat-card-content>
+      <p class="priceP">
+        {{ product.price }} RSD
+      </p>
+    </mat-card-content>
+  
+    <div class="container">
+      <button type="button" class="btn" (click)="dec(product)"><i class="fa fa-minus"></i></button>
+      <span>{{ product.quantity }}</span>
+      <button type="button" class="btn" (click)="inc(product)"><i class="fa fa-plus"></i></button>      
+    </div>
+  
+    <mat-card-content>
+      <p id='stock'>
+        Dostupna količina: {{ product.stock }}
+      </p>
+    </mat-card-content>
+  
+    <mat-form-field id="select" *ngIf="product.category === 'Svila 5m' || product.category === 'Svila 4m'">
+      <mat-label>Dostupne boje</mat-label>
+      <mat-select [(value)]="product.selectedColor" required>
+        <mat-option *ngFor="let color of product.colors" [value]="color">
+          {{color}}
+        </mat-option>  
+      </mat-select>
+      <!-- <mat-error *ngIf="colorControl.hasError('required')">Izaberite boju</mat-error> -->
+    </mat-form-field>
+  
+    <button type="submit" class="cart-btn" (click)="addToCart(product)" *ngIf="!userIsAdmin">Dodaj u korpu</button>
+  
+    <mat-card-actions *ngIf="userIsAdmin">
+      <a mat-button color="accent" class="button" [routerLink]="['/izmeni-proizvod', product._id]">Uredi</a>
+      <button mat-button color="accent" class="button" (click)="onDelete(product._id)">Obriši</button>
+    </mat-card-actions>
+  </mat-card></div>
+  
+  <div class="alert alert-danger" role="alert" *ngIf='alert'>
+    Morate biti prijavljeni da biste dodali u korpu. <a href="/prijava" class="alert-link">Prijavi se</a>
   </div>
-
-  <mat-card-content>
-    <p class="priceP">
-      {{ product.price }} RSD
-    </p>
-  </mat-card-content>
-
-  <mat-card-content>
-    <p id="cat">
-      Kategorija: {{ product.category }}
-    </p>
-  </mat-card-content>
-
-  <div class="container">
-    <button type="button" class="btn" (click)="dec(product)"><i class="fa fa-minus"></i></button>
-    <span>{{ product.quantity }}</span>
-    <button type="button" class="btn" (click)="inc(product)"><i class="fa fa-plus"></i></button>      
-  </div>
-
-  <mat-form-field id="select" *ngIf="product.category === 'Svila 5m' || product.category === 'Svila 4m'">
-    <mat-label>Dostupne boje</mat-label>
-    <mat-select [formControl]="colorControl" [(value)]="product.selectedColor" required>
-      <mat-option *ngFor="let color of product.colors" [value]="color">
-        {{color}}
-      </mat-option>  
-    </mat-select>
-    <mat-error *ngIf="colorControl.hasError('required')">Izaberite boju</mat-error>
-  </mat-form-field>
-
-  <button type="submit" class="cart-btn" (click)="addToCart(product)">Dodaj u korpu</button>
-
-  <mat-card-actions *ngIf="userIsAdmin">
-    <a mat-button color="accent" class="button" [routerLink]="['/izmeni-proizvod', product._id]">Uredi</a>
-    <button mat-button color="accent" class="button" (click)="onDelete(product._id)">Obriši</button>
-  </mat-card-actions>
-</mat-card></div>
-
-<div class="alert alert-danger" role="alert" *ngIf='alert'>
-  Morate biti prijavljeni da biste dodali u korpu. <a href="/prijava" class="alert-link">Prijavi se</a>
+  
+  <mat-paginator [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="products.length > 0"></mat-paginator>
+  
+  <p *ngIf="products.length <= 0" id="noAdded">Nema dodatih proizvoda!</p>
 </div>
-
-<mat-paginator [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
-*ngIf="products.length > 0"></mat-paginator>
-
-<p *ngIf="products.length <= 0" id="noAdded">Nema dodatih proizvoda!</p>
 

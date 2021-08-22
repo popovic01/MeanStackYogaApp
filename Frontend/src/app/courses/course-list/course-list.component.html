@@ -22,7 +22,7 @@
     </p>
   </mat-card-content>
 
-  <button type="button" class="cart-btn" (click)="addToCart(course)">Dodaj u korpu</button>
+  <button type="button" class="cart-btn" (click)="addToCart(course)" *ngIf="!userIsAdmin">Dodaj u korpu</button>
 
   <mat-card-actions *ngIf="userIsAdmin">
     <a mat-button class="button" [routerLink]="['/izmeni-kurs', course._id]">Uredi</a>

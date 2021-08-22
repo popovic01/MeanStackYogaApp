@@ -11,17 +11,15 @@ body {
 }
 
 #showcase {
-  background-image:url('../../assets/images/Wallpaper.jpg');
-  background-size:cover;
-  background-position:center;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  /*align-items:center;*/
-  /*text-align:center;*/
+  background-image: url('../../assets/images/Wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 0 20px;
-  color:#845357;
+  color: #845357;
 }
 
 #showcase h1 {
@@ -35,7 +33,7 @@ body {
 #showcase p {
   font-size: 24px;
   margin-left: 30px;
-  color: ivory;
+  color: white;
 }
 
 #showcase .button {
@@ -43,7 +41,7 @@ body {
   text-decoration:none;
   background-color:#FDB19F;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  color: ivory;
+  color: #FCFBFF;
   border:#FDB19F 1px solid;
   padding: 10px 20px;
   border-radius: 18px;
@@ -53,20 +51,20 @@ body {
 }
 
 #showcase .button:hover {
-  background-color:ivory;
+  background-color:#FCFBFF;
   color: #FDB19F;
 }
 
 #kupi-odmah {
   display: flex;  
   justify-content: center;
-  background-color: ivory;
+  background-color: #FCFBFF;
 }
 
 .card {
   padding: 16px;
   margin: 20px 20px;
-  background-color: ivory;
+  background-color: #FCFBFF;
   border: none;
 }
 
@@ -77,9 +75,9 @@ body {
   display: block;
   margin: auto;
   width: 50%;
-  background-color: ivory;
-  border: 2px solid #fc9a84;
-  color: #fc9a84;
+  background-color: #FCFBFF;
+  border: 2px solid #6475FA;
+  color: #6475FA;
   font-size: 16px;
   text-transform: uppercase;
   border-radius: 10px;
@@ -87,9 +85,9 @@ body {
 }
 
 #a > div > div > a:hover, #b > div > div > a:hover, #c > div > div > a:hover {
-  background-color: #fc9a84;
-  border: 2px solid #fc9a84;
-  color: ivory;
+  background-color: #6475FA;
+  border: 2px solid #6475FA;
+  color: #FCFBFF;
 }
 
 .card-img-top {

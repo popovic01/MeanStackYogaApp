@@ -52,15 +52,5 @@ const productSchema = new Schema({
     isDeleted: Boolean */
 }, { timestamps: true });
 
-/* productSchema.pre('validate', function (next) {
-    //check if there is a description
-    if (this.description) {
-      this.description = htmlPurify.sanitize(this.description);
-      this.snippet = stripHtml(this.description.substring(0, 200)).result;
-    }
-  
-    next();
-  }); */
-
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

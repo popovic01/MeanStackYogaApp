@@ -20,11 +20,12 @@
           <td>{{ stringAsDate(cart.createdAt) | date:'dd-MM-yy HH:mm:ss' }}</td>
           <td>{{ cart.subTotal }}</td>
           <td>
-            <tr *ngFor='let item of cart.items'>
+            <div *ngFor='let item of cart.items'>
               Proizvod: {{ item.name }} <br>
               Količina: {{ item.quantity }} <br>
-              Cena: {{ item.price }} <br><br>
-            <tr>
+              Cena: {{ item.price }} <br>
+              <div *ngIf="item.selectedColor">Boja: {{ item.selectedColor }} <br><br></div>
+            </div>
           </td>
       </tr>
       </table><br>

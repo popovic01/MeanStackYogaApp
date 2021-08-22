@@ -28,8 +28,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
   alert = false;
-  colorControl = new FormControl('', Validators.required);
-  selected = '';
 
   private _searchTerm!: string;
 
@@ -66,11 +64,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
     .subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;
     });
+
   }
 
   filterProducts(searchString: string) {
     return this.products.filter(product =>
       product.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+  }
+
+  filter(category: string) {
+    this.filteredProducts = this.products.filter((product: any) => {
+      if (product.category == category) {
+        return product; 
+      } else if (category == 'All') {
+         return this.filteredProducts;
+      }
+    });
   }
 
   onChangedPage(pageData: PageEvent) {
@@ -102,38 +111,44 @@ export class ProductListComponent implements OnInit, OnDestroy {
   addToCart(product: any) {
     if (this.userIsAuthenticated == false)
       this.alert = true;
+    else {
 
-    let cartDataNull = localStorage.getItem('localCart');
+    if (!product.selectedColor && (product.category === 'Svila 5m' || product.category === 'Svila 4m'))
+      console.log('Morate izabrati boju!');
+    else if ((product.category !== 'Svila 5m' || product.category !== 'Svila 4m')) {
+      let cartDataNull = localStorage.getItem('localCart');
 
-    //ako je localStorage prazan
-    if (cartDataNull == null) {
-      let storeDataGet: any = [];
-      storeDataGet.push(product);
-      
-      localStorage.setItem('localCart', JSON.stringify(storeDataGet));
-    } else {
-      var id =  product._id;
-      let index: number = -1;
-      this.itemsCart = JSON.parse(localStorage.getItem('localCart') as string);
-      for (let i = 0; i < this.itemsCart.length; i++) {
-        //provera da li se u localStorage nalazi proizvod sa selektovanom id-om
-        if (id === this.itemsCart[i]._id) {
-          this.itemsCart[i].quantity = product.quantity;
-          index = i;
-          break;
-        }
-      } 
-
-      //ako localStorage nije prazan, i nema proizvoda sa selektovanim id-om
-      if (index == -1) {
-        this.itemsCart.push(product);
-        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      //ako je localStorage prazan
+      if (cartDataNull == null) {
+        let storeDataGet: any = [];
+        storeDataGet.push(product);
+        
+        localStorage.setItem('localCart', JSON.stringify(storeDataGet));
       } else {
-        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+        var id =  product._id;
+        let index: number = -1;
+        this.itemsCart = JSON.parse(localStorage.getItem('localCart') as string);
+        for (let i = 0; i < this.itemsCart.length; i++) {
+          //provera da li se u localStorage nalazi proizvod sa selektovanom id-om
+          if (id === this.itemsCart[i]._id) {
+            this.itemsCart[i].quantity = product.quantity;
+            index = i;
+            break;
+          }
+        } 
+  
+        //ako localStorage nije prazan, i nema proizvoda sa selektovanim id-om
+        if (index == -1) {
+          this.itemsCart.push(product);
+          localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+        } else {
+          localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+        }
+  
       }
-
+      this.cartNumberFunc();
+    } 
     }
-    this.cartNumberFunc();
   }
 
   cartNumber: number = 0;

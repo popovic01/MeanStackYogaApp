@@ -44,13 +44,6 @@
             <mat-error *ngIf="form.get('stock')!.invalid">Unesite dostupnu količinu proizvoda.</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-label>Količina</mat-label>
-            <input matInput type="number" min="0"
-            formControlName="quantity" required>
-            <mat-error *ngIf="form.get('quantity')!.invalid">Unesite količinu proizvoda.</mat-error>
-        </mat-form-field>
-
         <mat-form-field>
             <mat-label>Kategorija</mat-label>
             <mat-select [(value)]="selectedCategory" formControlName="category" required>
