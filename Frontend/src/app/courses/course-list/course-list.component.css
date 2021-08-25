@@ -3,15 +3,16 @@
     max-height: 600px;
     display: inline-block;
     margin: 40px 20px;
-    background-color: #E0E3FE;
+    background-color: #FFF;
     color: #010421;
   }
 
 .priceP {
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     padding-top: 14px;
     color: #010421;
+    font-family: 'Suranna', serif;
 }
 
 #noAdded {
@@ -25,6 +26,7 @@
   margin-top: 10px;
   margin-bottom: 25px;
   line-height: 2rem;
+  font-family: 'Bentham', serif;
 }
 
 .button {
@@ -86,18 +88,25 @@ mat-spinner {
   height: 300px;
 }
 
+/* centriranje */
 .cart-btn {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  background: #7386BA;
-  color: white;
-  border-radius: 4px;
-  border: 1px solid #7386BA;
-  padding: 4px 10px;
-  font-size: 18px;
+  height: 45px;
+  width: 150px;
+  box-sizing: border-box;
+  border: transparent;
+  border-radius: 60px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
   font-weight: 500;
-  transition: 0.4s;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+  background-color: #b1aaee;
+  cursor: pointer;
+  outline: none;
 }
 
 .cart-btn:hover {
@@ -110,4 +119,14 @@ mat-card-actions {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+#center {
+  background: url('../../../assets/images/AboutUs.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

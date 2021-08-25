@@ -64,7 +64,7 @@ a {
 
 .socialMedia .icon:hover {
   background: white;
-  color: #724448;
+  color: #5F3CF8;
 }
 
 .container .contactInfo .box {
@@ -76,8 +76,8 @@ a {
 .container .contactInfo .box .icon {
   min-width: 60px;
   height: 60px;
-  background: #FDB19F;
-  color: #724448;
+  background: #cbbfff;
+  color: #4930b4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,7 +97,7 @@ a {
 
 .container .contactInfo .box .text h3 {
    font-weight: 700;
-   color: #FDB19F;
+   color: #b9abf7;
    font-size: 20px;
 }
 
@@ -111,7 +111,7 @@ a {
 
 .contactForm h2 {
   font-size: 30px;
-  color: #724448;
+  color: #4930b4;
   font-weight: 600;
 }
 
@@ -132,7 +132,7 @@ a {
 }
 
 .location {
-  background: #A8ACB6;
+  background: #c7c9ce;
 }
 
 .contactForm mat-form-field {
@@ -143,7 +143,7 @@ a {
 
 .contactForm button {
   width: 100px;
-  background: #FDB19F;
+  background: #4930b4;
   color: white;
   border: none;
   cursor: pointer;
@@ -154,27 +154,27 @@ a {
 }
 
 .contactForm button:hover {
-  background: #724448;
+  background: #CBBFFF;
   color: white;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color: #724448 !important;
+  color: #4930b4 !important;
  }
 
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
-  background-color: #724448 !important;
+  background-color: #4930b4 !important;
 } 
 
 ::ng-deep.mat-form-field-ripple {
  /*change color of underline when focused*/
- background-color: #724448 !important;;
+ background-color: #4930b4 !important;;
 }
 
 .placeholder{
-  color: #724448;
+  color: #4930b4;
 }
 
 @media (max-width: 991px) {

@@ -13,7 +13,7 @@
     </div>
   </div>
   
-  <div id="center"><mat-card class="example-card" *ngFor="let product of filteredProducts " (submit)="addToCart(product)">
+<div id="center"><mat-card class="example-card" *ngFor="let product of filteredProducts " (submit)="addToCart(product)">
     <mat-card-content>
       <div id="name">
         <p id="main">
@@ -58,7 +58,6 @@
           {{color}}
         </mat-option>  
       </mat-select>
-      <!-- <mat-error *ngIf="colorControl.hasError('required')">Izaberite boju</mat-error> -->
     </mat-form-field>
   
     <button type="submit" class="cart-btn" (click)="addToCart(product)" *ngIf="!userIsAdmin">Dodaj u korpu</button>
@@ -76,6 +75,6 @@
   <mat-paginator [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
   *ngIf="products.length > 0"></mat-paginator>
   
-  <p *ngIf="products.length <= 0" id="noAdded">Nema dodatih proizvoda!</p>
+  <p *ngIf="products.length <= 0" id="noAdded">Nema dodatih proizvoda!</p> 
 </div>
 

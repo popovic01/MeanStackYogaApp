@@ -2,26 +2,26 @@
     margin-bottom: 50px;
 }
 
+.bg-light {
+    background-color: #EDF0FF !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #181B20;
+    font-size: 20px;
+    margin-left: 22px;
+}
+
 img {
     height: 44px;
     width: 46px;
-}
-
-div a {
-    font-size: 16px;
-    margin-left: 15px;
-}
-
-div button {
-    font-size: 16px;
-    margin-left: 15px;
 }
 
 .cart-icon {
     position: relative;
     cursor: pointer;
     font-size: 16px;
-    color: #848485;
+    color: #181B20;
     margin-right: 20px;
 }
 
@@ -38,7 +38,7 @@ div button {
     position: absolute;
     top: -16px;
     right: -32px;
-    background: rgb(173, 182, 182);
+    background: #181B20;
     color: white;
     border: 1px solid white;
     border-radius: 50%;
@@ -61,11 +61,9 @@ div button {
 
 .profile i {
     font-size: 24px;
-    color: #848485;
+    color: #181B20;
 }
 
-.navbar
-{
-    background-color: transparent;
-    padding-bottom: 20px;
+::ng-deep .menu {
+    margin-top: 10px;
 }

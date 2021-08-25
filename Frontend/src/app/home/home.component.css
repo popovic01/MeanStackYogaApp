@@ -3,13 +3,6 @@
   padding:0;
 }
 
-body {
-  margin:0;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 20px;
-  line-height:1.6;
-}
-
 #showcase {
   background-image: url('../../assets/images/Wallpaper.jpg');
   background-size: cover;
@@ -44,10 +37,10 @@ body {
   color: #FCFBFF;
   border:#FDB19F 1px solid;
   padding: 10px 20px;
-  border-radius: 18px;
+  border-radius: 16px;
   margin-top: 20px;
   margin-left: 30px;
-  width: 190px;
+  width: 160px;
 }
 
 #showcase .button:hover {
@@ -55,44 +48,21 @@ body {
   color: #FDB19F;
 }
 
-#kupi-odmah {
-  display: flex;  
-  justify-content: center;
-  background-color: #FCFBFF;
+#more {
+  height: 100vh;
+  background-image: url('../../assets/images/AboutUs.jpg');
 }
 
-.card {
-  padding: 16px;
-  margin: 20px 20px;
-  background-color: #FCFBFF;
-  border: none;
-}
-
-#a > div > div > a, #b > div > div > a, #c > div > div > a {
-  padding: 5px;
-  margin-left: auto;
-  margin-top: 10px;
-  display: block;
-  margin: auto;
-  width: 50%;
-  background-color: #FCFBFF;
-  border: 2px solid #6475FA;
-  color: #6475FA;
-  font-size: 16px;
-  text-transform: uppercase;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-#a > div > div > a:hover, #b > div > div > a:hover, #c > div > div > a:hover {
-  background-color: #6475FA;
-  border: 2px solid #6475FA;
-  color: #FCFBFF;
-}
-
-.card-img-top {
-  margin-bottom: 20px;
-  border: none;
+#more #text {
+  width: 40%;
+  text-align: justify;
+  line-height: 2.2rem;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  left: 15%;
+  top: 20%;
 }
 
 @media (max-width: 991px) {

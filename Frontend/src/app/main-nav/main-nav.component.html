@@ -1,11 +1,11 @@
 <div class="bs-example">
-  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <a href="#" class="navbar-brand">
           <img src="assets/images/Transparent.png" height="98" alt="CoolBrand">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
@@ -31,7 +31,7 @@
         <div class="profile">
             <button mat-button [matMenuTriggerFor]="menu"
             *ngIf="userIsAuthenticated && !userIsAdmin" class="nav-item nav-link"><i class="fa fa-user"></i></button>
-            <mat-menu #menu="matMenu">
+            <mat-menu #menu="matMenu" class="menu">
             <button mat-menu-item routerLink="/profil">Profil</button>
             <button mat-menu-item routerLink="/moje-porudzbine">Moje porudžbine</button>
             <button mat-menu-item (click)="onLogout()">Odjavi se</button>
@@ -41,7 +41,7 @@
         <div class="profile">
             <button mat-button [matMenuTriggerFor]="menuAdmin"
             *ngIf="userIsAuthenticated && userIsAdmin" class="nav-item nav-link"><i class="fa fa-user"></i></button>
-            <mat-menu #menuAdmin="matMenu">
+            <mat-menu #menuAdmin="matMenu" class="menu">
             <button mat-menu-item routerLink="/dodaj-kurs">Dodaj radionicu</button>
             <button mat-menu-item routerLink="/dodaj-trening">Dodaj trening</button>
             <button mat-menu-item routerLink="/dodaj-proizvod">Dodaj proizvod</button>

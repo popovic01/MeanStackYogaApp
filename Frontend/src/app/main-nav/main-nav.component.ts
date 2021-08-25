@@ -63,3 +63,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   }
 
 }
+
+function onWindowScroll() {
+  throw new Error('Function not implemented.');
+}
