@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 
@@ -18,14 +20,13 @@ export class CourseListComponent implements OnInit, OnDestroy {
   coursesPerPage = 6;
   currentPage = 1;
   pageSizeOptions = [1, 3, 6, 12, 24];
-  alert = false;
   private coursesSub: Subscription = new Subscription;
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
 
 
-  constructor(public coursesService: CoursesService, public authService: AuthService) { }
+  constructor(public coursesService: CoursesService, public authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('isAdmin') == 'true')
@@ -63,8 +64,11 @@ export class CourseListComponent implements OnInit, OnDestroy {
   itemsCart: any = [];
 
   addToCart(course: any) {
-    if (this.userIsAuthenticated == false)
-      this.alert = true;
+    if (this.userIsAuthenticated == false) {
+      this.dialog.open(DialogComponent, {
+        data: { message: 'Morate se ulogovati da bi izvršili kupovinu!' },
+      });
+    }
       
     let cartDataNull = localStorage.getItem('localCart');
 

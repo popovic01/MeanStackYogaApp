@@ -32,7 +32,7 @@
             <button mat-button [matMenuTriggerFor]="menu"
             *ngIf="userIsAuthenticated && !userIsAdmin" class="nav-item nav-link"><i class="fa fa-user"></i></button>
             <mat-menu #menu="matMenu" class="menu">
-            <button mat-menu-item routerLink="/profil">Profil</button>
+            <!-- <button mat-menu-item routerLink="/profil">Profil</button> -->
             <button mat-menu-item routerLink="/moje-porudzbine">Moje porudžbine</button>
             <button mat-menu-item (click)="onLogout()">Odjavi se</button>
             </mat-menu>

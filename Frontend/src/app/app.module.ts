@@ -40,7 +40,6 @@ import { ErrorInterceptor } from './error-interceptor';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { CartComponent } from './cart/cart.component';
-import { DialogComponent } from './products/dialog/dialog.component';
 import { ConfirmationDialogComponent } from './cart/confirmation-dialog/confirmation-dialog.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { FooterComponent } from './footer/footer.component';
@@ -66,7 +65,6 @@ import { ProfileComponent } from './profile/profile.component';
     ContactFormComponent,
     AddCategoryComponent,
     CartComponent,
-    DialogComponent,
     ConfirmationDialogComponent,
     OrderDetailsComponent,
     FooterComponent,

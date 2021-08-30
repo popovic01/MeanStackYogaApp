@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Workout } from '../workout.model';
 import { WorkoutsService } from '../workouts.service';
 
@@ -22,9 +24,8 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
-  alert = false;
 
-  constructor(public workoutsService: WorkoutsService, public authService: AuthService) { }
+  constructor(public workoutsService: WorkoutsService, public authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('isAdmin') == 'true')
@@ -60,8 +61,11 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   itemsCart: any = [];
 
   addToCart(workout: any) {
-    if (this.userIsAuthenticated == false)
-      this.alert = true;
+    if (this.userIsAuthenticated == false) {
+      this.dialog.open(DialogComponent, {
+        data: { message: 'Morate se ulogovati da bi izvršili kupovinu!' },
+      });
+    }
 
     let cartDataNull = localStorage.getItem('localCart');
 

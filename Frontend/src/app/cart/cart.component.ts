@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { AuthService } from '../auth/auth.service';
-import { DialogComponent } from '../products/dialog/dialog.component';
+import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CartService } from './cart.service';
 
@@ -34,8 +34,11 @@ export class CartComponent implements OnInit {
       if (this.getCartDetails[i]._id === id) {
         if (qnt != this.getCartDetails[i].stock)
           this.getCartDetails[i].quantity = qnt + 1;
-        else
-          this.dialog.open(DialogComponent);
+        else {
+          this.dialog.open(DialogComponent, {
+            data: { message: 'Dostigli ste maksmimalnu količinu proizvoda!' },
+          });
+        }
       }
     }
     localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));

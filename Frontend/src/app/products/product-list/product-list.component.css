@@ -85,7 +85,7 @@ mat-spinner {
 
 /* Style the back side */
 .flip-box-back {
-  background-color: #FCFCFF;
+  background-color: #F0F1F2;
   color: #010421;
   transform: rotateY(180deg);
 }
@@ -147,8 +147,9 @@ mat-spinner {
 }
 
 .cart-btn:hover {
-  background-color: #9a91e9;
-}
+  background: #7B5EFF;
+  color: #FFF;
+} 
 
 #stock {
   text-align: center;

@@ -5,10 +5,9 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';
-import { DialogComponent } from '../dialog/dialog.component';
+import { DialogComponent } from '../../dialog/dialog.component';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
-import { CartService } from 'src/app/cart/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -27,7 +26,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
-  alert = false;
 
   private _searchTerm!: string;
 
@@ -44,7 +42,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   constructor(public productsService: ProductsService, 
-    public authService: AuthService, public dialog: MatDialog, private cartService: CartService) { }
+    public authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('isAdmin') == 'true')
@@ -98,7 +96,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (product.quantity != product.stock)
       product.quantity += 1;
     else 
-      this.dialog.open(DialogComponent);
+    this.dialog.open(DialogComponent, {
+      data: { message: 'Dostigli ste maksmimalnu količinu proizvoda!' },
+    });
   }
 
   dec(product: { quantity: number; }) {
@@ -110,11 +110,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   addToCart(product: any) {
     if (this.userIsAuthenticated == false)
-      this.alert = true;
+    this.dialog.open(DialogComponent, {
+      data: { message: 'Morate se ulogovati da bi izvršili kupovinu!' },
+    });
     else {
 
     if (!product.selectedColor && (product.category === 'Svila 5m' || product.category === 'Svila 4m'))
-      console.log('Morate izabrati boju!');
+    this.dialog.open(DialogComponent, {
+      data: { message: 'Moratete izabrati boju proizvoda!' },
+    });
     else if ((product.category !== 'Svila 5m' || product.category !== 'Svila 4m')) {
       let cartDataNull = localStorage.getItem('localCart');
 
