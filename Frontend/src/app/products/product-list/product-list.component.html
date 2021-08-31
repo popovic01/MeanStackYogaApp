@@ -1,4 +1,5 @@
-<div class="body">
+<app-spinner *ngIf="isLoading"></app-spinner>
+<div *ngIf="!isLoading" class="body">
   <div id="search">
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Pretraga"

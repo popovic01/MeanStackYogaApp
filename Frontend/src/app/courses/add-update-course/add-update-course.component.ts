@@ -4,7 +4,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FileCheck } from 'angular-file-validator';
 import { Subscription } from 'rxjs';
 
-import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 import { AuthService } from 'src/app/auth/auth.service';
 

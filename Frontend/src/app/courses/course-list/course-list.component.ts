@@ -24,7 +24,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
-
+  isLoading = true;
 
   constructor(public coursesService: CoursesService, public authService: AuthService, public dialog: MatDialog) { }
 
@@ -38,6 +38,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
     .subscribe((courseData: { courses: Course[], courseCount: number }) => {
       this.totalCourses = courseData.courseCount;
       this.courses = courseData.courses;
+      this.isLoading = false;
     });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService

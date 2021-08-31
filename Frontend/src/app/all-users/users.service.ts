@@ -13,12 +13,11 @@ export class UsersService {
   private users: AuthData[] = [];
   private usersUpdated = new Subject<{ users: AuthData[] }>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   getAllUsers() {
     this.http.get<{message: string, users: AuthData[]}>('http://localhost:3000/user/get-users')
       .subscribe((usersData) => {
-        console.log(usersData);
         this.users = usersData.users;
         this.usersUpdated.next({
           users: [...this.users]

@@ -1,5 +1,4 @@
 <mat-card>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
     <form [formGroup]="form" (submit)="onSaveCourse()" *ngIf="!isLoading">
         <mat-form-field class="example-full-width">
             <mat-label>Naziv</mat-label>

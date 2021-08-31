@@ -9,7 +9,10 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  isLoading = true;
+
   ngOnInit(): void {
+    this.isLoading = false;
   }
 
 }

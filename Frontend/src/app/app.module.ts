@@ -47,6 +47,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { AboutComponent } from './about/about.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ProfileComponent } from './profile/profile.component';
     AllOrdersComponent,
     AboutComponent,
     AllUsersComponent,
-    ProfileComponent
+    ProfileComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

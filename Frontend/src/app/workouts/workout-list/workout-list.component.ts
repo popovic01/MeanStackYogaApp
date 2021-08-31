@@ -24,6 +24,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
+  isLoading = true;
 
   constructor(public workoutsService: WorkoutsService, public authService: AuthService, public dialog: MatDialog) { }
 
@@ -37,6 +38,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     .subscribe((workoutData: { workouts: Workout[], workoutCount: number }) => {
       this.totalWorkouts = workoutData.workoutCount;
       this.workouts = workoutData.workouts;
+      this.isLoading = false;
     });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService

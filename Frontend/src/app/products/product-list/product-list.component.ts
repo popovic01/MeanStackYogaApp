@@ -26,6 +26,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authStatusSub: Subscription | undefined;
   userIsAdmin = false;
+  isLoading = true;
 
   private _searchTerm!: string;
 
@@ -55,6 +56,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.totalProducts = productData.productCount;
       this.products = productData.products;
       this.filteredProducts = this.products;
+      this.isLoading = false;
     });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService

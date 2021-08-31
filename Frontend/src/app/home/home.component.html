@@ -1,4 +1,7 @@
-<header id="showcase">
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div *ngIf="!isLoading">
+  <header id="showcase">
     <h1>Aerofit</h1>
     <p>Dobrodošli u svet letenja.</p>
     <a href="#more" class="button">&nbsp;Saznaj više</a>
@@ -14,5 +17,6 @@
   zglobove, jača muskulaturu i dubinski isteže sve ligamente i pripoje. Daje trenutni osećaj olakšanja i opuštanja. <br>
   U ponudi je i napredni program aero akrobacije i fitnes u vazduhu. <br><br>
   Ovo je mesto na kojem možete kupiti sve potrebne rekvizite za celokupni AERO program (platno, obruč, nešto itd.)
+</div>
 </div>
 </div>
