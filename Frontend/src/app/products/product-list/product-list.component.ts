@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';

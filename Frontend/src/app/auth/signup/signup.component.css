@@ -1,26 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
-* {
+.jumbotron {
   margin: 0;
+  margin-top: 30px;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Popins', sans-serif;
-}
-
-section {
+  background-color: #FFF;
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
 }
 
-section .imgBx {
+.jumbotron .imgBx {
   position: relative;
   width: 50%;
   height: 100%;
 }
 
-section .imgBx  img{
+.jumbotron .imgBx  img{
   position: relative;
   top: 0;
   left: 0;
@@ -29,7 +28,7 @@ section .imgBx  img{
   object-fit: cover;
 }
 
-section .contentBx {
+.jumbotron .contentBx {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,11 +36,11 @@ section .contentBx {
   height: 100%;
 }
 
-section .contentBx .formBx {
+.jumbotron .contentBx .formBx {
   width: 50%;
 }
 
-section .contentBx .formBx h2 {
+.jumbotron .contentBx .formBx h2 {
   color: #101E25;
   font-weight: 600;
   font-size: 1.5em;
@@ -52,21 +51,11 @@ section .contentBx .formBx h2 {
   letter-spacing: 1px;
 }
 
-section .contentBx .formBx .inputBx {
+.jumbotron .contentBx .formBx .inputBx {
   margin-bottom: 20px;
 }
 
-section .contentBx .formBx .inputBx span {
-  font-size: 16px;
-  margin-bottom: 5px;
-  display: inline-block;
-  color: #101E25;
-  font-weight: 300;
-  font-size: 16px;
-  letter-spacing: 1px;
-}
-
-section .contentBx .formBx .inputBx input {
+.jumbotron .contentBx .formBx .inputBx input {
   width: 100%;
   padding: 10px 20px;
   outline: none;
@@ -79,7 +68,7 @@ section .contentBx .formBx .inputBx input {
   border-radius: 20px;
 }
 
-section .contentBx .formBx .inputBx input[type="submit"] {
+.jumbotron .contentBx .formBx .inputBx input[type="submit"] {
   background-color: #A2C3D6;
   color: white;
   border: none;

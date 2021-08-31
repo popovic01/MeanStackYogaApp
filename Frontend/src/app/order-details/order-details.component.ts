@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ElementSchemaRegistry } from '@angular/compiler';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
