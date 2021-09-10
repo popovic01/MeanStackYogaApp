@@ -48,8 +48,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
       });
   }
 
-
-
   onChangedPage(pageData: PageEvent) {
     this.currentPage = pageData.pageIndex + 1;
     this.coursesPerPage = pageData.pageSize;

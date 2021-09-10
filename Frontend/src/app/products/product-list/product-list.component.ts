@@ -116,11 +116,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
     else {
 
-    if (!product.selectedColor && (product.category === 'Svila 5m' || product.category === 'Svila 4m'))
+    if (!product.selectedColor && (product.category === 'Svila'))
     this.dialog.open(DialogComponent, {
       data: { message: 'Moratete izabrati boju proizvoda!' },
     });
-    else if ((product.category !== 'Svila 5m' || product.category !== 'Svila 4m')) {
+    else if ((product.category !== 'Svila')) {
       let cartDataNull = localStorage.getItem('localCart');
 
       //ako je localStorage prazan

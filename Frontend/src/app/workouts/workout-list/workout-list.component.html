@@ -24,7 +24,7 @@
       </p>
     </mat-card-content>
     
-    <button type="button" class="cart-btn" (click)="addToCart(workout)" *ngIf="!userIsAdmin">Dodaj u korpu</button>
+    <a href="/kontakt" class="buy" *ngIf="!userIsAdmin">Kontakt</a>
 
     <mat-card-actions *ngIf="userIsAdmin">
       <a mat-button class="button" [routerLink]="['/izmeni-trening', workout._id]">Uredi</a>

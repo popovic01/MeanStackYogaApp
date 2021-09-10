@@ -47,7 +47,7 @@ export class AddUpdateWorkoutComponent implements OnInit, OnDestroy {
       }),
       image: new FormControl(null, {
         validators: [Validators.required],
-        asyncValidators: [FileCheck.ngFileValidator(['png', 'jpeg', 'jpg'])]
+        asyncValidators: [FileCheck.ngFileValidator(['png', 'jpeg', 'jpg', 'jfif'])]
       })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

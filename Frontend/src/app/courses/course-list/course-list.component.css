@@ -1,17 +1,18 @@
 .example-card {
     width: 400px;
-    max-height: 600px;
+    max-height: 620px;
     display: inline-block;
     margin: 40px 20px;
-    background-color: #FFF;
-    color: #010421;
+    background-color: transparent;
+    color: #FFF;
+    border: #FFF 1px solid;
   }
 
 .priceP {
     text-align: center;
     font-size: 24px;
     padding-top: 14px;
-    color: #010421;
+    color: #FFF;
     font-family: 'Suranna', serif;
 }
 
@@ -41,7 +42,7 @@ mat-spinner {
 .flip-box {
   background-color: transparent;
   width: 370px;
-  height: 300px;
+  height: 360px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -85,11 +86,16 @@ mat-spinner {
 
 .flip-box-front img {
   width: 370px;
-  height: 300px;
+  height: 360px;
 }
 
+.buy:hover {
+  background: #7B5EFF;
+  color: #FFF;
+} 
+
 /* centriranje */
-.cart-btn {
+.buy {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -103,16 +109,14 @@ mat-spinner {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2em;
+  text-decoration: none;
   color: #ffffff;
   background-color: #b1aaee;
   cursor: pointer;
   outline: none;
+  text-align: center;
+  padding-top: 3.5%;
 }
-
-.cart-btn:hover {
-  background: #7B5EFF;
-  color: #FFF;
-} 
 
 mat-card-actions {
   display: block;

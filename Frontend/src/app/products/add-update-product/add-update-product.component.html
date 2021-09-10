@@ -47,8 +47,7 @@
         <mat-form-field>
             <mat-label>Kategorija</mat-label>
             <mat-select [(value)]="selectedCategory" formControlName="category" required>
-              <mat-option value="Svila 4m">Svila 4m</mat-option>
-              <mat-option value="Svila 5m">Svila 5m</mat-option>
+              <mat-option value="Svila">Svila</mat-option>
               <mat-option value="Obruč">Obruč</mat-option>
             </mat-select>
         <mat-error *ngIf="form.get('category')!.invalid">Izaberite kategoriju.</mat-error>
